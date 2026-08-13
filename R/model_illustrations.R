@@ -63,6 +63,22 @@ plot_utility_distributions <- function(utilities, dist_fun = dist_normal,
     )
 }
 
+# -- Plotmath label helpers --
+# The pdf graphics device drops Unicode Greek glyphs from legend and strip
+# text, so figure labels encode them as plotmath strings parsed at render time.
+
+theta_label <- function(theta) paste0("theta == ", theta)
+
+label_plotmath <- function(labels) {
+  lapply(as.character(labels), function(label) {
+    if (grepl("==", label, fixed = TRUE)) {
+      parse(text = label)[[1]]
+    } else {
+      parse(text = paste0("'", label, "'"))[[1]]
+    }
+  })
+}
+
 # -- Equation panel helpers for patchwork --
 
 plot_equation <- function(expr, title = NULL, size = 5) {
