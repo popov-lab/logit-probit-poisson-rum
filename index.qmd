@@ -9,6 +9,15 @@ author:
     orcid: 0000-0002-8073-4199
 abstract: |
   This study embeds the two canonical discrete choice specifications - multinomial logit and multinomial probit - in a single generative family built on a count process. The model is a Poisson count race: $K$ alternatives generate events via independent Poisson processes, and a choice occurs when one alternative reaches a cumulative count threshold $\theta$. At the single-event threshold, $\theta=1$, the model yields the Multinomial Logit (Luce choice rule). Normalizing the utility noise to constant variance, I show that as $\theta \to \infty$ the model converges to the independent Multinomial Probit. The distributional ingredients are classical - the induced errors form the log-Gamma family of survival analysis, and Poisson races of static choice have a psychometric history. The contribution is the synthesis: a variance-standardized formulation in which logit and probit occupy the endpoints of one generative family, with $\theta$ governing noise shape, a separate parameter $\beta$ its scale, and systematic utilities $v_i$ shared across regimes. Two extensions generate correlated probit models. Shared evidence streams induce positive dependence and imply an upper bound coupling attainable correlations to utility differences and thresholds. Reciprocal inhibition - signed evidence streams that favor some alternatives while suppressing others - recovers, in a high-threshold first-passage limit, every choice-relevant probit covariance, at the cost of the count-process representation. The unification is distributional rather than dynamical: changes in $\theta$ compare accumulation regimes at matched discriminability, not a single system adjusting its threshold.
+author-note:
+  disclosures:
+    related-report: |
+      An HTML version of this article is available at
+      https://venpopov.com/logit-probit-poisson-rum/.
+    data-sharing: |
+      All simulation code for this article, together with an interactive
+      browser-based simulator of the reciprocal-inhibition model, is openly
+      available on GitHub at https://github.com/popov-lab/logit-probit-poisson-rum.
 number-sections: true
 keywords:
   - discrete choice
@@ -1668,6 +1677,14 @@ Thus pure reciprocal competition yields logit choice at every threshold, and a l
 
 The inhibited construction therefore provides a complementary route to the Gaussian endpoint developed earlier in this paper. The original Poisson count race retains non-negative counters, Gamma waiting times, and the exact log-Gamma random-utility representation, producing the Logit-to-Probit bridge through variance normalization. Reciprocal inhibition sacrifices that finite-threshold representation: individual counters are no longer Poisson and their first-passage times are no longer Gamma. In return, signed evidence provides a direct mechanism for both positive and negative dependence and, in the high-threshold local-alternatives limit, generates the full choice-relevant covariance structure of the correlated Multinomial Probit.
 
+
+::: {.callout-tip icon="false"}
+## Explore this model interactively
+
+Unlike the other simulations reported in this article, which are static, the reciprocal-inhibition race can be explored live. An interactive simulator implementing the construction of this section runs directly in the browser at <https://venpopov.com/logit-probit-poisson-rum/simulator.html>, with adjustable threshold $\theta$, shared rate $\lambda_0$, utilities $v_i$, and pairwise inhibition weights $u_{ij}$ for $K = 2$ to $4$ alternatives, along with presets for the regimes discussed above ($\rho > 0$, $\rho < 0$, $\rho = 0$, and a similarity structure). As @fig-simulator illustrates, it displays sample counter trajectories, the convergence of simulated choice shares to the limiting Multinomial Probit probabilities, the limiting correlation structure alongside counter-fluctuation scatters, and the $\sqrt{\theta}$-localized first-passage-time distributions.
+:::
+
+![The interactive reciprocal-inhibition simulator, available at [venpopov.com/logit-probit-poisson-rum/simulator.html](https://venpopov.com/logit-probit-poisson-rum/simulator.html). Controls (left) set the threshold $\theta$, the shared stream rate $\lambda_0$, the utilities $v_i$, and the pairwise inhibition weights $u_{ij}$. Panels show the counter trajectories of a sample trial with the winning crossing marked (top left); Monte Carlo choice shares converging to the limiting Multinomial Probit probabilities as $\theta$ grows (top right); the limiting utility correlation matrix and the counter fluctuations $Z_i = (X_i(t_\theta) - \theta)/\sqrt{\theta}$ at the nominal crossing time with the theoretical 90% ellipse (bottom left); and the standardized first-passage times against their predicted Gaussian densities (bottom right).](simulator-screenshot.png){#fig-simulator}
 
 # Discussion {#sec-discussion}
 

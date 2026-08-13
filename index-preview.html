@@ -1861,6 +1861,29 @@ u-\frac{a}{2\theta},
 \]</span></p>
 <p>Thus pure reciprocal competition yields logit choice at every threshold, and a logistic — not probit — limit under its own local scaling. The correlated-Probit regime arises specifically when common evidence carries all alternatives toward a distant threshold while signed comparative evidence produces <span class="math inline">\(O(\sqrt{\theta})\)</span> fluctuations in their relative arrival times.</p>
 <p>The inhibited construction therefore provides a complementary route to the Gaussian endpoint developed earlier in this paper. The original Poisson count race retains non-negative counters, Gamma waiting times, and the exact log-Gamma random-utility representation, producing the Logit-to-Probit bridge through variance normalization. Reciprocal inhibition sacrifices that finite-threshold representation: individual counters are no longer Poisson and their first-passage times are no longer Gamma. In return, signed evidence provides a direct mechanism for both positive and negative dependence and, in the high-threshold local-alternatives limit, generates the full choice-relevant covariance structure of the correlated Multinomial Probit.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Explore this model interactively
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unlike the other simulations reported in this article, which are static, the reciprocal-inhibition race can be explored live. An interactive simulator implementing the construction of this section runs directly in the browser at <a href="https://venpopov.com/logit-probit-poisson-rum/simulator.html" class="uri">https://venpopov.com/logit-probit-poisson-rum/simulator.html</a>, with adjustable threshold <span class="math inline">\(\theta\)</span>, shared rate <span class="math inline">\(\lambda_0\)</span>, utilities <span class="math inline">\(v_i\)</span>, and pairwise inhibition weights <span class="math inline">\(u_{ij}\)</span> for <span class="math inline">\(K = 2\)</span> to <span class="math inline">\(4\)</span> alternatives, along with presets for the regimes discussed above (<span class="math inline">\(\rho &gt; 0\)</span>, <span class="math inline">\(\rho &lt; 0\)</span>, <span class="math inline">\(\rho = 0\)</span>, and a similarity structure). As <a href="#fig-simulator" class="quarto-xref">Figure&nbsp;11</a> illustrates, it displays sample counter trajectories, the convergence of simulated choice shares to the limiting Multinomial Probit probabilities, the limiting correlation structure alongside counter-fluctuation scatters, and the <span class="math inline">\(\sqrt{\theta}\)</span>-localized first-passage-time distributions.</p>
+</div>
+</div>
+<div id="fig-simulator" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simulator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="simulator-screenshot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;11: The interactive reciprocal-inhibition simulator, available at venpopov.com/logit-probit-poisson-rum/simulator.html. Controls (left) set the threshold \theta, the shared stream rate \lambda_0, the utilities v_i, and the pairwise inhibition weights u_{ij}. Panels show the counter trajectories of a sample trial with the winning crossing marked (top left); Monte Carlo choice shares converging to the limiting Multinomial Probit probabilities as \theta grows (top right); the limiting utility correlation matrix and the counter fluctuations Z_i = (X_i(t_\theta) - \theta)/\sqrt{\theta} at the nominal crossing time with the theoretical 90% ellipse (bottom left); and the standardized first-passage times against their predicted Gaussian densities (bottom right)."><img src="simulator-screenshot.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simulator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: The interactive reciprocal-inhibition simulator, available at <a href="https://venpopov.com/logit-probit-poisson-rum/simulator.html">venpopov.com/logit-probit-poisson-rum/simulator.html</a>. Controls (left) set the threshold <span class="math inline">\(\theta\)</span>, the shared stream rate <span class="math inline">\(\lambda_0\)</span>, the utilities <span class="math inline">\(v_i\)</span>, and the pairwise inhibition weights <span class="math inline">\(u_{ij}\)</span>. Panels show the counter trajectories of a sample trial with the winning crossing marked (top left); Monte Carlo choice shares converging to the limiting Multinomial Probit probabilities as <span class="math inline">\(\theta\)</span> grows (top right); the limiting utility correlation matrix and the counter fluctuations <span class="math inline">\(Z_i = (X_i(t_\theta) - \theta)/\sqrt{\theta}\)</span> at the nominal crossing time with the theoretical 90% ellipse (bottom left); and the standardized first-passage times against their predicted Gaussian densities (bottom right).
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="sec-discussion" class="level1" data-number="9">

@@ -208,7 +208,12 @@ logit, multinomial probit, Poisson process, evidence accumulation}
 
 \authornote{\par{\addORCIDlink{Vencislav Popov}{0000-0002-8073-4199}} 
 
-\par{       }
+\par{ All simulation code for this article, together with an interactive
+browser-based simulator of the reciprocal-inhibition model, is openly
+available on GitHub at
+https://github.com/popov-lab/logit-probit-poisson-rum. An HTML version
+of this article is available at
+https://venpopov.com/logit-probit-poisson-rum/.     }
 \par{Correspondence concerning this article should be addressed
 to Vencislav
 Popov, Email: \href{mailto:vencislav.popov@gmail.com}{vencislav.popov@gmail.com}}
@@ -2575,6 +2580,50 @@ longer Gamma. In return, signed evidence provides a direct mechanism for
 both positive and negative dependence and, in the high-threshold
 local-alternatives limit, generates the full choice-relevant covariance
 structure of the correlated Multinomial Probit.
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title={Explore this model interactively}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Unlike the other simulations reported in this article, which are static,
+the reciprocal-inhibition race can be explored live. An interactive
+simulator implementing the construction of this section runs directly in
+the browser at
+\url{https://venpopov.com/logit-probit-poisson-rum/simulator.html}, with
+adjustable threshold \(\theta\), shared rate \(\lambda_0\), utilities
+\(v_i\), and pairwise inhibition weights \(u_{ij}\) for \(K = 2\) to
+\(4\) alternatives, along with presets for the regimes discussed above
+(\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a similarity structure).
+As Figure~\ref{fig-simulator} illustrates, it displays sample counter
+trajectories, the convergence of simulated choice shares to the limiting
+Multinomial Probit probabilities, the limiting correlation structure
+alongside counter-fluctuation scatters, and the
+\(\sqrt{\theta}\)-localized first-passage-time distributions.
+
+\end{tcolorbox}
+
+\begin{figure}
+
+\caption{\label{fig-simulator}The interactive reciprocal-inhibition
+simulator, available at
+\href{https://venpopov.com/logit-probit-poisson-rum/simulator.html}{venpopov.com/logit-probit-poisson-rum/simulator.html}.
+Controls (left) set the threshold \(\theta\), the shared stream rate
+\(\lambda_0\), the utilities \(v_i\), and the pairwise inhibition
+weights \(u_{ij}\). Panels show the counter trajectories of a sample
+trial with the winning crossing marked (top left); Monte Carlo choice
+shares converging to the limiting Multinomial Probit probabilities as
+\(\theta\) grows (top right); the limiting utility correlation matrix
+and the counter fluctuations
+\(Z_i = (X_i(t_\theta) - \theta)/\sqrt{\theta}\) at the nominal crossing
+time with the theoretical 90\% ellipse (bottom left); and the
+standardized first-passage times against their predicted Gaussian
+densities (bottom right).}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{simulator-screenshot.png}}
+
+}
+
+\end{figure}%
 
 \section{Discussion}\label{sec-discussion}
 

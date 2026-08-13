@@ -552,6 +552,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntxbmia.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txbmiaSTbb.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntxbmi.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/NewTXBMI.tfm
+INPUT ./simulator-screenshot.png
+INPUT ./simulator-screenshot.png
+INPUT ./simulator-screenshot.png
+INPUT ./simulator-screenshot.png
+INPUT ./simulator-screenshot.png
 INPUT index.aux
 INPUT ./index.out
 INPUT ./index.out
