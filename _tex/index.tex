@@ -498,13 +498,18 @@ representations for static choice: Marley and Colonius
 (\citeproc{ref-marleyHorseRaceRandom1992}{1992}) analyzed the general
 ``horse race'' random utility model, in which independent random
 completion times play exactly the role that the waiting times play here.
-Most directly, Ruan et al.
-(\citeproc{ref-ruanDependentPoissonRace2008a}{2008}) developed Poisson
-race models --- with both independent and dependent accumulators --- as
-a process-based random-utility account of \emph{static} conjoint choice,
-derived their choice probabilities, and showed that dependent Poisson
-races outperform the multinomial logit empirically. Poisson races as
-generators of static choice models are therefore not new in themselves.
+Most directly, Poisson races have been developed as process-based
+random-utility accounts of \emph{static} conjoint choice. Otter et al.
+(\citeproc{ref-otterIntegratedModelDiscrete2008}{2008}) built an
+integrated model of choice and response time on a thresholded Poisson
+race, noting that it recovers the multinomial logit exactly at threshold
+one, departs from IIA in a structured way at higher thresholds, and
+yields a probit if the race is instead stopped at a fixed exogenous
+time; Ruan et al. (\citeproc{ref-ruanDependentPoissonRace2008a}{2008})
+developed the dependent Poisson race, derived its choice probabilities,
+and showed that it outperforms the multinomial logit empirically.
+Poisson races as generators of static choice models are therefore not
+new in themselves.
 
 On the distributional side, the error family induced by the race is
 equally classical. The negative logarithm of a Gamma variate follows a
@@ -542,8 +547,14 @@ knowledge, are new:
   characterized as the two \emph{endpoints} of a single generative
   family. Prior work treated the Poisson race as an empirical
   alternative to the logit
-  (\citeproc{ref-ruanDependentPoissonRace2008a}{Ruan et al., 2008}), not
-  as a bridge to the probit.
+  (\citeproc{ref-otterIntegratedModelDiscrete2008}{Otter et al., 2008};
+  \citeproc{ref-ruanDependentPoissonRace2008a}{Ruan et al., 2008}), not
+  as a bridge to the probit: Otter et al.
+  (\citeproc{ref-otterIntegratedModelDiscrete2008}{2008}) obtained a
+  probit only by switching to a different stopping rule (a fixed
+  exogenous deadline), whereas here the independent probit is reached
+  within the threshold-stopping family itself, as its
+  variance-standardized \(\theta \to \infty\) limit.
 \item
   \textbf{A precise statement of what the bridge does and does not
   claim.} The unification is distributional rather than dynamical: the
@@ -682,23 +693,17 @@ log-Gamma(\(\theta\)) noise.
 
 \end{tcolorbox}
 
-Result 1 involves no new distribution theory. The noise term
-\(-\log G_i\) is a member of the log-gamma family whose properties were
-characterized by Consul and Jain
-(\citeproc{ref-consulLoggammaDistributionIts1971a}{1971}) and which
-Prentice (\citeproc{ref-prenticeLogGammaModel1974}{1974}) developed,
-building on the generalized gamma distribution of Stacy
-(\citeproc{ref-stacyGeneralizationGamma1962}{1962}), into a standard
-tool of survival analysis
-(\citeproc{ref-lawlessInferenceGeneralizedGamma1980}{Lawless, 1980}). In
-Prentice's parameterization the shape parameter plays exactly the
-interpolating role that \(\theta\) plays here: the extreme value
-distributions are included as boundary cases and the normal arises as
-the central limit. What the Poisson race adds is an interpretation.
-Embedded in a race with a count threshold, the shape parameter of this
-classical family acquires a process meaning --- the amount of evidence
-required before commitment --- and the distributional family becomes a
-family of random utility models.
+Result 1 involves no new distribution theory: \(-\log G_i\) follows the
+log-gamma distribution reviewed in the introduction, whose shape
+parameter interpolates between extreme-value and normal shapes
+(\citeproc{ref-consulLoggammaDistributionIts1971a}{Consul \& Jain,
+1971}; \citeproc{ref-lawlessInferenceGeneralizedGamma1980}{Lawless,
+1980}; \citeproc{ref-prenticeLogGammaModel1974}{Prentice, 1974}). What
+the Poisson race adds is an interpretation. Embedded in a race with a
+count threshold, the shape parameter of this classical family acquires a
+process meaning --- the amount of evidence required before commitment
+--- and the distributional family becomes a family of random utility
+models.
 
 \section{\texorpdfstring{The Logit Boundary
 (\(\theta = 1\))}{The Logit Boundary (\textbackslash theta = 1)}}\label{sec-logit-boundary}
@@ -867,21 +872,18 @@ accumulation threshold.
 
 \end{tcolorbox}
 
-Distributionally, Result 3 restates a classical fact: the standardized
-log-gamma distribution converges to the standard normal as its shape
-parameter grows, which is precisely the sense in which the normal is the
-central case of Prentice's
-(\citeproc{ref-prenticeLogGammaModel1974}{1974}) log-gamma family. In
-the binary case, the resulting convergence of choice probabilities to
-the probit form likewise recovers the Thurstone--Mosteller endpoint of
-Stern's (\citeproc{ref-sternContinuumPairedComparisons1990}{1990})
-continuum of paired comparison models. The content of Result 3 is the
-multinomial, choice-level statement: under the matched-discriminability
-identification of Section~\ref{sec-variance-normalization}, the full
-vector of choice probabilities converges to that of the independent
-Multinomial Probit for any number of alternatives, so that the two
-canonical discrete choice models occupy the two endpoints of a single
-generative family.
+Distributionally, Result 3 restates a classical fact --- the normal is
+the central case of the log-gamma family
+(\citeproc{ref-prenticeLogGammaModel1974}{Prentice, 1974}) --- and in
+the binary case its choice-level consequence recovers the probit
+endpoint of Stern's
+(\citeproc{ref-sternContinuumPairedComparisons1990}{1990}) continuum.
+The content of Result 3 is the multinomial statement: under the
+matched-discriminability identification of
+Section~\ref{sec-variance-normalization}, the full vector of choice
+probabilities converges to that of the independent Multinomial Probit
+for any number of alternatives, so that the two canonical discrete
+choice models occupy the two endpoints of a single generative family.
 
 \section{Simulation Studies: Binary
 Choice}\label{sec-binary-simulations}
@@ -911,11 +913,9 @@ event is equivalent to \(W < \sigma(x)\), where
 \(\Pr(T_1 < T_2) = I_{\sigma(x)}(\theta, \theta)\). For \(\theta = 1\),
 this reduces exactly to \(\sigma(x)\), the logistic function.
 
-This one-parameter family of binary choice functions is not itself new.
-It is exactly the continuum of paired comparison models studied by Stern
-(\citeproc{ref-sternContinuumPairedComparisons1990}{1990}), who
-identified the Bradley--Terry model at \(\theta = 1\) and the
-Thurstone--Mosteller model in the large-\(\theta\) limit, and the same
+This one-parameter family of binary choice functions is not itself new:
+it is exactly the continuum of paired comparison models studied by Stern
+(\citeproc{ref-sternContinuumPairedComparisons1990}{1990}), and the same
 incomplete-Beta accuracy function arises in Poisson counter models of
 simple decisions
 (\citeproc{ref-smithTimedependentPoissonCounter2000a}{Smith \& Van
@@ -1134,7 +1134,13 @@ Under MNP:
 \(P(\text{target}) = \int \phi(z) \,\Phi(v_t/\beta + z)^{K-1}\, dz\) (by
 symmetry of the \(K - 1\) equal competitors). This integral reveals that
 probit's thinner tails give the target a larger advantage over many
-competitors than logit's heavier tails.
+competitors than logit's heavier tails. Intuitively, each added
+competitor raises the bar that the winning draw must clear; with heavy
+Gumbel tails a lucky draw from any competitor clears a high bar almost
+as easily as a low one, diluting the target's advantage, whereas with
+thin Gaussian-like tails a rising bar increasingly favors the
+alternative with the higher systematic utility (Study 4 develops this
+tail mechanism in the context of IIA).
 
 \protect\phantomsection\label{cell-fig-set-size}
 \begin{figure}[H]
@@ -1166,6 +1172,57 @@ This property does not hold for the Multinomial Probit model, even when
 errors are independent and identically distributed. The Poisson count
 race therefore provides a mechanism through which IIA holds exactly at
 \(\theta = 1\) and is progressively violated as \(\theta\) increases.
+
+Why should noise \emph{shape} alone --- with fully independent,
+identically distributed errors --- determine whether IIA holds? The
+question matters because IIA is often loosely equated with independence.
+The equation is incorrect: among i.i.d. random utility models with three
+or more alternatives, IIA singles out exactly the Gumbel distribution,
+up to location and scale
+(\citeproc{ref-mcfaddenConditionalLogitAnalysis1974}{McFadden, 1974};
+\citeproc{ref-yellottRelationshipLucesChoice1977}{Yellott, 1977}).
+Violations of IIA therefore need not signal correlated errors or
+similarity structure; they can arise purely from the shape of
+independent noise.
+
+The race makes the special status of the Gumbel case mechanistically
+transparent. At \(\theta = 1\) the decision is settled by the
+\emph{first} event in the superposition of all the Poisson streams, and
+superposed Poisson processes compete proportionally: whichever
+alternatives are present, events from alternative \(i\) arrive
+\(\lambda_i/\lambda_j\) times as often as events from alternative \(j\).
+Adding or removing a third stream changes how soon the race ends, but
+not the relative frequency with which \(i\) rather than \(j\) supplies
+the deciding event, so \(P(i)/P(j) = \lambda_i/\lambda_j\) in every
+choice set. At the single-event threshold, IIA is nothing more than the
+superposition (thinning) property of Poisson processes.
+
+For \(\theta > 1\) the deciding event is no longer the first event ---
+winning requires accumulating \(\theta\) events before every rival ---
+so the outcome depends on the relative standing of the whole field, and
+the memorylessness that underwrote proportional competition is lost. The
+distributional counterpart of this coupling is tail behavior. In a
+random utility model, an alternative wins by exceeding the highest rival
+draw, and what matters for IIA is how the \emph{relative} odds of
+clearing that bar depend on the bar's height. Gumbel noise has an
+exponential upper tail, for which relative exceedance odds are
+(asymptotically) independent of the bar: a stronger field raises the
+bar, but leaves the relative standing of the remaining alternatives
+untouched. As \(\theta\) grows, the standardized log-Gamma tail thins
+--- the exponential decay rate of exceedances,
+\(\theta\sqrt{\psi_1(\theta)}\), grows like \(\sqrt{\theta}\) on the
+variance-matched scale --- so wins by lucky extreme draws become rare,
+and races are instead decided near the bulk of the distributions, where
+a higher bar increasingly favors the alternative with the higher
+systematic utility. A strong choice set therefore tilts the odds among
+the remaining alternatives toward the stronger of them: share is taken
+disproportionately from weaker alternatives, the direction that Otter et
+al. (\citeproc{ref-otterIntegratedModelDiscrete2008}{2008}) noted for
+Poisson races with thresholds above one, and the pattern quantified
+below. In terms of processing, graded set-composition effects of this
+signature are what single-sample commitment (\(\theta = 1\)) can never
+produce and extensive evidence integration (large \(\theta\)) must
+produce.
 
 To quantify this, I consider three alternatives with utilities
 \(v = (2, 1, 0)\). I compute the ratio \(P(1)/P(2)\) under two
@@ -1324,8 +1381,13 @@ results:
   property, which holds exactly at \(\theta = 1\), is progressively
   violated as \(\theta\) increases. This provides a process-level
   account of why IIA holds for logit but not probit: it is a consequence
-  of the Gumbel noise shape, and alternative noise shapes---induced by
-  higher accumulation thresholds---do not preserve it.
+  of the Gumbel noise shape (at \(\theta = 1\), the superposition
+  property of Poisson processes), and alternative noise shapes---induced
+  by higher accumulation thresholds---do not preserve it. Because the
+  erosion arises with fully independent accumulators, graded IIA
+  violations of this signature are not by themselves evidence of
+  correlated errors or similarity effects; they can equally signal
+  thin-tailed noise produced by more extensive evidence integration.
 \item
   \textbf{Parameter invariance}: When choice data generated by the
   Poisson count race are fit under a logit assumption, the recovered
@@ -1574,17 +1636,12 @@ models}\label{relation-to-existing-models}
 From a mathematical standpoint, all components of the present framework
 are classical: exponential races yield Luce's choice rule, Gamma waiting
 times arise from accumulated Poisson events, and asymptotic normality
-follows from the Central Limit Theorem. More than that, both halves of
-the bridge have been built before, separately. As a family of
-distributions, the log-Gamma interpolation between extreme-value and
-normal shapes is Prentice's
-(\citeproc{ref-prenticeLogGammaModel1974}{1974}) log-gamma family, a
-standard object in survival analysis
-(\citeproc{ref-lawlessInferenceGeneralizedGamma1980}{Lawless, 1980};
-\citeproc{ref-stacyGeneralizationGamma1962}{Stacy, 1962}); and as a
-family of binary choice functions, the incomplete-Beta continuum from
-Bradley--Terry to Thurstone--Mosteller was described by Stern
-(\citeproc{ref-sternContinuumPairedComparisons1990}{1990}). The
+follows from the Central Limit Theorem. Indeed, as reviewed in the
+introduction, both halves of the bridge predate it, separately --- the
+distributional interpolation in survival analysis
+(\citeproc{ref-prenticeLogGammaModel1974}{Prentice, 1974}) and the
+binary choice-function continuum in paired comparisons
+(\citeproc{ref-sternContinuumPairedComparisons1990}{Stern, 1990}). The
 contribution of the present work lies in assembling these elements into
 a single generative account of multinomial choice, identifying the
 variance standardization under which the limiting behavior remains
@@ -1592,26 +1649,19 @@ non-degenerate, and drawing out its consequences: the multinomial probit
 endpoint, the \(\rho_{\max}\) bound, and the parameter-invariance
 crossover.
 
-The closest precedent on the process side is the dependent Poisson race
-model of Ruan et al.
-(\citeproc{ref-ruanDependentPoissonRace2008a}{2008}), which shares this
-paper's starting point: Poisson races as a process-based random utility
-account of static choice, with dependence introduced through shared
-event streams. The two efforts are complementary but aim at different
-targets. Ruan and colleagues positioned the dependent Poisson race as an
-empirical competitor to the multinomial logit and demonstrated superior
-fit to conjoint choice data, with the race parameters estimated
-descriptively. Here, the threshold is instead treated as an
-interpolation index, and the race is used to establish a theoretical
-relationship --- that multinomial logit and independent multinomial
-probit are the two endpoints of one family under matched
-discriminability. To my knowledge, the probit side of this
-correspondence has not previously been stated in the choice literature,
-where the Poisson race has figured as an alternative to the logit rather
-than as a bridge between logit and probit. The general correspondence
-between race mechanisms and random utility representations goes back
-further still, to the horse-race random utility model of Marley and
-Colonius (\citeproc{ref-marleyHorseRaceRandom1992}{1992}).
+The conjoint Poisson race models reviewed in the introduction
+(\citeproc{ref-otterIntegratedModelDiscrete2008}{Otter et al., 2008};
+\citeproc{ref-ruanDependentPoissonRace2008a}{Ruan et al., 2008}) are the
+closest precedents on the process side, and the relationship deserves
+precision. Those efforts aim at a different target: the race serves as a
+richer descriptive model to be fit to choice data, with the threshold as
+a free parameter, and the links to logit, probit, and IIA are noted
+along the way rather than pursued. Here the threshold is instead treated
+as an interpolation index, and the race is used to establish a
+theoretical relationship --- that multinomial logit and independent
+multinomial probit are the two endpoints of one family under matched
+discriminability, with the interpolation characterized distributionally
+(log-Gamma noise), proved in the limit, and quantified by simulation.
 
 The log-Gamma family should also be distinguished from link-level
 bridges between logit and probit. It has long been known that the
@@ -1665,6 +1715,19 @@ distribution in isolation: differences between logit and probit may
 reflect differences in decision criteria or commitment thresholds rather
 than differences in representational noise per se.
 
+The IIA analysis adds a complementary caution. Violations of IIA are
+commonly modeled as evidence of correlated utilities --- similarity
+effects captured by nested logit or correlated probit specifications.
+Study 4 shows that graded, set-wide IIA violations arise with fully
+independent accumulators once the effective threshold exceeds one,
+because thin-tailed noise makes the odds between any two alternatives
+sensitive to the strength of the surrounding field. Observed IIA
+violations therefore admit two process interpretations --- genuinely
+correlated evidence streams (Section~\ref{sec-correlated-errors}) or
+extensive independent evidence integration --- and distinguishing them
+requires attention to the pattern of the violations, not merely their
+presence.
+
 \subsection{Limitations and
 extensions}\label{limitations-and-extensions}
 
@@ -1687,10 +1750,14 @@ indexed by \((\theta, \beta)\), but a formal identification analysis is
 beyond the present scope. In principle, \(\theta\) and \(\beta\) play
 distinct roles---shape versus scale of the noise distribution---and the
 shape of the psychometric function or the pattern of IIA violations
-could serve to identify \(\theta\) from choice data. Whether these
-parameters are jointly identifiable from aggregate choice frequencies
-alone, and under what experimental designs, remains an open question for
-future investigation.
+could serve to identify \(\theta\) from choice data. Existing results
+point in this direction: in the unstandardized thresholded race, Otter
+et al. (\citeproc{ref-otterIntegratedModelDiscrete2008}{2008}) show that
+the structured departure from IIA identifies the threshold, and the
+rates up to a multiplicative constant, from repeated choices alone.
+Whether \(\theta\) and \(\beta\) remain jointly identifiable under the
+variance-standardized parameterization used here, and under what
+experimental designs, remains an open question for future investigation.
 
 Finally, the framework naturally invites comparison with other random
 utility specifications. Exploring whether additional classical models
@@ -1778,6 +1845,12 @@ behavior. In \emph{Frontiers in econometrics} (p. 105).
 Mudholkar, G. S., \& George, E. O. (1978). A remark on the shape of the
 logistic distribution. \emph{Biometrika}, \emph{65}(3), 667--668.
 \url{https://doi.org/10.1093/biomet/65.3.667}
+
+\bibitem[\citeproctext]{ref-otterIntegratedModelDiscrete2008}
+Otter, T., Allenby, G. M., \& Van Zandt, T. (2008). An integrated model
+of discrete choice and response time. \emph{Journal of Marketing
+Research}, \emph{45}(5), 593--607.
+\url{https://doi.org/10.1509/jmkr.45.5.593}
 
 \bibitem[\citeproctext]{ref-pikeResponseLatencyModels1973}
 Pike, R. (1973). Response latency models for signal detection.
