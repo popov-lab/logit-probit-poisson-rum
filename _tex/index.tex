@@ -479,13 +479,18 @@ across \(\theta\) values compares different accumulation systems at
 matched discriminability, not a single system under threshold variation
 (see Section~\ref{sec-variance-normalization} for details).
 
+Beyond the independent family, two further constructions extend the
+Gaussian endpoint to correlated choice. Shared evidence streams generate
+a structured class of positively correlated probit models, while signed
+evidence streams --- reciprocal inhibition --- recover, in the
+high-threshold limit, every choice-relevant covariance structure of the
+correlated Multinomial Probit (Section~\ref{sec-correlated-errors},
+Section~\ref{sec-inhibitory-race}).
+
 \subsection*{Relation to prior work}\label{relation-to-prior-work}
 \addcontentsline{toc}{subsection}{Relation to prior work}
 
-Both main ingredients of this construction have substantial histories,
-and it is important to be precise about what is inherited and what is
-new.
-
+Both main ingredients of this construction have substantial histories.
 On the process side, Poisson counter models are a classical tool of
 mathematical psychology, developed primarily as accounts of response
 time distributions (\citeproc{ref-pikeResponseLatencyModels1973}{Pike,
@@ -506,9 +511,11 @@ one, departs from IIA in a structured way at higher thresholds, and
 yields a probit if the race is instead stopped at a fixed exogenous
 time; Ruan et al. (\citeproc{ref-ruanDependentPoissonRace2008a}{2008})
 developed the dependent Poisson race, derived its choice probabilities,
-and showed that it outperforms the multinomial logit empirically.
-Poisson races as generators of static choice models are therefore not
-new in themselves.
+and showed that it outperforms the multinomial logit empirically;
+because that model induces dependence through shared event streams, the
+covariance structures it can realize are confined to the non-negative,
+common-shock class. Poisson races as generators of static choice models
+are therefore not new in themselves.
 
 On the distributional side, the error family induced by the race is
 equally classical. The negative logarithm of a Gamma variate follows a
@@ -562,25 +569,34 @@ knowledge, are new:
   behavior merely by raising its threshold
   (Section~\ref{sec-variance-normalization}).
 \item
-  \textbf{Generative constructions for correlated probit models, and the
-  constraints they carry.} Extending the race with shared feature
-  generators induces positive dependence among the accumulators and
-  yields, in the large-threshold limit, a correlated Multinomial Probit
-  whose covariance structure is inherited from those shared generators.
-  This construction spans only covariances realizable by non-negative
-  shared Poisson rates, and within that class it implies a strict upper
-  bound, \(\rho_{\max} = \exp(-(v_1 - v_2)\sigma_\theta/2)\) (where
+  \textbf{A generative construction for positively correlated probit
+  models, and the constraint it carries.} Extending the race with shared
+  feature generators induces positive dependence among the accumulators
+  and yields, in the large-threshold limit, a correlated Multinomial
+  Probit whose covariance structure is inherited from those shared
+  generators. This construction spans only covariances realizable by
+  non-negative shared Poisson rates, and within that class it implies a
+  strict upper bound,
+  \(\rho_{\max} = \exp(-(v_1 - v_2)\sigma_\theta/2)\) (where
   \(\sigma_\theta\) is the scale of the unstandardized log-Gamma noise),
   on the correlation attainable between two alternatives of unequal
-  utility at a given threshold (Section~\ref{sec-correlated-errors}). A
-  second construction, based on reciprocal inhibition --- signed
-  evidence streams that favor some alternatives while counting against
-  others --- reaches beyond this class: in the high-threshold limit it
-  recovers the full choice-relevant covariance structure of the
-  correlated Multinomial Probit, at the cost of the count-process
-  representation, and carries an analogous finite-threshold bound
-  coupling expressible utility contrasts to available noise
-  (Section~\ref{sec-inhibitory-race}).
+  utility at a given threshold (Section~\ref{sec-correlated-errors}).
+\item
+  \textbf{A representation theorem for the correlated Multinomial
+  Probit.} A second construction, based on reciprocal inhibition ---
+  signed evidence streams that favor some alternatives while counting
+  against others --- recovers in the high-threshold limit \emph{every}
+  choice-relevant probit covariance, including negative dependence
+  (Result 5, Section~\ref{sec-inhibitory-race}). Whereas existing
+  dependent-race models
+  (\citeproc{ref-ruanDependentPoissonRace2008a}{Ruan et al., 2008})
+  generate dependence only through common shocks, and are thereby
+  confined to a restricted class of non-negative covariances, the signed
+  construction spans the full choice-relevant class. The generality
+  comes at the cost of the count-process representation, and the
+  mechanism still carries a finite-threshold bound, analogous to
+  \(\rho_{\max}\), coupling expressible utility contrasts to available
+  noise.
 \item
   \textbf{A process-level account of parameter invariance across set
   size.} The framework explains why probit (signal detection) parameters
@@ -1425,15 +1441,17 @@ processes to be strictly independent, yielding the Independent
 Multinomial Probit in the asymptotic limit. Correlated probit models
 allow the stochastic components of different alternatives to covary,
 providing a natural way to represent similarity and substitution
-effects. In this section, I show that the Poisson count race can be
-extended to generate a structured class of such models by introducing
-shared evidence generators. The resulting covariance structure is not
-unrestricted: because the underlying event rates must be non-negative,
-the construction produces positive dependence of a particular
-common-shock form. This restriction is itself theoretically informative,
-because it links the covariance structure of the resulting random
-utility model to a physically realizable evidence-accumulation
-mechanism.
+effects. In this section, following Ruan et al.
+(\citeproc{ref-ruanDependentPoissonRace2008a}{2008}), I show that the
+Poisson count race can be extended to generate a structured class of
+such models by introducing shared evidence generators. The resulting
+covariance structure is not unrestricted: because the underlying event
+rates must be non-negative, the construction produces positive
+dependence of a particular common-shock form. This restriction is itself
+theoretically informative, because it links the covariance structure of
+the resulting random utility model to a physically realizable
+evidence-accumulation mechanism. Section~\ref{sec-inhibitory-race} then
+lifts the restriction by admitting signed evidence streams.
 
 \subsection{The Shared-Feature
 Mechanism}\label{the-shared-feature-mechanism}
@@ -2571,10 +2589,15 @@ discussed in Section~\ref{sec-variance-normalization}, this bridge is
 distributional rather than dynamical: the variance standardization
 compares different accumulation systems at matched discriminability,
 rather than describing the behavior of a single system under threshold
-manipulation. The goal is not to advocate replacing existing models, but
-to clarify their relationship: logit and probit represent different
-positions within a continuum of log-Gamma noise shapes, with the
-accumulation threshold governing the transition between them.
+manipulation. The framework, moreover, does not stop at the independent
+case: shared evidence streams generate a structured class of positively
+correlated probit models, and signed evidence streams recover the full
+choice-relevant covariance structure of the correlated Multinomial
+Probit in the high-threshold limit. The goal is not to advocate
+replacing existing models, but to clarify their relationship: logit and
+probit represent different positions within a continuum of log-Gamma
+noise shapes, with the accumulation threshold governing the transition
+between them.
 
 The multinomial simulations demonstrate that this unification is not
 merely a theoretical curiosity. Thresholded accumulation induces
@@ -2605,7 +2628,10 @@ variance standardization under which the limiting behavior remains
 non-degenerate, and drawing out its consequences: the independent
 multinomial probit endpoint, a shared-generator extension yielding a
 structured class of correlated probit models, the \(\rho_{\max}\) bound
-within that construction, and the parameter-invariance crossover.
+within that construction, a signed-stream construction that attains
+every choice-relevant probit covariance in the high-threshold limit
+(Result 5) together with the finite-threshold bound it carries, and the
+parameter-invariance crossover.
 
 The conjoint Poisson race models reviewed in the introduction
 (\citeproc{ref-otterIntegratedModelDiscrete2008}{Otter et al., 2008};
@@ -2620,6 +2646,16 @@ theoretical relationship --- that multinomial logit and independent
 multinomial probit are the two endpoints of one family under matched
 discriminability, with the interpolation characterized distributionally
 (log-Gamma noise), proved in the limit, and quantified by simulation.
+The same precision applies on the dependence side. The dependent Poisson
+race of Ruan et al. (\citeproc{ref-ruanDependentPoissonRace2008a}{2008})
+induces correlation exclusively through shared event streams, and any
+construction of that type is confined to non-negative covariances of the
+common-shock form. Result 5 resolves the representation question this
+leaves open: once signed evidence streams are admitted, the
+high-threshold race attains every choice-relevant covariance of the
+correlated Multinomial Probit. The restriction to positive dependence is
+thus a property of purely excitatory event generation, not of race
+mechanisms as such.
 
 The log-Gamma family should also be distinguished from link-level
 bridges between logit and probit. It has long been known that the
@@ -2650,7 +2686,14 @@ continuous accumulation with explicit drift and boundary parameters. The
 Poisson count race is deliberately minimal: it uses accumulation as a
 generative device to induce a family of random utility models, without
 making claims about within-trial dynamics or response time
-distributions.
+distributions. The same reorientation applies to inhibition: reciprocal
+inhibitory coupling is a standard dynamical ingredient of models such as
+the leaky competing accumulator
+(\citeproc{ref-usherTimeCoursePerceptual2001}{Usher \& McClelland,
+2001}), where it shapes within-trial trajectories, whereas
+Section~\ref{sec-inhibitory-race} repurposes it as a generative device
+whose role is to endow the limiting random utility model with a target
+covariance structure.
 
 Between the logit and probit endpoints lies a continuum of log-Gamma
 random utility models. These intermediate regimes are not intended as
@@ -2681,10 +2724,11 @@ independent accumulators once the effective threshold exceeds one,
 because thin-tailed noise makes the odds between any two alternatives
 sensitive to the strength of the surrounding field. Observed IIA
 violations therefore admit two process interpretations --- genuinely
-correlated evidence streams (Section~\ref{sec-correlated-errors}) or
-extensive independent evidence integration --- and distinguishing them
-requires attention to the pattern of the violations, not merely their
-presence.
+correlated evidence streams, whether excitatory or inhibitory
+(Section~\ref{sec-correlated-errors},
+Section~\ref{sec-inhibitory-race}), or extensive independent evidence
+integration --- and distinguishing them requires attention to the
+pattern of the violations, not merely their presence.
 
 \subsection{Limitations and
 extensions}\label{limitations-and-extensions}
@@ -2750,9 +2794,13 @@ representing fundamentally distinct generating mechanisms. At the same
 time, the unification does not imply that a single decision system can
 transition between regimes by adjusting its threshold alone, since the
 variance standardization that enables comparison across \(\theta\)
-values entails different effective rate structures. The framework thus
-clarifies the conceptual relationship between logit and probit and
-provides a principled basis for comparison, illustrating how
+values entails different effective rate structures. The same asymptotic
+machinery also reaches beyond the independent case: shared evidence
+streams realize a structured, positively dependent subclass of
+correlated probit models, and signed evidence streams provide a
+generative foundation for the entire choice-relevant class. The
+framework thus clarifies the conceptual relationship between logit and
+probit and provides a principled basis for comparison, illustrating how
 process-level reasoning can illuminate the structure of static choice
 models.
 
