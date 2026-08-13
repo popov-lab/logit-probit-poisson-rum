@@ -207,7 +207,12 @@ logit, multinomial probit, Poisson process, evidence accumulation}
 
 \authornote{\par{\addORCIDlink{Vencislav Popov}{0000-0002-8073-4199}} 
 
-\par{       }
+\par{ All simulation code for this article, together with an interactive
+browser-based simulator of the reciprocal-inhibition model, is openly
+available on GitHub at
+https://github.com/popov-lab/logit-probit-poisson-rum. An HTML version
+of this article is available at
+https://venpopov.com/logit-probit-poisson-rum/.     }
 \par{Correspondence concerning this article should be addressed
 to Vencislav
 Popov, Email: \href{mailto:vencislav.popov@gmail.com}{vencislav.popov@gmail.com}}
@@ -693,7 +698,7 @@ where:
 Thus, the Poisson count race is isomorphic to a Random Utility Model
 characterized by Log-Gamma noise.
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, opacityback=0, coltitle=black, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacitybacktitle=0.6, bottomrule=.15mm, title={Result 1 (Log-Gamma Random Utility Family)}, breakable, leftrule=.75mm, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 1 (Log-Gamma Random Utility Family)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
 
 For any integer threshold \(\theta \ge 1\), the Poisson count race
 induces a random utility model
@@ -740,7 +745,7 @@ formula:
 \Pr(C=i) = \frac{\exp(v_i)}{\sum_{j=1}^K \exp(v_j)} = \frac{\lambda_i}{\sum_{j=1}^K \lambda_j}
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, opacityback=0, coltitle=black, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacitybacktitle=0.6, bottomrule=.15mm, title={Result 2 (Logit Boundary)}, breakable, leftrule=.75mm, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 2 (Logit Boundary)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
 
 The Poisson count race with threshold \(\theta=1\) recovers the
 Multinomial Logit model exactly, with deterministic utility components
@@ -869,7 +874,7 @@ Consequently, the vector of random utilities converges in distribution:
 
 where \(Z_i \stackrel{i.i.d.}{\sim} \mathcal{N}(0, 1)\).
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, opacityback=0, coltitle=black, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacitybacktitle=0.6, bottomrule=.15mm, title={Result 3 (Probit Limit)}, breakable, leftrule=.75mm, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 3 (Probit Limit)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
 
 As \(\theta \to \infty\), the Variance-Standardized Poisson race
 converges to the Independent Multinomial Probit model. Within the
@@ -2075,7 +2080,7 @@ threshold is therefore converted almost deterministically into
 arrival-time differences, turning the Gaussian counter fluctuations into
 a Gaussian argmax choice rule.
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, opacityback=0, coltitle=black, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacitybacktitle=0.6, bottomrule=.15mm, title={Result 4 (Correlated Probit Limit Under Reciprocal Inhibition)}, breakable, leftrule=.75mm, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 4 (Correlated Probit Limit Under Reciprocal Inhibition)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
 
 Consider a thresholded two-alternative race in which a shared Poisson
 stream increments both counters and each unique event increments its own
@@ -2427,7 +2432,7 @@ Therefore, once signed feature events with general loadings are
 admitted, the high-threshold race reproduces the full choice-relevant
 covariance class of correlated Multinomial Probit models.
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, opacityback=0, coltitle=black, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacitybacktitle=0.6, bottomrule=.15mm, title={Result 5 (Signed Streams Span the Choice-Relevant Probit Class)}, breakable, leftrule=.75mm, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 5 (Signed Streams Span the Choice-Relevant Probit Class)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
 
 Let \(\mathbf v\in\mathbb R^K\) be any utility vector and
 \(\boldsymbol\Sigma\) any \(K\times K\) covariance matrix for which the
@@ -2556,6 +2561,50 @@ longer Gamma. In return, signed evidence provides a direct mechanism for
 both positive and negative dependence and, in the high-threshold
 local-alternatives limit, generates the full choice-relevant covariance
 structure of the correlated Multinomial Probit.
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-tip-color-frame, opacityback=0, title={Explore this model interactively}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+
+Unlike the other simulations reported in this article, which are static,
+the reciprocal-inhibition race can be explored live. An interactive
+simulator implementing the construction of this section runs directly in
+the browser at
+\url{https://venpopov.com/logit-probit-poisson-rum/simulator.html}, with
+adjustable threshold \(\theta\), shared rate \(\lambda_0\), utilities
+\(v_i\), and pairwise inhibition weights \(u_{ij}\) for \(K = 2\) to
+\(4\) alternatives, along with presets for the regimes discussed above
+(\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a similarity structure).
+As Figure~\ref{fig-simulator} illustrates, it displays sample counter
+trajectories, the convergence of simulated choice shares to the limiting
+Multinomial Probit probabilities, the limiting correlation structure
+alongside counter-fluctuation scatters, and the
+\(\sqrt{\theta}\)-localized first-passage-time distributions.
+
+\end{tcolorbox}
+
+\begin{figure}
+
+\caption{\label{fig-simulator}The interactive reciprocal-inhibition
+simulator, available at
+\href{https://venpopov.com/logit-probit-poisson-rum/simulator.html}{venpopov.com/logit-probit-poisson-rum/simulator.html}.
+Controls (left) set the threshold \(\theta\), the shared stream rate
+\(\lambda_0\), the utilities \(v_i\), and the pairwise inhibition
+weights \(u_{ij}\). Panels show the counter trajectories of a sample
+trial with the winning crossing marked (top left); Monte Carlo choice
+shares converging to the limiting Multinomial Probit probabilities as
+\(\theta\) grows (top right); the limiting utility correlation matrix
+and the counter fluctuations
+\(Z_i = (X_i(t_\theta) - \theta)/\sqrt{\theta}\) at the nominal crossing
+time with the theoretical 90\% ellipse (bottom left); and the
+standardized first-passage times against their predicted Gaussian
+densities (bottom right).}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{simulator-screenshot.png}}
+
+}
+
+\end{figure}%
 
 \section{Discussion}\label{sec-discussion}
 

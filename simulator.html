@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reciprocal Inhibition Race — Correlated-Probit Simulator</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --div-neg: #e34948;   /* diverging red pole */
+    --div-mid: #f0efec;   /* neutral midpoint */
+    --div-pos: #2a78d6;   /* diverging blue pole */
+    --accent: #2a78d6;
+    --warn-bg: #fdf3e2;
+    --warn-ink: #7a4c00;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --div-neg: #e66767;
+    --div-mid: #383835;
+    --div-pos: #3987e5;
+    --accent: #3987e5;
+    --warn-bg: #33260d;
+    --warn-ink: #f2c063;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  header.top {
+    padding: 18px 24px 10px;
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  header.top h1 { font-size: 19px; font-weight: 650; margin: 0; }
+  header.top .sub { color: var(--text-secondary); font-size: 13px; }
+  #themeBtn {
+    margin-left: auto; border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--text-secondary); border-radius: 8px; padding: 5px 12px; cursor: pointer; font: inherit; font-size: 12.5px;
+  }
+  .app { display: grid; grid-template-columns: 296px 1fr; gap: 16px; padding: 0 24px 28px; align-items: start; }
+  @media (max-width: 980px) { .app { grid-template-columns: 1fr; } }
+
+  aside.controls, .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+  }
+  aside.controls { padding: 14px 16px 16px; position: sticky; top: 12px; }
+  .ctl-group { margin-bottom: 14px; }
+  .ctl-group h3 {
+    font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  .row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+  .row label.name { width: 84px; flex: none; color: var(--text-secondary); font-size: 12.5px; }
+  .row input[type=range] { flex: 1; min-width: 60px; accent-color: var(--accent); }
+  .row .val { width: 46px; flex: none; text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  .seg { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    flex: 1; border: 0; background: transparent; color: var(--text-secondary);
+    padding: 5px 0; cursor: pointer; font: inherit; font-size: 12.5px;
+  }
+  .seg button.on { background: var(--accent); color: #fff; font-weight: 600; }
+  select, .btn {
+    width: 100%; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface-1); color: var(--text-primary); font: inherit; font-size: 13px;
+  }
+  .btn { cursor: pointer; }
+  .btn.primary { background: var(--accent); border-color: transparent; color: #fff; font-weight: 600; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .linekey { display:inline-block; width: 14px; height: 0; border-top: 3px solid; border-radius: 2px; margin-right: 6px; vertical-align: 3px; }
+  #warnbar {
+    display: none; margin: 0 0 12px; padding: 8px 12px; border-radius: 10px;
+    background: var(--warn-bg); color: var(--warn-ink); font-size: 12.5px;
+  }
+  main .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 1340px) { main .grid2 { grid-template-columns: 1fr; } }
+  .card { padding: 12px 14px 10px; min-width: 0; }
+  .card h2 { font-size: 13.5px; font-weight: 650; margin: 0 0 2px; }
+  .card .hint { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
+  .card canvas { width: 100%; display: block; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); margin: 4px 2px 2px; }
+  .toolrow { display: flex; gap: 8px; align-items: center; margin: 2px 0 6px; flex-wrap: wrap; }
+  .toolrow button, .toolrow select {
+    width: auto; padding: 4px 10px; font-size: 12.5px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-primary); cursor: pointer;
+  }
+  .toolrow .status { color: var(--muted); font-size: 12px; margin-left: auto; font-variant-numeric: tabular-nums; }
+  .busy { opacity: .45; transition: opacity .15s; }
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 30; display: none;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 9px;
+    padding: 7px 10px; font-size: 12px; box-shadow: 0 4px 18px rgba(0,0,0,.14); max-width: 260px;
+  }
+  #tooltip .tt-title { color: var(--muted); margin-bottom: 3px; }
+  #tooltip .tt-row { display: flex; align-items: baseline; gap: 7px; }
+  #tooltip .tt-row b { font-variant-numeric: tabular-nums; }
+  #tooltip .tt-row span.nm { color: var(--text-secondary); }
+  table.tbl { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  table.tbl th, table.tbl td { padding: 5px 10px; text-align: right; font-variant-numeric: tabular-nums; }
+  table.tbl th { color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--grid); }
+  table.tbl td:first-child, table.tbl th:first-child { text-align: left; }
+  table.tbl tr + tr td { border-top: 1px solid var(--grid); }
+  .eq { font-size: 12.5px; color: var(--text-secondary); }
+  .eq b { color: var(--text-primary); font-weight: 600; }
+  .eq .frm { font-family: ui-serif, Georgia, serif; font-style: italic; font-size: 13.5px; color: var(--text-primary); }
+  footer.notes { margin-top: 16px; }
+  footer.notes .card { padding: 14px 16px; }
+  footer.notes p { margin: 6px 0; }
+  sub, sup { font-size: 10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Reciprocal Inhibition Race</h1>
+  <div class="sub">A Poisson race with signed evidence streams and its correlated Multinomial-Probit limit</div>
+  <button id="themeBtn" title="Toggle light/dark">◐ Theme</button>
+</header>
+
+<div class="app viz-root">
+  <aside class="controls">
+    <div class="ctl-group">
+      <h3>Preset</h3>
+      <select id="preset">
+        <option value="k3sim">K = 3 · similar pair (A ≈ B)</option>
+        <option value="binPos">Binary · positive ρ (shared evidence dominates)</option>
+        <option value="binNeg">Binary · negative ρ (inhibition dominates)</option>
+        <option value="binZero">Binary · ρ = 0 (contributions cancel)</option>
+        <option value="k4">K = 4 · mixed structure</option>
+      </select>
+    </div>
+    <div class="ctl-group">
+      <h3>Alternatives K</h3>
+      <div class="seg" id="ksel"></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Race parameters</h3>
+      <div class="row"><label class="name">threshold θ</label><input type="range" id="theta" min="0" max="8" step="1"><span class="val" id="thetaV"></span></div>
+      <div class="row"><label class="name">shared rate λ₀</label><input type="range" id="lam0" min="0.2" max="3" step="0.05"><span class="val" id="lam0V"></span></div>
+      <div class="row"><label class="name">trials / point</label><input type="range" id="ntr" min="0" max="3" step="1"><span class="val" id="ntrV"></span></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Utilities v<sub>i</sub> (drift d<sub>ij</sub> = (v<sub>i</sub>−v<sub>j</sub>)/K)</h3>
+      <div id="utilRows"></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Pairwise inhibition u<sub>ij</sub></h3>
+      <div id="pairRows"></div>
+    </div>
+    <button class="btn primary" id="runBtn">Re-run simulation</button>
+  </aside>
+
+  <main>
+    <div id="warnbar"></div>
+    <div class="grid2">
+      <div class="card">
+        <h2>Sample trial — counter trajectories</h2>
+        <p class="hint">One complete trial: shared events lift every counter by +1; a pair event adds +1 to one alternative and −1 to its competitor. First counter to θ wins. Faded paths are the previous trial.</p>
+        <div class="toolrow">
+          <button id="newTrialBtn">New trial</button>
+          <span class="status" id="raceStatus"></span>
+        </div>
+        <canvas id="cvRace" height="300"></canvas>
+        <div class="legend" id="legRace"></div>
+      </div>
+
+      <div class="card" id="cardConv">
+        <h2>Choice probabilities vs threshold — convergence to the probit limit</h2>
+        <p class="hint">Monte-Carlo choice shares at each θ (points ± 95% CI) against the limiting Multinomial-Probit probabilities (dashed asymptotes).</p>
+        <canvas id="cvConv" height="300"></canvas>
+        <div class="legend" id="legConv"></div>
+      </div>
+
+      <div class="card" id="cardCov">
+        <h2>Limiting utility correlations ρ<sub>ij</sub></h2>
+        <p class="hint">Left: correlation of the limiting Gaussian utilities, Corr(V) from λ₀Q. Right: counter fluctuations Z<sub>i</sub> = (X<sub>i</sub>(t<sub>θ</sub>) − θ)/√θ at the nominal crossing time, with the theoretical 90% ellipse.</p>
+        <div class="toolrow">
+          <select id="pairSel"></select>
+          <span class="status" id="covStatus"></span>
+        </div>
+        <canvas id="cvCov" height="290"></canvas>
+      </div>
+
+      <div class="card" id="cardFpt">
+        <h2>First-passage times — √θ localization</h2>
+        <p class="hint">Standardized crossing times (T<sub>i</sub> − θ/λ₀)/√θ for every alternative, with the predicted Gaussian N(−ṽ<sub>i</sub>/λ₀², Q<sub>ii</sub>/λ₀³).</p>
+        <canvas id="cvFpt" height="300"></canvas>
+        <div class="legend" id="legFpt"></div>
+      </div>
+    </div>
+
+    <footer class="notes">
+      <div class="card">
+        <h2>Numbers behind the charts</h2>
+        <div id="tableWrap" style="overflow-x:auto; margin-top:6px;"></div>
+        <p class="eq" style="margin-top:12px">
+          <b>Model.</b> Counters <span class="frm">X<sub>i</sub>(t)</span> share a Poisson stream of rate <span class="frm">λ₀</span> (increment +1 to all) and, for each pair (i, j), two opposed streams with rates
+          <span class="frm">u<sub>ij</sub> ± d<sub>ij</sub>/(2√θ)</span> and loadings <span class="frm">±(e<sub>i</sub> − e<sub>j</sub>)</span>, where <span class="frm">d<sub>ij</sub> = (v<sub>i</sub> − v<sub>j</sub>)/K</span>.
+          As <span class="frm">θ → ∞</span> the winner converges to <span class="frm">argmax<sub>i</sub> (ṽ<sub>i</sub> + ε<sub>i</sub>)</span> with
+          <span class="frm">ε ~ N(0, Σ<sub>contrast</sub>)</span>, <span class="frm">Σ<sub>contrast</sub> = 2λ₀ Σ u<sub>ij</sub>(e<sub>i</sub>−e<sub>j</sub>)(e<sub>i</sub>−e<sub>j</sub>)ᵀ</span> — a weighted graph Laplacian.
+          For K = 2 this gives <span class="frm">ρ = (λ₀ − 2u)/(λ₀ + 2u)</span> and <span class="frm">P(1) → Φ(a/√(2λ₀u))</span> with <span class="frm">a = (v₁−v₂)/2</span>.
+          Rate positivity requires <span class="frm">|d<sub>ij</sub>| &lt; 2u<sub>ij</sub>√θ</span>: expressible utility contrasts are bounded by available noise at finite θ.
+        </p>
+      </div>
+    </footer>
+  </main>
+</div>
+<div id="tooltip"></div>
+
+<script>
+"use strict";
+/* ================= palette / css helpers ================= */
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const seriesColor = i => cssVar('--series-' + (i + 1));
+const ALT = ['A', 'B', 'C', 'D'];
+const THETA_STEPS = [2, 4, 8, 16, 32, 64, 128, 256, 512];
+const NTR_STEPS = [500, 1000, 2000, 4000];
+
+/* ================= state ================= */
+const S = {
+  K: 3,
+  thetaIdx: 6,          // index into THETA_STEPS -> 128
+  lam0: 1.2,
+  ntrIdx: 1,            // 1000
+  v: [0.6, 0.3, -0.9, 0.0],
+  u: {},                // "i-j" -> u_ij
+  pairView: '0-1'
+};
+const PRESETS = {
+  k3sim:  { K: 3, thetaIdx: 6, lam0: 1.2, v: [0.5, 0.35, -0.85, 0], u: { '0-1': 0.10, '0-2': 0.80, '1-2': 0.80 } },
+  binPos: { K: 2, thetaIdx: 6, lam0: 2.0, v: [0.5, -0.5, 0, 0],     u: { '0-1': 0.25 } },
+  binNeg: { K: 2, thetaIdx: 6, lam0: 0.6, v: [0.5, -0.5, 0, 0],     u: { '0-1': 1.20 } },
+  binZero:{ K: 2, thetaIdx: 6, lam0: 1.0, v: [0.5, -0.5, 0, 0],     u: { '0-1': 0.50 } },
+  k4:     { K: 4, thetaIdx: 6, lam0: 1.2, v: [0.6, 0.3, -0.2, -0.7],u: { '0-1': 0.15, '0-2': 0.6, '0-3': 0.6, '1-2': 0.6, '1-3': 0.6, '2-3': 0.25 } }
+};
+function pairs(K) { const p = []; for (let i = 0; i < K; i++) for (let j = i + 1; j < K; j++) p.push([i, j]); return p; }
+function pkey(i, j) { return i + '-' + j; }
+function getU(i, j) { const k = pkey(i, j); if (!(k in S.u)) S.u[k] = 0.5; return S.u[k]; }
+function theta() { return THETA_STEPS[S.thetaIdx]; }
+function ntrials() { return NTR_STEPS[S.ntrIdx]; }
+
+/* ================= derived model quantities ================= */
+function derived() {
+  const K = S.K, lam0 = S.lam0;
+  const vt = S.v.slice(0, K); const mean = vt.reduce((a, b) => a + b, 0) / K;
+  const vc = vt.map(x => x - mean); // centered utilities = limiting systematic part
+  const ps = pairs(K);
+  const d = {}, u = {};
+  for (const [i, j] of ps) { d[pkey(i, j)] = (vt[i] - vt[j]) / K; u[pkey(i, j)] = getU(i, j); }
+  // per-unit-time covariance Q = lam0*11' + 2 sum u bb'
+  const Q = Array.from({ length: K }, () => new Array(K).fill(lam0));
+  for (const [i, j] of ps) {
+    const uu = u[pkey(i, j)];
+    Q[i][i] += 2 * uu; Q[j][j] += 2 * uu; Q[i][j] -= 2 * uu; Q[j][i] -= 2 * uu;
+  }
+  const corr = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => Q[i][j] / Math.sqrt(Q[i][i] * Q[j][j])));
+  return { K, lam0, vc, ps, d, u, Q, corr };
+}
+function streamsFor(th, D) {
+  // returns {lams:[], vecs:[[..]], Lam, clamped:bool}
+  const lams = [S.lam0], vecs = [new Array(D.K).fill(1)];
+  let clamped = false;
+  for (const [i, j] of D.ps) {
+    const dd = D.d[pkey(i, j)], uu = D.u[pkey(i, j)], s = dd / (2 * Math.sqrt(th));
+    let lp = uu + s, lm = uu - s;
+    if (lp < 0) { lp = 0; clamped = true; }
+    if (lm < 0) { lm = 0; clamped = true; }
+    const b = new Array(D.K).fill(0); b[i] = 1; b[j] = -1;
+    const nb = b.map(x => -x);
+    lams.push(lp, lm); vecs.push(b, nb);
+  }
+  return { lams, vecs, Lam: lams.reduce((a, b) => a + b, 0), clamped };
+}
+
+/* ================= RNG ================= */
+let _seed = 987654321 >>> 0;
+function rand() { _seed |= 0; _seed = (_seed + 0x6D2B79F5) | 0; let t = Math.imul(_seed ^ (_seed >>> 15), 1 | _seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+function randn() { let u = 0, v = 0; while (u === 0) u = rand(); while (v === 0) v = rand(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+/* ================= simulation core ================= */
+function pickStream(st) {
+  let r = rand() * st.Lam;
+  for (let k = 0; k < st.lams.length; k++) { r -= st.lams[k]; if (r <= 0) return k; }
+  return st.lams.length - 1;
+}
+// winner-only trial
+function trialWinner(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  for (;;) {
+    const k = pickStream(st), vec = st.vecs[k];
+    let mx = -Infinity, arg = -1, tie = false;
+    for (let i = 0; i < K; i++) { X[i] += vec[i]; }
+    for (let i = 0; i < K; i++) { if (X[i] > mx) { mx = X[i]; arg = i; tie = false; } else if (X[i] === mx) tie = true; }
+    if (mx >= th) { if (tie) { const cand = []; for (let i = 0; i < K; i++) if (X[i] === mx) cand.push(i); return cand[Math.floor(rand() * cand.length)]; } return arg; }
+  }
+}
+// full trial: winner + all first-passage times + snapshot at t_theta
+function trialFull(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  const T = new Array(K).fill(NaN);
+  const tTheta = th / D.lam0;
+  const tCap = tTheta + 14 * Math.sqrt(th) / D.lam0 + 30 / D.lam0;
+  let t = 0, nc = 0, winner = -1, Z = null;
+  for (;;) {
+    t += -Math.log(1 - rand()) / st.Lam;
+    if (Z === null && t > tTheta) { Z = Array.from(X, x => (x - th) / Math.sqrt(th)); }
+    const vec = st.vecs[pickStream(st)];
+    for (let i = 0; i < K; i++) X[i] += vec[i];
+    for (let i = 0; i < K; i++) if (isNaN(T[i]) && X[i] >= th) { T[i] = t; nc++; if (winner < 0) winner = i; }
+    if ((nc >= K && Z !== null) || t > tCap) break;
+  }
+  if (Z === null) Z = Array.from(X, x => (x - th) / Math.sqrt(th));
+  return { winner, T, Z, tTheta };
+}
+// full event path for the sample-trial view
+function trialPath(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  const ev = [{ t: 0, X: Array.from(X) }];
+  let t = 0, winner = -1, guard = 0;
+  for (;;) {
+    t += -Math.log(1 - rand()) / st.Lam;
+    const vec = st.vecs[pickStream(st)];
+    for (let i = 0; i < K; i++) X[i] += vec[i];
+    ev.push({ t, X: Array.from(X) });
+    let mx = -Infinity, arg = -1;
+    for (let i = 0; i < K; i++) if (X[i] > mx) { mx = X[i]; arg = i; }
+    if (mx >= th) { winner = arg; break; }
+    if (++guard > 4e5) break;
+  }
+  return { ev, winner, tEnd: t };
+}
+// Gaussian MC for the limiting MNP probabilities
+function limitProbs(D, n) {
+  const K = D.K, counts = new Array(K).fill(0);
+  const coef = D.ps.map(([i, j]) => ({ i, j, s: Math.sqrt(2 * D.lam0 * D.u[pkey(i, j)]) }));
+  const e = new Float64Array(K);
+  for (let r = 0; r < n; r++) {
+    e.fill(0);
+    for (const c of coef) { const g = randn() * c.s; e[c.i] += g; e[c.j] -= g; }
+    let mx = -Infinity, arg = 0;
+    for (let i = 0; i < K; i++) { const val = D.vc[i] + e[i]; if (val > mx) { mx = val; arg = i; } }
+    counts[arg]++;
+  }
+  return counts.map(c => c / n);
+}
+function phi(x) { // standard normal CDF (Abramowitz–Stegun)
+  const t = 1 / (1 + 0.2316419 * Math.abs(x));
+  const dnorm = Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI);
+  let p = dnorm * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+  return x >= 0 ? 1 - p : p;
+}
+
+/* ================= results store ================= */
+const R = {
+  D: null,
+  limit: null,          // limiting probs
+  conv: null,           // [{th, shares:[...], n, skipped}]
+  ens: null,            // { winners:[], Ts:[[..]], Zs:[[..]], th }
+  gen: 0
+};
+
+/* ================= async runner (chunked) ================= */
+let runToken = 0;
+function recompute() {
+  const token = ++runToken;
+  const D = derived();
+  R.D = D; R.gen++;
+  R.limit = limitProbs(D, 120000);
+  // feasibility warning at current theta
+  const st0 = streamsFor(theta(), D);
+  const warn = document.getElementById('warnbar');
+  let msgs = [];
+  if (st0.clamped) msgs.push('At θ = ' + theta() + ' some rate uₓ − dₓ/(2√θ) would be negative and has been clamped to 0 — the race leaves the paper’s regime (|d| < 2u√θ). Increase u or θ, or shrink the utility contrast.');
+  newTrial(false);  // fresh sample trajectory for the new parameters
+  renderStatic();   // heatmap + table + legends + limit lines can draw now
+  // --- convergence sweep ---
+  const sweep = [];
+  const thList = THETA_STEPS;
+  const nPer = ntrials();
+  let ti = 0, done = 0;
+  const convCard = document.getElementById('cardConv');
+  const covCard = document.getElementById('cardCov');
+  const fptCard = document.getElementById('cardFpt');
+  convCard.classList.add('busy'); covCard.classList.add('busy'); fptCard.classList.add('busy');
+  R.conv = sweep; R.ens = null;
+  function stepConv() {
+    if (token !== runToken) return;
+    if (ti >= thList.length) { convCard.classList.remove('busy'); drawConv(); stepEnsInit(); return; }
+    const th = thList[ti];
+    const st = streamsFor(th, D);
+    if (st.clamped) { sweep.push({ th, shares: null, n: 0, skipped: true }); ti++; setTimeout(stepConv, 0); return; }
+    const counts = new Array(D.K).fill(0);
+    const CH = 250;
+    let doneTr = 0;
+    function chunk() {
+      if (token !== runToken) return;
+      const m = Math.min(CH, nPer - doneTr);
+      for (let r = 0; r < m; r++) counts[trialWinner(th, D, st)]++;
+      doneTr += m;
+      if (doneTr < nPer) { setTimeout(chunk, 0); return; }
+      sweep.push({ th, shares: counts.map(c => c / nPer), n: nPer, skipped: false });
+      ti++; drawConv(); setTimeout(stepConv, 0);
+    }
+    chunk();
+  }
+  // --- ensemble at current theta ---
+  function stepEnsInit() {
+    if (token !== runToken) return;
+    const th = theta(), st = streamsFor(th, D);
+    const ens = { winners: [], Ts: [], Zs: [], th };
+    R.ens = ens;
+    const N = Math.min(ntrials(), 2000);
+    let doneTr = 0;
+    const covStatus = document.getElementById('covStatus');
+    function chunk() {
+      if (token !== runToken) return;
+      const m = Math.min(120, N - doneTr);
+      for (let r = 0; r < m; r++) {
+        const tr = trialFull(th, D, st);
+        ens.winners.push(tr.winner); ens.Ts.push(tr.T); ens.Zs.push(tr.Z);
+      }
+      doneTr += m;
+      covStatus.textContent = doneTr + ' / ' + N + ' trials';
+      if (doneTr < N) { setTimeout(chunk, 0); return; }
+      covCard.classList.remove('busy'); fptCard.classList.remove('busy');
+      covStatus.textContent = N + ' trials at θ = ' + th;
+      drawCov(); drawFpt(); renderTable();
+    }
+    if (st.clamped) {
+      covCard.classList.remove('busy'); fptCard.classList.remove('busy');
+      covStatus.textContent = 'skipped — rates infeasible at θ = ' + th;
+      drawCov(); drawFpt(); renderTable();
+    } else chunk();
+  }
+  warn.style.display = msgs.length ? 'block' : 'none';
+  warn.textContent = msgs.join(' ');
+  stepConv();
+}
+
+/* ================= canvas helpers ================= */
+function setupCanvas(cv) {
+  const dpr = window.devicePixelRatio || 1;
+  if (!cv.dataset.h) cv.dataset.h = cv.getAttribute('height'); // design height, stored once — cv.height writes reflect into the attribute
+  const h = parseInt(cv.dataset.h, 10);
+  const w = cv.clientWidth;
+  const W = Math.round(w * dpr), H = Math.round(h * dpr);
+  if (cv.width !== W) cv.width = W;
+  if (cv.height !== H) cv.height = H;
+  if (cv.style.height !== h + 'px') cv.style.height = h + 'px';
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  return { ctx, w, h };
+}
+function niceTicks(lo, hi, n) {
+  const span = hi - lo || 1, step0 = span / Math.max(1, n);
+  const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  let step = mag; for (const m of [1, 2, 2.5, 5, 10]) { if (step0 <= m * mag) { step = m * mag; break; } }
+  const t = [];
+  for (let x = Math.ceil(lo / step) * step; x <= hi + 1e-9; x += step) t.push(+x.toFixed(10));
+  return t;
+}
+function fmt(x, d) { return (+x).toFixed(d === undefined ? 2 : d); }
+const tooltip = document.getElementById('tooltip');
+function showTip(x, y, html) {
+  tooltip.style.display = 'block';
+  tooltip.replaceChildren(...html);
+  const pad = 14, r = tooltip.getBoundingClientRect();
+  let L = x + pad, T = y + pad;
+  if (L + r.width > innerWidth - 8) L = x - r.width - pad;
+  if (T + r.height > innerHeight - 8) T = y - r.height - pad;
+  tooltip.style.left = L + 'px'; tooltip.style.top = T + 'px';
+}
+function hideTip() { tooltip.style.display = 'none'; }
+function tipRows(title, rows) {
+  const out = [];
+  const t = document.createElement('div'); t.className = 'tt-title'; t.textContent = title; out.push(t);
+  for (const r of rows) {
+    const div = document.createElement('div'); div.className = 'tt-row';
+    if (r.color) { const k = document.createElement('span'); k.className = 'linekey'; k.style.borderTopColor = r.color; div.appendChild(k); }
+    const b = document.createElement('b'); b.textContent = r.value; div.appendChild(b);
+    const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = r.name; div.appendChild(nm);
+    out.push(div);
+  }
+  return out;
+}
+
+/* ================= view 1: sample-trial trajectories (static) ================= */
+const race = { path: null, ghost: null };
+function newTrial(keepGhost) {
+  if (!R.D) return;
+  const st = streamsFor(theta(), R.D);
+  if (st.Lam <= 0 || st.clamped) { race.path = null; race.ghost = null; drawRace(); return; }
+  if (keepGhost && race.path) race.ghost = race.path; else if (!keepGhost) race.ghost = null;
+  race.path = trialPath(theta(), R.D, st);
+  drawRace();
+}
+function drawRace() {
+  const cv = document.getElementById('cvRace');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D;
+  const statusEl = document.getElementById('raceStatus');
+  if (!D || !race.path) { if (statusEl) statusEl.textContent = 'no feasible trial at θ = ' + theta(); return; }
+  const th = theta();
+  const padL = 44, padR = 14, padT = 12, padB = 38;
+  const pw = w - padL - padR, ph = h - padT - padB;
+  const tEnd = Math.max(race.path.tEnd, race.ghost ? race.ghost.tEnd : 0) * 1.04;
+  let yMin = 0, yMax = th;
+  for (const p of [race.path, race.ghost]) if (p) for (const e of p.ev) for (const x of e.X) { if (x < yMin) yMin = x; }
+  yMin = Math.min(yMin, -2) - 1; yMax = th * 1.06 + 1;
+  const X = t => padL + pw * t / tEnd;
+  const Y = v => padT + ph * (1 - (v - yMin) / (yMax - yMin));
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (const t of niceTicks(yMin, yMax, 5)) {
+    ctx.beginPath(); ctx.moveTo(padL, Y(t)); ctx.lineTo(w - padR, Y(t)); ctx.stroke();
+    ctx.fillText(String(t), padL - 6, Y(t));
+  }
+  ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(padL, Y(th)); ctx.lineTo(w - padR, Y(th)); ctx.stroke();
+  ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left';
+  ctx.fillText('θ = ' + th, padL + 4, Y(th) - 8);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = cssVar('--muted');
+  for (const t of niceTicks(0, tEnd, 6)) { ctx.fillText(fmt(t, tEnd > 40 ? 0 : 1), X(t), h - padB + 6); }
+  ctx.fillText('time t', padL + pw / 2, h - padB + 20);
+  const tTh = th / D.lam0;
+  if (tTh < tEnd) {
+    ctx.strokeStyle = cssVar('--grid'); ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(X(tTh), padT); ctx.lineTo(X(tTh), h - padB); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillText('tθ = θ/λ₀', X(tTh) + 4, padT);
+  }
+  const drawPath = (path, alpha) => {
+    for (let i = 0; i < D.K; i++) {
+      ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = alpha; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+      ctx.beginPath();
+      let started = false, lastY = null;
+      for (const e of path.ev) {
+        const px = X(e.t), py = Y(e.X[i]);
+        if (!started) { ctx.moveTo(px, py); started = true; }
+        else { ctx.lineTo(px, lastY); ctx.lineTo(px, py); }
+        lastY = py;
+      }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+  };
+  if (race.ghost) drawPath(race.ghost, 0.16);
+  drawPath(race.path, 0.95);
+  if (race.path.winner >= 0) {
+    const wA = race.path.winner;
+    const last = race.path.ev[race.path.ev.length - 1];
+    ctx.beginPath(); ctx.arc(X(last.t), Y(last.X[wA]), 5, 0, 7);
+    ctx.fillStyle = seriesColor(wA); ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = cssVar('--surface-1'); ctx.stroke();
+    if (statusEl) statusEl.textContent = 'winner: ' + ALT[wA] + '  ·  T = ' + fmt(last.t, 1) + '  ·  θ = ' + th;
+  }
+}
+
+/* ================= view 2: convergence chart ================= */
+const convHover = { x: null };
+function drawConv() {
+  const cv = document.getElementById('cvConv');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  const padL = 44, padR = 60, padT = 12, padB = 30;
+  const pw = w - padL - padR, ph = h - padT - padB;
+  const lx = t => Math.log2(t);
+  const x0 = lx(THETA_STEPS[0]) - 0.35, x1 = lx(THETA_STEPS[THETA_STEPS.length - 1]) + 0.35;
+  const X = t => padL + pw * (lx(t) - x0) / (x1 - x0);
+  const Y = p => padT + ph * (1 - p);
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (const p of [0, .25, .5, .75, 1]) {
+    ctx.beginPath(); ctx.moveTo(padL, Y(p)); ctx.lineTo(w - padR, Y(p)); ctx.stroke();
+    ctx.fillText(p.toFixed(2), padL - 6, Y(p));
+  }
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (const t of THETA_STEPS) ctx.fillText(String(t), X(t), h - padB + 6);
+  ctx.fillText('threshold θ (log scale)', padL + pw / 2, h - padB + 18);
+  // limit asymptotes (dashed = projection)
+  for (let i = 0; i < D.K; i++) {
+    ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = 0.75; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(padL, Y(R.limit[i])); ctx.lineTo(w - padR, Y(R.limit[i])); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(ALT[i] + ' → ' + fmt(R.limit[i], 3), w - padR + 6, Y(R.limit[i]));
+  }
+  // simulated series
+  const rows = (R.conv || []).filter(r => !r.skipped);
+  for (let i = 0; i < D.K; i++) {
+    ctx.strokeStyle = seriesColor(i); ctx.lineWidth = 2; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    rows.forEach((r, k) => { const px = X(r.th), py = Y(r.shares[i]); k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); });
+    ctx.stroke();
+    for (const r of rows) {
+      const p = r.shares[i], se = Math.sqrt(Math.max(p * (1 - p), 1e-9) / r.n);
+      ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = 0.55; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(X(r.th), Y(Math.min(1, p + 1.96 * se))); ctx.lineTo(X(r.th), Y(Math.max(0, p - 1.96 * se))); ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.beginPath(); ctx.arc(X(r.th), Y(p), 4, 0, 7);
+      ctx.fillStyle = seriesColor(i); ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = cssVar('--surface-1'); ctx.stroke();
+    }
+  }
+  // crosshair
+  if (convHover.x !== null && rows.length) {
+    let best = rows[0], bd = Infinity;
+    for (const r of rows) { const d0 = Math.abs(X(r.th) - convHover.x); if (d0 < bd) { bd = d0; best = r; } }
+    ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(X(best.th), padT); ctx.lineTo(X(best.th), h - padB); ctx.stroke();
+    convHover.row = best;
+  } else convHover.row = null;
+}
+function bindConv() {
+  const cv = document.getElementById('cvConv');
+  cv.addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect();
+    convHover.x = e.clientX - r.left;
+    drawConv();
+    if (convHover.row && R.D) {
+      const rows = [];
+      for (let i = 0; i < R.D.K; i++) rows.push({ color: seriesColor(i), value: fmt(convHover.row.shares[i], 3), name: ALT[i] + ' (limit ' + fmt(R.limit[i], 3) + ')' });
+      showTip(e.clientX, e.clientY, tipRows('θ = ' + convHover.row.th + ' · ' + convHover.row.n + ' trials', rows));
+    } else hideTip();
+  });
+  cv.addEventListener('pointerleave', () => { convHover.x = null; hideTip(); drawConv(); });
+}
+
+/* ================= view 3: correlation heatmap + scatter ================= */
+const covHover = { cell: null };
+function divergeColor(v) { // v in [-1,1] -> red..neutral..blue
+  const mix = (a, b, t) => {
+    const pa = [1, 3, 5].map(k => parseInt(a.slice(k, k + 2), 16));
+    const pb = [1, 3, 5].map(k => parseInt(b.slice(k, k + 2), 16));
+    return 'rgb(' + pa.map((x, i) => Math.round(x + (pb[i] - x) * t)).join(',') + ')';
+  };
+  const mid = cssVar('--div-mid'), pos = cssVar('--div-pos'), neg = cssVar('--div-neg');
+  return v >= 0 ? mix(mid, pos, Math.min(1, v)) : mix(mid, neg, Math.min(1, -v));
+}
+function luminance(colStr) {
+  const m = colStr.match(/\d+/g); if (!m) return 1;
+  const [r, g, b] = m.map(Number);
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+const covGeom = {};
+function drawCov() {
+  const cv = document.getElementById('cvCov');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  ctx.font = '11px system-ui, sans-serif';
+  const K = D.K;
+  // ---- left: heatmap ----
+  const hmSize = Math.min(h - 60, w * 0.34);
+  const cell = hmSize / K, hx = 30, hy = 24;
+  covGeom.hx = hx; covGeom.hy = hy; covGeom.cell = cell; covGeom.K = K;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  for (let i = 0; i < K; i++) {
+    ctx.fillStyle = cssVar('--muted');
+    ctx.fillText(ALT[i], hx + cell * i + cell / 2, hy - 10);
+    ctx.fillText(ALT[i], hx - 12, hy + cell * i + cell / 2);
+  }
+  for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) {
+    const v = D.corr[i][j];
+    const col = divergeColor(v);
+    ctx.fillStyle = col;
+    ctx.fillRect(hx + cell * j + 1, hy + cell * i + 1, cell - 2, cell - 2); // 2px surface gap
+    ctx.fillStyle = luminance(col) > 0.55 ? '#0b0b0b' : '#ffffff';
+    ctx.fillText(fmt(v, 2), hx + cell * j + cell / 2, hy + cell * i + cell / 2);
+  }
+  ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('Corr(V) — theory', hx - 12, hy + hmSize + 10);
+  if (K === 2) {
+    ctx.fillStyle = cssVar('--muted');
+    ctx.fillText('ρ = (λ₀−2u)/(λ₀+2u) = ' + fmt(D.corr[0][1], 3), hx - 12, hy + hmSize + 26);
+  }
+  // ---- right: scatter of Z fluctuations ----
+  const [pi, pj] = S.pairView.split('-').map(Number);
+  const sx0 = hx + hmSize + 46, sw = w - sx0 - 16, sy0 = 16, sh = h - 52;
+  covGeom.scatter = { sx0, sw, sy0, sh };
+  if (sw < 80) return;
+  // theory moments of Z: mean vc/lam0, cov Q/lam0
+  const mZ = [D.vc[pi] / D.lam0, D.vc[pj] / D.lam0];
+  const cZ = [[D.Q[pi][pi] / D.lam0, D.Q[pi][pj] / D.lam0], [D.Q[pi][pj] / D.lam0, D.Q[pj][pj] / D.lam0]];
+  const sd = Math.sqrt(Math.max(cZ[0][0], cZ[1][1]));
+  let lo = Math.min(mZ[0], mZ[1]) - 3.2 * sd, hiV = Math.max(mZ[0], mZ[1]) + 3.2 * sd;
+  const X = v => sx0 + sw * (v - lo) / (hiV - lo);
+  const Y = v => sy0 + sh * (1 - (v - lo) / (hiV - lo));
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted');
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (const t of niceTicks(lo, hiV, 4)) {
+    ctx.beginPath(); ctx.moveTo(X(t), sy0); ctx.lineTo(X(t), sy0 + sh); ctx.stroke();
+    ctx.fillText(fmt(t, 0), X(t), sy0 + sh + 5);
+  }
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (const t of niceTicks(lo, hiV, 4)) {
+    ctx.beginPath(); ctx.moveTo(sx0, Y(t)); ctx.lineTo(sx0 + sw, Y(t)); ctx.stroke();
+    ctx.fillText(fmt(t, 0), sx0 - 5, Y(t));
+  }
+  ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('Z' + subDigit(pj + 1) + '  vs  Z' + subDigit(pi + 1) + '   (x: ' + ALT[pi] + ', y: ' + ALT[pj] + ')', sx0, sy0 + sh + 18);
+  // points
+  let emp = null;
+  if (R.ens && R.ens.Zs.length) {
+    ctx.fillStyle = seriesColor(0); ctx.globalAlpha = 0.4;
+    const n = Math.min(R.ens.Zs.length, 1600);
+    let sxm = 0, sym = 0, sxx = 0, syy = 0, sxy = 0;
+    for (let r = 0; r < R.ens.Zs.length; r++) { const z = R.ens.Zs[r]; sxm += z[pi]; sym += z[pj]; }
+    sxm /= R.ens.Zs.length; sym /= R.ens.Zs.length;
+    for (let r = 0; r < R.ens.Zs.length; r++) {
+      const z = R.ens.Zs[r];
+      sxx += (z[pi] - sxm) ** 2; syy += (z[pj] - sym) ** 2; sxy += (z[pi] - sxm) * (z[pj] - sym);
+    }
+    emp = sxy / Math.sqrt(sxx * syy);
+    for (let r = 0; r < n; r++) {
+      const z = R.ens.Zs[r];
+      ctx.beginPath(); ctx.arc(X(z[pi]), Y(z[pj]), 2.4, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  // theoretical 90% ellipse
+  const det = cZ[0][0] * cZ[1][1] - cZ[0][1] * cZ[0][1];
+  if (det > 1e-12) {
+    const tr = cZ[0][0] + cZ[1][1];
+    const l1 = tr / 2 + Math.sqrt(Math.max(0, tr * tr / 4 - det));
+    const l2 = tr / 2 - Math.sqrt(Math.max(0, tr * tr / 4 - det));
+    const ang = Math.atan2(l1 - cZ[0][0], cZ[0][1] === 0 ? 1e-12 : cZ[0][1]);
+    const k90 = Math.sqrt(4.605); // chi2_2 90%
+    ctx.strokeStyle = cssVar('--text-secondary'); ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let a = 0; a <= 64; a++) {
+      const t = a / 64 * 2 * Math.PI;
+      const ex = Math.sqrt(l1) * Math.cos(t) * k90, ey = Math.sqrt(l2) * Math.sin(t) * k90;
+      const rx = mZ[0] + ex * Math.cos(ang) - ey * Math.sin(ang);
+      const ry = mZ[1] + ex * Math.sin(ang) + ey * Math.cos(ang);
+      a === 0 ? ctx.moveTo(X(rx), Y(ry)) : ctx.lineTo(X(rx), Y(ry));
+    }
+    ctx.stroke();
+  }
+  const thRho = D.corr[pi][pj];
+  ctx.fillStyle = cssVar('--text-primary'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('ρ theory ' + fmt(thRho, 3) + (emp !== null ? '   ·   ρ simulated ' + fmt(emp, 3) : ''), sx0, sy0);
+}
+function subDigit(n) { return String(n).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]); }
+function bindCov() {
+  const cv = document.getElementById('cvCov');
+  cv.addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const g = covGeom;
+    if (g.cell && x >= g.hx && y >= g.hy && x < g.hx + g.cell * g.K && y < g.hy + g.cell * g.K && R.D) {
+      const j = Math.floor((x - g.hx) / g.cell), i = Math.floor((y - g.hy) / g.cell);
+      showTip(e.clientX, e.clientY, tipRows('Corr(V' + subDigit(i + 1) + ', V' + subDigit(j + 1) + ')', [
+        { value: fmt(R.D.corr[i][j], 4), name: ALT[i] + ' × ' + ALT[j] }
+      ]));
+    } else hideTip();
+  });
+  cv.addEventListener('pointerleave', hideTip);
+}
+
+/* ================= view 4: FPT histograms ================= */
+const fptGeom = { bins: null };
+function drawFpt() {
+  const cv = document.getElementById('cvFpt');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  const padL = 44, padR = 14, padT = 14, padB = 30;
+  const pw = w - padL - padR, ph = h - padT - padB;
+  ctx.font = '11px system-ui, sans-serif';
+  // theory params per alternative: mean -vc/lam0^2, var Qii/lam0^3
+  const th = R.ens ? R.ens.th : theta();
+  const tTheta = th / D.lam0;
+  const means = [], sds = [];
+  for (let i = 0; i < D.K; i++) { means.push(-D.vc[i] / (D.lam0 * D.lam0)); sds.push(Math.sqrt(D.Q[i][i] / Math.pow(D.lam0, 3))); }
+  const sMax = Math.max(...sds);
+  let lo = Math.min(...means) - 3.6 * sMax, hi = Math.max(...means) + 3.6 * sMax;
+  // gather standardized samples
+  const samples = Array.from({ length: D.K }, () => []);
+  if (R.ens) for (let r = 0; r < R.ens.Ts.length; r++) {
+    const T = R.ens.Ts[r];
+    for (let i = 0; i < D.K; i++) if (!isNaN(T[i])) {
+      const s = (T[i] - tTheta) / Math.sqrt(th);
+      samples[i].push(s);
+      if (s < lo) lo = s; if (s > hi) hi = s;
+    }
+  }
+  const NB = 36, bw = (hi - lo) / NB;
+  const hist = samples.map(arr => {
+    const b = new Array(NB).fill(0);
+    for (const s of arr) { const k = Math.min(NB - 1, Math.max(0, Math.floor((s - lo) / bw))); b[k]++; }
+    return { b, n: arr.length };
+  });
+  // density scale
+  let dMax = 0;
+  for (let i = 0; i < D.K; i++) dMax = Math.max(dMax, 1 / (sds[i] * Math.sqrt(2 * Math.PI)));
+  for (const hh of hist) if (hh.n) for (const c of hh.b) dMax = Math.max(dMax, c / (hh.n * bw));
+  dMax *= 1.08;
+  const X = s => padL + pw * (s - lo) / (hi - lo);
+  const Y = d => padT + ph * (1 - d / dMax);
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (const t of niceTicks(lo, hi, 7)) {
+    ctx.beginPath(); ctx.moveTo(X(t), padT); ctx.lineTo(X(t), h - padB); ctx.stroke();
+    ctx.fillText(fmt(t, 1), X(t), h - padB + 6);
+  }
+  ctx.fillText('(Tᵢ − θ/λ₀) / √θ', padL + pw / 2, h - padB + 18);
+  // zero marker
+  ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(X(0), padT); ctx.lineTo(X(0), h - padB); ctx.stroke();
+  fptGeom.lo = lo; fptGeom.bw = bw; fptGeom.hist = hist; fptGeom.X = X; fptGeom.padT = padT; fptGeom.padB = padB; fptGeom.h = h;
+  // histograms as translucent bars
+  for (let i = 0; i < D.K; i++) {
+    if (!hist[i].n) continue;
+    ctx.fillStyle = seriesColor(i); ctx.globalAlpha = 0.28;
+    for (let k = 0; k < NB; k++) {
+      const d0 = hist[i].b[k] / (hist[i].n * bw);
+      if (!d0) continue;
+      ctx.fillRect(X(lo + k * bw) + 1, Y(d0), Math.max(1, pw / NB - 2), (h - padB) - Y(d0));
+    }
+    ctx.globalAlpha = 1;
+  }
+  // theory curves
+  for (let i = 0; i < D.K; i++) {
+    ctx.strokeStyle = seriesColor(i); ctx.lineWidth = 2; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (let px = 0; px <= pw; px += 2) {
+      const s = lo + (hi - lo) * px / pw;
+      const d0 = Math.exp(-((s - means[i]) ** 2) / (2 * sds[i] * sds[i])) / (sds[i] * Math.sqrt(2 * Math.PI));
+      px === 0 ? ctx.moveTo(padL + px, Y(d0)) : ctx.lineTo(padL + px, Y(d0));
+    }
+    ctx.stroke();
+  }
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('density', padL + 4, padT);
+}
+function bindFpt() {
+  const cv = document.getElementById('cvFpt');
+  cv.addEventListener('pointermove', e => {
+    if (!fptGeom.hist || !R.D) { hideTip(); return; }
+    const r = cv.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const s = fptGeom.lo + (x - 44) / (cv.clientWidth - 58) * (fptGeom.hist[0].b.length * fptGeom.bw);
+    const k = Math.floor((s - fptGeom.lo) / fptGeom.bw);
+    if (k < 0 || k >= fptGeom.hist[0].b.length) { hideTip(); return; }
+    const rows = [];
+    for (let i = 0; i < R.D.K; i++) {
+      const hh = fptGeom.hist[i];
+      const dens = hh.n ? hh.b[k] / (hh.n * fptGeom.bw) : 0;
+      rows.push({ color: seriesColor(i), value: fmt(dens, 3), name: ALT[i] + ' (' + (hh.b[k] || 0) + ' trials)' });
+    }
+    showTip(e.clientX, e.clientY, tipRows('bin ' + fmt(fptGeom.lo + k * fptGeom.bw, 2) + ' … ' + fmt(fptGeom.lo + (k + 1) * fptGeom.bw, 2), rows));
+  });
+  cv.addEventListener('pointerleave', hideTip);
+}
+
+/* ================= static render: legends, table, controls ================= */
+function renderLegends() {
+  const D = R.D; if (!D) return;
+  const mk = (id, kind) => {
+    const el = document.getElementById(id);
+    el.replaceChildren();
+    for (let i = 0; i < D.K; i++) {
+      const s = document.createElement('span');
+      const key = document.createElement('span');
+      key.className = kind === 'line' ? 'linekey' : 'swatch';
+      if (kind === 'line') key.style.borderTopColor = seriesColor(i); else key.style.background = seriesColor(i);
+      s.appendChild(key);
+      s.appendChild(document.createTextNode('Alternative ' + ALT[i] + ' (v = ' + fmt(S.v[i], 2) + ')'));
+      el.appendChild(s);
+    }
+    if (id === 'legConv') {
+      const s = document.createElement('span');
+      s.appendChild(document.createTextNode('dashed = probit limit'));
+      el.appendChild(s);
+    }
+    if (id === 'legFpt') {
+      const s = document.createElement('span');
+      s.appendChild(document.createTextNode('bars = simulation · curves = Gaussian theory'));
+      el.appendChild(s);
+    }
+  };
+  mk('legRace', 'line'); mk('legConv', 'line'); mk('legFpt', 'swatch');
+}
+function renderTable() {
+  const D = R.D; if (!D) return;
+  const wrap = document.getElementById('tableWrap');
+  const tbl = document.createElement('table'); tbl.className = 'tbl';
+  const thead = document.createElement('tr');
+  for (const htxt of ['Alternative', 'vᵢ', 'ṽᵢ (centered)', 'P simulated @ θ=' + (R.ens ? R.ens.th : theta()), 'P probit limit', S.K === 2 ? 'Φ(a/√(2λ₀u))' : '']) {
+    if (htxt === '') continue;
+    const el = document.createElement('th'); el.textContent = htxt; thead.appendChild(el);
+  }
+  tbl.appendChild(thead);
+  const simShare = new Array(D.K).fill(NaN);
+  if (R.ens && R.ens.winners.length) {
+    const c = new Array(D.K).fill(0);
+    for (const w0 of R.ens.winners) if (w0 >= 0) c[w0]++;
+    for (let i = 0; i < D.K; i++) simShare[i] = c[i] / R.ens.winners.length;
+  }
+  for (let i = 0; i < D.K; i++) {
+    const tr = document.createElement('tr');
+    const c0 = document.createElement('td');
+    const key = document.createElement('span'); key.className = 'swatch'; key.style.background = seriesColor(i);
+    c0.appendChild(key); c0.appendChild(document.createTextNode('Alternative ' + ALT[i]));
+    tr.appendChild(c0);
+    for (const val of [fmt(S.v[i], 2), fmt(D.vc[i], 3), isNaN(simShare[i]) ? '—' : fmt(simShare[i], 3), fmt(R.limit[i], 3)]) {
+      const td = document.createElement('td'); td.textContent = val; tr.appendChild(td);
+    }
+    if (S.K === 2) {
+      const a = (S.v[0] - S.v[1]) / 2, u = getU(0, 1);
+      const p1 = phi(a / Math.sqrt(2 * S.lam0 * u));
+      const td = document.createElement('td'); td.textContent = fmt(i === 0 ? p1 : 1 - p1, 3); tr.appendChild(td);
+    }
+    tbl.appendChild(tr);
+  }
+  // correlation rows
+  const corTitle = document.createElement('p');
+  corTitle.className = 'eq'; corTitle.style.marginTop = '10px';
+  corTitle.innerHTML = '<b>Pairwise limiting correlations.</b>';
+  const tbl2 = document.createElement('table'); tbl2.className = 'tbl';
+  const th2 = document.createElement('tr');
+  for (const htxt of ['Pair', 'uᵢⱼ', 'dᵢⱼ', 'ρᵢⱼ theory', '|d| < 2u√θ ?']) { const el = document.createElement('th'); el.textContent = htxt; th2.appendChild(el); }
+  tbl2.appendChild(th2);
+  for (const [i, j] of D.ps) {
+    const tr = document.createElement('tr');
+    const dd = D.d[pkey(i, j)], uu = D.u[pkey(i, j)];
+    const ok = Math.abs(dd) < 2 * uu * Math.sqrt(theta());
+    for (const val of [ALT[i] + ' – ' + ALT[j], fmt(uu, 2), fmt(dd, 3), fmt(D.corr[i][j], 3), ok ? 'yes' : 'VIOLATED']) {
+      const td = document.createElement('td'); td.textContent = val; tr.appendChild(td);
+    }
+    tbl2.appendChild(tr);
+  }
+  wrap.replaceChildren(tbl, corTitle, tbl2);
+}
+function renderStatic() {
+  renderLegends(); drawRace(); drawCov(); drawFpt(); drawConv(); renderTable();
+}
+
+/* ================= controls ================= */
+function buildControls() {
+  // K segmented
+  const ks = document.getElementById('ksel');
+  ks.replaceChildren();
+  for (const k of [2, 3, 4]) {
+    const b = document.createElement('button');
+    b.textContent = 'K = ' + k;
+    if (k === S.K) b.classList.add('on');
+    b.addEventListener('click', () => { S.K = k; if (!pairs(k).some(([i,j]) => pkey(i,j) === S.pairView)) S.pairView = '0-1'; buildControls(); scheduleRecompute(); });
+    ks.appendChild(b);
+  }
+  // sliders
+  const thetaEl = document.getElementById('theta');
+  thetaEl.max = THETA_STEPS.length - 1;
+  thetaEl.value = S.thetaIdx;
+  document.getElementById('thetaV').textContent = theta();
+  const lam0El = document.getElementById('lam0');
+  lam0El.value = S.lam0;
+  document.getElementById('lam0V').textContent = fmt(S.lam0, 2);
+  const ntrEl = document.getElementById('ntr');
+  ntrEl.value = S.ntrIdx;
+  document.getElementById('ntrV').textContent = ntrials();
+  // utilities
+  const ur = document.getElementById('utilRows');
+  ur.replaceChildren();
+  for (let i = 0; i < S.K; i++) {
+    const row = document.createElement('div'); row.className = 'row';
+    const lab = document.createElement('label'); lab.className = 'name';
+    const sw = document.createElement('span'); sw.className = 'swatch'; sw.style.background = seriesColor(i);
+    lab.appendChild(sw); lab.appendChild(document.createTextNode('v(' + ALT[i] + ')'));
+    const inp = document.createElement('input'); inp.type = 'range'; inp.min = -1.5; inp.max = 1.5; inp.step = 0.05; inp.value = S.v[i];
+    const val = document.createElement('span'); val.className = 'val'; val.textContent = fmt(S.v[i], 2);
+    inp.addEventListener('input', () => { S.v[i] = +inp.value; val.textContent = fmt(S.v[i], 2); scheduleRecompute(); });
+    row.append(lab, inp, val); ur.appendChild(row);
+  }
+  // pairs
+  const pr = document.getElementById('pairRows');
+  pr.replaceChildren();
+  for (const [i, j] of pairs(S.K)) {
+    const row = document.createElement('div'); row.className = 'row';
+    const lab = document.createElement('label'); lab.className = 'name'; lab.textContent = 'u(' + ALT[i] + ',' + ALT[j] + ')';
+    const inp = document.createElement('input'); inp.type = 'range'; inp.min = 0.05; inp.max = 1.5; inp.step = 0.05; inp.value = getU(i, j);
+    const val = document.createElement('span'); val.className = 'val'; val.textContent = fmt(getU(i, j), 2);
+    inp.addEventListener('input', () => { S.u[pkey(i, j)] = +inp.value; val.textContent = fmt(+inp.value, 2); scheduleRecompute(); });
+    row.append(lab, inp, val); pr.appendChild(row);
+  }
+  // pair selector for scatter
+  const psel = document.getElementById('pairSel');
+  psel.replaceChildren();
+  for (const [i, j] of pairs(S.K)) {
+    const o = document.createElement('option');
+    o.value = pkey(i, j); o.textContent = 'Scatter pair: ' + ALT[i] + ' × ' + ALT[j];
+    if (o.value === S.pairView) o.selected = true;
+    psel.appendChild(o);
+  }
+}
+let recomputeTimer = null;
+function scheduleRecompute() { clearTimeout(recomputeTimer); recomputeTimer = setTimeout(recompute, 350); }
+
+function applyPreset(name) {
+  const p = PRESETS[name]; if (!p) return;
+  S.K = p.K; S.thetaIdx = p.thetaIdx; S.lam0 = p.lam0;
+  S.v = p.v.slice(); S.u = Object.assign({}, p.u);
+  S.pairView = '0-1';
+  buildControls(); recompute();
+}
+
+/* ================= wiring ================= */
+document.getElementById('preset').addEventListener('change', e => applyPreset(e.target.value));
+document.getElementById('theta').addEventListener('input', e => { S.thetaIdx = +e.target.value; document.getElementById('thetaV').textContent = theta(); scheduleRecompute(); });
+document.getElementById('lam0').addEventListener('input', e => { S.lam0 = +e.target.value; document.getElementById('lam0V').textContent = fmt(S.lam0, 2); scheduleRecompute(); });
+document.getElementById('ntr').addEventListener('input', e => { S.ntrIdx = +e.target.value; document.getElementById('ntrV').textContent = ntrials(); scheduleRecompute(); });
+document.getElementById('runBtn').addEventListener('click', () => recompute());
+document.getElementById('newTrialBtn').addEventListener('click', () => newTrial(true));
+document.getElementById('pairSel').addEventListener('change', e => { S.pairView = e.target.value; drawCov(); });
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', cur);
+  renderStatic();
+});
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+window.addEventListener('resize', () => { renderStatic(); });
+
+bindConv(); bindCov(); bindFpt();
+applyPreset('k3sim');
+</script>
+</body>
+</html>

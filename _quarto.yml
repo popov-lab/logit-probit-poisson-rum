@@ -4,6 +4,8 @@ project:
     - "!AGENTS.md"
     - "!meta/"
     - "**/*.qmd"
+  resources:
+    - simulator.html
 
 manuscript:
   article: index.qmd
@@ -11,6 +13,9 @@ manuscript:
     - text: Simulation functions
       icon: file-code
       href: R/race_functions.R
+    - text: Interactive simulator
+      icon: sliders
+      href: simulator.html
     - repo
 
 bibliography: references.bib
@@ -25,6 +30,3 @@ format:
 execute:
   freeze: auto
   execute-dir: project
-
-
-
