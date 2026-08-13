@@ -208,9 +208,9 @@ logit, multinomial probit, Poisson process, evidence accumulation}
 
 \authornote{\par{\addORCIDlink{Vencislav Popov}{0000-0002-8073-4199}} 
 
-\par{ All simulation code for this article, together with an interactive
-browser-based simulator of the reciprocal-inhibition model, is openly
-available on GitHub at
+\par{ All simulation code for this article, together with interactive
+browser-based simulators of the reciprocal-inhibition race and of the
+general signed-stream construction, is openly available on GitHub at
 https://github.com/popov-lab/logit-probit-poisson-rum. An HTML version
 of this article is available at
 https://venpopov.com/logit-probit-poisson-rum/.     }
@@ -2584,19 +2584,35 @@ structure of the correlated Multinomial Probit.
 \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title={Explore this model interactively}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Unlike the other simulations reported in this article, which are static,
-the reciprocal-inhibition race can be explored live. An interactive
-simulator implementing the construction of this section runs directly in
-the browser at
-\url{https://venpopov.com/logit-probit-poisson-rum/simulator.html}, with
-adjustable threshold \(\theta\), shared rate \(\lambda_0\), utilities
-\(v_i\), and pairwise inhibition weights \(u_{ij}\) for \(K = 2\) to
-\(4\) alternatives, along with presets for the regimes discussed above
-(\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a similarity structure).
-As Figure~\ref{fig-simulator} illustrates, it displays sample counter
-trajectories, the convergence of simulated choice shares to the limiting
-Multinomial Probit probabilities, the limiting correlation structure
-alongside counter-fluctuation scatters, and the
-\(\sqrt{\theta}\)-localized first-passage-time distributions.
+the constructions of this section can be explored live in the browser.
+An interactive simulator of the pairwise reciprocal-inhibition race runs
+at \url{https://venpopov.com/logit-probit-poisson-rum/simulator.html},
+with adjustable threshold \(\theta\), shared rate \(\lambda_0\),
+utilities \(v_i\), and pairwise inhibition weights \(u_{ij}\) for
+\(K = 2\) to \(4\) alternatives, along with presets for the regimes
+discussed above (\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a
+similarity structure). As Figure~\ref{fig-simulator} illustrates, it
+displays sample counter trajectories, the convergence of simulated
+choice shares to the limiting Multinomial Probit probabilities, the
+limiting correlation structure alongside counter-fluctuation scatters,
+and the \(\sqrt{\theta}\)-localized first-passage-time distributions.
+
+A second simulator, at
+\url{https://venpopov.com/logit-probit-poisson-rum/signed-streams-simulator.html},
+implements the general signed-loading construction of Result 5: given
+target utilities and an arbitrary target covariance
+\(\boldsymbol\Sigma\) (specified through its standard deviations and
+pairwise correlations), it eigendecomposes the choice-relevant part
+\(\mathbf P\boldsymbol\Sigma\mathbf P\), displays the constructed
+evidence streams \((\mathbf b_r, u_r, d_r)\) --- including the
+vanishing-rate treatment of degenerate directions --- and verifies by
+simulation that the race reproduces both the target Multinomial Probit
+choice probabilities and the target contrast covariance. It flags
+targets whose contrast covariance has positive off-diagonal entries,
+which lie beyond the pairwise-inhibition (graph-Laplacian) class, and
+makes the finite-threshold bound \(|d_r| < 2u_r\sqrt{\theta}\) visible
+when a requested utility contrast exceeds the noise available along its
+direction.
 
 \end{tcolorbox}
 
