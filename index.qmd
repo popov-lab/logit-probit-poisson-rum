@@ -21,6 +21,7 @@ floatsintext: true
 a4paper: true
 execute: 
   cache: true
+  freeze: auto
 draft:
   true
 ---
