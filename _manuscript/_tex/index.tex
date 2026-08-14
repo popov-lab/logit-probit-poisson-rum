@@ -207,9 +207,9 @@ logit, multinomial probit, Poisson process, evidence accumulation}
 
 \authornote{\par{\addORCIDlink{Vencislav Popov}{0000-0002-8073-4199}} 
 
-\par{ All simulation code for this article, together with an interactive
-browser-based simulator of the reciprocal-inhibition model, is openly
-available on GitHub at
+\par{ All simulation code for this article, together with interactive
+browser-based simulators of the reciprocal-inhibition race and of the
+general signed-stream construction, is openly available on GitHub at
 https://github.com/popov-lab/logit-probit-poisson-rum. An HTML version
 of this article is available at
 https://venpopov.com/logit-probit-poisson-rum/.     }
@@ -341,14 +341,9 @@ of these latent quantities under stochastic variability. The general
 setup is surprisingly simple. Consider a decision-maker facing a set of
 \(K \ge 2\) mutually exclusive alternatives. The utility associated with
 alternative \(i\) can be decomposed into a systematic component,
-\(v_i\), and a stochastic component, \(\epsilon_i\):
-
-\[
+\(v_i\), and a stochastic component, \(\epsilon_i\): \[
 U_{i} = v_{i} + \epsilon_{i}, \quad i=1, \dots, K
-\]
-
-The decision-maker then selects the alternative with maximum utility:
-
+\] The decision-maker then selects the alternative with maximum utility:
 \[
 C = \arg \max_{i \in K} U_{i}
 \]
@@ -483,13 +478,18 @@ across \(\theta\) values compares different accumulation systems at
 matched discriminability, not a single system under threshold variation
 (see Section~\ref{sec-variance-normalization} for details).
 
+Beyond the independent family, two further constructions extend the
+Gaussian endpoint to correlated choice. Shared evidence streams generate
+a structured class of positively correlated probit models, while signed
+evidence streams --- reciprocal inhibition --- recover, in the
+high-threshold limit, every choice-relevant covariance structure of the
+correlated Multinomial Probit (Section~\ref{sec-correlated-errors},
+Section~\ref{sec-inhibitory-race}).
+
 \subsection*{Relation to prior work}\label{relation-to-prior-work}
 \addcontentsline{toc}{subsection}{Relation to prior work}
 
-Both main ingredients of this construction have substantial histories,
-and it is important to be precise about what is inherited and what is
-new.
-
+Both main ingredients of this construction have substantial histories.
 On the process side, Poisson counter models are a classical tool of
 mathematical psychology, developed primarily as accounts of response
 time distributions (\citeproc{ref-pikeResponseLatencyModels1973}{Pike,
@@ -510,9 +510,11 @@ one, departs from IIA in a structured way at higher thresholds, and
 yields a probit if the race is instead stopped at a fixed exogenous
 time; Ruan et al. (\citeproc{ref-ruanDependentPoissonRace2008a}{2008})
 developed the dependent Poisson race, derived its choice probabilities,
-and showed that it outperforms the multinomial logit empirically.
-Poisson races as generators of static choice models are therefore not
-new in themselves.
+and showed that it outperforms the multinomial logit empirically;
+because that model induces dependence through shared event streams, the
+covariance structures it can realize are confined to the non-negative,
+common-shock class. Poisson races as generators of static choice models
+are therefore not new in themselves.
 
 On the distributional side, the error family induced by the race is
 equally classical. The negative logarithm of a Gamma variate follows a
@@ -566,25 +568,34 @@ knowledge, are new:
   behavior merely by raising its threshold
   (Section~\ref{sec-variance-normalization}).
 \item
-  \textbf{Generative constructions for correlated probit models, and the
-  constraints they carry.} Extending the race with shared feature
-  generators induces positive dependence among the accumulators and
-  yields, in the large-threshold limit, a correlated Multinomial Probit
-  whose covariance structure is inherited from those shared generators.
-  This construction spans only covariances realizable by non-negative
-  shared Poisson rates, and within that class it implies a strict upper
-  bound, \(\rho_{\max} = \exp(-(v_1 - v_2)\sigma_\theta/2)\) (where
+  \textbf{A generative construction for positively correlated probit
+  models, and the constraint it carries.} Extending the race with shared
+  feature generators induces positive dependence among the accumulators
+  and yields, in the large-threshold limit, a correlated Multinomial
+  Probit whose covariance structure is inherited from those shared
+  generators. This construction spans only covariances realizable by
+  non-negative shared Poisson rates, and within that class it implies a
+  strict upper bound,
+  \(\rho_{\max} = \exp(-(v_1 - v_2)\sigma_\theta/2)\) (where
   \(\sigma_\theta\) is the scale of the unstandardized log-Gamma noise),
   on the correlation attainable between two alternatives of unequal
-  utility at a given threshold (Section~\ref{sec-correlated-errors}). A
-  second construction, based on reciprocal inhibition --- signed
-  evidence streams that favor some alternatives while counting against
-  others --- reaches beyond this class: in the high-threshold limit it
-  recovers the full choice-relevant covariance structure of the
-  correlated Multinomial Probit, at the cost of the count-process
-  representation, and carries an analogous finite-threshold bound
-  coupling expressible utility contrasts to available noise
-  (Section~\ref{sec-inhibitory-race}).
+  utility at a given threshold (Section~\ref{sec-correlated-errors}).
+\item
+  \textbf{A representation theorem for the correlated Multinomial
+  Probit.} A second construction, based on reciprocal inhibition ---
+  signed evidence streams that favor some alternatives while counting
+  against others --- recovers in the high-threshold limit \emph{every}
+  choice-relevant probit covariance, including negative dependence
+  (Result 5, Section~\ref{sec-inhibitory-race}). Whereas existing
+  dependent-race models
+  (\citeproc{ref-ruanDependentPoissonRace2008a}{Ruan et al., 2008})
+  generate dependence only through common shocks, and are thereby
+  confined to a restricted class of non-negative covariances, the signed
+  construction spans the full choice-relevant class. The generality
+  comes at the cost of the count-process representation, and the
+  mechanism still carries a finite-threshold bound, analogous to
+  \(\rho_{\max}\), coupling expressible utility contrasts to available
+  noise.
 \item
   \textbf{A process-level account of parameter invariance across set
   size.} The framework explains why probit (signal detection) parameters
@@ -611,16 +622,12 @@ Then, define a \textbf{count race} characterized by an integer threshold
 alternative accumulates \(\theta\) events.
 
 \textbf{Definition 1 (Stopping Time).} The stopping time for the system
-is the first time any process hits the threshold:
-
-\[
+is the first time any process hits the threshold: \[
 \tau_{\theta} = \inf \{t \ge 0 : \max_{i} N_i(t) = \theta \}
 \]
 
 \textbf{Definition 2 (Choice).} The chosen alternative is the specific
-process that triggers the stopping time:
-
-\[
+process that triggers the stopping time: \[
 C = \arg \max_{i} N_i(\tau_{\theta})
 \]
 
@@ -629,24 +636,18 @@ Times}\label{transformation-to-waiting-times}
 
 To map this stochastic process to a random utility framework, consider
 \(T_i^{(\theta)}\), the waiting time until the \(i\)-th process records
-its \(\theta\)-th event:
-
-\[
+its \(\theta\)-th event: \[
 T_i^{(\theta)} := \inf \{t : N_i(t) = \theta \}
 \]
 
 For a Poisson process with rate \(\lambda_i\), the waiting time to the
 \(\theta\)-th jump follows a Gamma (Erlang) distribution with shape
-\(\theta\) and rate \(\lambda_i\):
-
-\[
+\(\theta\) and rate \(\lambda_i\): \[
 T_i^{(\theta)} \sim \text{Gamma}(\text{shape}=\theta, \text{rate}=\lambda_i)
 \]
 
 The condition that alternative \(i\) wins the race is equivalent to
-observing the minimum waiting time:
-
-\[
+observing the minimum waiting time: \[
 C = \arg \min_{i} T_i^{(\theta)}
 \]
 
@@ -656,31 +657,23 @@ Representation}\label{the-random-utility-representation}
 Since the Poisson processes are independent, the waiting times
 \(T_1^{(\theta)}, \ldots, T_K^{(\theta)}\) are mutually independent.
 Utilizing the scaling property of the Gamma distribution, we can express
-each waiting time as:
-
-\[
+each waiting time as: \[
 T_i^{(\theta)} \stackrel{d}{=} \frac{G_i}{\lambda_i}
 \]
 
 where
 \(G_1, \ldots, G_K \stackrel{\text{i.i.d.}}{\sim} \text{Gamma}(\theta, 1)\)
-are standard Gamma random variables. The choice problem then becomes:
-
-\[
+are standard Gamma random variables. The choice problem then becomes: \[
 C = \arg \min_{i} \left( \frac{G_i}{\lambda_i} \right)
 \]
 
 Applying the natural logarithm and taking the negative, a monotonic
 transformation, reverses the optimization direction from minimization to
-maximization:
-
-\[
+maximization: \[
 \begin{aligned} C &= \arg \min_{i} (\log G_i - \log \lambda_i) \\ &= \arg \max_{i} (\log \lambda_i - \log G_i) \end{aligned}
 \]
 
-This establishes an exact Random Utility Model (RUM) structure:
-
-\[
+This establishes an exact Random Utility Model (RUM) structure: \[
 U_i^{(\theta)} = v_i + \epsilon_i^{(\theta)}
 \]
 
@@ -698,7 +691,7 @@ where:
 Thus, the Poisson count race is isomorphic to a Random Utility Model
 characterized by Log-Gamma noise.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 1 (Log-Gamma Random Utility Family)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Result 1 (Log-Gamma Random Utility Family)}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 For any integer threshold \(\theta \ge 1\), the Poisson count race
 induces a random utility model
@@ -724,28 +717,22 @@ models.
 
 In the specific instance where the threshold is a single event
 (\(\theta = 1\)), the waiting time distribution simplifies to the
-Exponential distribution:
-
-\[
+Exponential distribution: \[
 G_i \sim \text{Gamma}(1, 1) \equiv \text{Exponential}(1)
 \]
 
 A fundamental property of Extreme Value Theory is the relationship
-between the Exponential and Gumbel distributions:
-
-\[
+between the Exponential and Gumbel distributions: \[
 X \sim \text{Exp}(1) \implies -\log(X) \sim \text{Gumbel}(\text{Type I EV})
 \]
 
 Therefore, when \(\theta=1\), the noise terms \(\epsilon_i^{(1)}\) are
 i.i.d. standard Gumbel. This recovers the exact Multinomial Logit
-formula:
-
-\[
+formula: \[
 \Pr(C=i) = \frac{\exp(v_i)}{\sum_{j=1}^K \exp(v_j)} = \frac{\lambda_i}{\sum_{j=1}^K \lambda_j}
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 2 (Logit Boundary)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Result 2 (Logit Boundary)}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 The Poisson count race with threshold \(\theta=1\) recovers the
 Multinomial Logit model exactly, with deterministic utility components
@@ -761,9 +748,7 @@ For thresholds \(\theta > 1\), the error distribution deviates from the
 Gumbel form. More critically, as \(\theta\) increases, the variance of
 the error term diminishes. Specifically, for
 \(\epsilon^{(\theta)} = -\log G\) where
-\(G \sim \text{Gamma}(\theta, 1)\), the moments are:
-
-\[
+\(G \sim \text{Gamma}(\theta, 1)\), the moments are: \[
 \begin{aligned} \mathbb{E}[\epsilon^{(\theta)}] &= -\psi(\theta) \\ \text{Var}(\epsilon^{(\theta)}) &= \psi_1(\theta) \end{aligned}
 \]
 
@@ -778,15 +763,11 @@ meaningful comparison of error shapes across varying \(\theta\), we must
 enforce a consistent scale.
 
 Define the standardized noise term \(Z_i^{(\theta)}\) to have zero mean
-and unit variance for all \(\theta\):
-
-\[
+and unit variance for all \(\theta\): \[
 Z_i^{(\theta)} := \frac{\epsilon_i^{(\theta)} - \mu_\theta}{\sigma_\theta} = \frac{-\log G_i + \psi(\theta)}{\sqrt{\psi_1(\theta)}}
 \]
 
-This leads to family of utility models with matched discriminability:
-
-\[
+This leads to family of utility models with matched discriminability: \[
 U_i^{(\theta)} = v_i + \beta Z_i^{(\theta)}
 \]
 
@@ -846,9 +827,7 @@ Recall that \(G_i \sim \text{Gamma}(\theta, 1)\). For integer
 \(\theta\), \(G_i\) can be represented as the sum of \(\theta\)
 independent exponential variables: \(G_i = \sum_{j=1}^{\theta} E_{ij}\).
 By the Central Limit Theorem, the standardized variable converges to a
-standard normal distribution:
-
-\[
+standard normal distribution: \[
 \frac{G_i - \theta}{\sqrt{\theta}} \xrightarrow{d} \mathcal{N}(0, 1)
 \]
 
@@ -860,21 +839,18 @@ the transformation \(g(x) = -\log x\), the asymptotic distribution of
 
 Standardizing this result matches our variance standardization scaling.
 Since \(\psi_1(\theta) \sim 1/\theta\) for large \(\theta\), the
-standardized term converges to the standard normal:
-
-\[
+standardized term converges to the standard normal: \[
 Z_i^{(\theta)} \xrightarrow{d} \mathcal{N}(0, 1)
 \]
 
 Consequently, the vector of random utilities converges in distribution:
-
 \[
 (v_i + \beta Z_i^{(\theta)})_{i=1}^K \xrightarrow{d} (v_i + \beta Z_i)_{i=1}^K
 \]
 
 where \(Z_i \stackrel{i.i.d.}{\sim} \mathcal{N}(0, 1)\).
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 3 (Probit Limit)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Result 3 (Probit Limit)}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 As \(\theta \to \infty\), the Variance-Standardized Poisson race
 converges to the Independent Multinomial Probit model. Within the
@@ -911,9 +887,7 @@ Let \(\lambda_1\) and \(\lambda_2\) denote the Poisson rates of the two
 alternatives, and define the log-rate ratio
 \(x = \log(\lambda_1/\lambda_2)\). The probability that alternative 1
 wins the race can be expressed in closed form using the regularized
-incomplete Beta function:
-
-\[
+incomplete Beta function: \[
 \Pr(C = 1 \mid x, \theta) = I_{\sigma(x)}(\theta, \theta)
 \]
 
@@ -971,9 +945,7 @@ converge to the probit curve.
 
 In the binary case this convergence is uniform in the signal, and the
 claim need not rest on simulation. On the variance-matched axis the
-choice function is itself a distribution function:
-
-\[
+choice function is itself a distribution function: \[
 \Pr(C = 1 \mid s, \theta) = \Pr\left[\frac{\epsilon_2^{(\theta)} - \epsilon_1^{(\theta)}}{\sqrt{2\psi_1(\theta)}} \le s\right] = F_\theta(s),
 \]
 
@@ -1178,9 +1150,9 @@ Alternatives}\label{study-4-independence-of-irrelevant-alternatives}
 The IIA property is a hallmark of the Multinomial Logit model: the ratio
 of choice probabilities for any two alternatives is invariant to the
 composition of the choice set. Formally, for alternatives \(i\) and
-\(j\):
-
-\[\frac{P(i \mid \mathcal{C})}{P(j \mid \mathcal{C})} = \frac{e^{v_i}}{e^{v_j}} \quad \text{for all choice sets } \mathcal{C} \ni i, j\]
+\(j\): \[
+\frac{P(i \mid \mathcal{C})}{P(j \mid \mathcal{C})} = \frac{e^{v_i}}{e^{v_j}} \quad \text{for all choice sets } \mathcal{C} \ni i, j
+\]
 
 This property does not hold for the Multinomial Probit model, even when
 errors are independent and identically distributed. The Poisson count
@@ -1429,15 +1401,17 @@ processes to be strictly independent, yielding the Independent
 Multinomial Probit in the asymptotic limit. Correlated probit models
 allow the stochastic components of different alternatives to covary,
 providing a natural way to represent similarity and substitution
-effects. In this section, I show that the Poisson count race can be
-extended to generate a structured class of such models by introducing
-shared evidence generators. The resulting covariance structure is not
-unrestricted: because the underlying event rates must be non-negative,
-the construction produces positive dependence of a particular
-common-shock form. This restriction is itself theoretically informative,
-because it links the covariance structure of the resulting random
-utility model to a physically realizable evidence-accumulation
-mechanism.
+effects. In this section, following Ruan et al.
+(\citeproc{ref-ruanDependentPoissonRace2008a}{2008}), I show that the
+Poisson count race can be extended to generate a structured class of
+such models by introducing shared evidence generators. The resulting
+covariance structure is not unrestricted: because the underlying event
+rates must be non-negative, the construction produces positive
+dependence of a particular common-shock form. This restriction is itself
+theoretically informative, because it links the covariance structure of
+the resulting random utility model to a physically realizable
+evidence-accumulation mechanism. Section~\ref{sec-inhibitory-race} then
+lifts the restriction by admitting signed evidence streams.
 
 \subsection{The Shared-Feature
 Mechanism}\label{the-shared-feature-mechanism}
@@ -1469,9 +1443,9 @@ Assume the existence of independent feature generators \(Y_S(t)\), which
 are Poisson processes with rates \(\lambda_S \ge 0\). An event from
 \(Y_S(t)\) delivers a simultaneous unit of evidence to all alternatives
 contained in \(S\). The cumulative count for alternative \(i\) is the
-superposition of all feature processes associated with it:
-
-\[N_i(t) = \sum_{S: i \in S} Y_S(t)\]
+superposition of all feature processes associated with it: \[
+N_i(t) = \sum_{S: i \in S} Y_S(t)
+\]
 
 Because the superposition of independent Poisson processes is itself a
 Poisson process, \(N_i(t)\) remains a standard Poisson process with
@@ -1481,18 +1455,18 @@ time marginals are therefore preserved as
 
 Crucially, for any two alternatives \(i\) and \(j\) that share at least
 one feature generator, their event counts covary. The covariance is
-determined by the sum of the rates of their shared processes:
-
-\[\text{Cov}(N_i(t), N_j(t)) = t \sum_{S: \{i,j\} \subseteq S} \lambda_S := t \Lambda_{ij}\]
+determined by the sum of the rates of their shared processes: \[
+\text{Cov}(N_i(t), N_j(t)) = t \sum_{S: \{i,j\} \subseteq S} \lambda_S := t \Lambda_{ij}
+\]
 
 This yields a correlation between the accumulators of
 \(\rho_{ij} = \Lambda_{ij} / \sqrt{\Lambda_i \Lambda_j}\).
 
 The covariance matrix generated in this way has a specific structure. If
 \(\mathbf{1}_S\) denotes the indicator vector for subset \(S\), then the
-covariance matrix of the count vector per unit time can be written as
-
-\[\boldsymbol{\Sigma}_N = \sum_S \lambda_S \, \mathbf{1}_S \mathbf{1}_S^\top\]
+covariance matrix of the count vector per unit time can be written as \[
+\boldsymbol{\Sigma}_N = \sum_S \lambda_S \, \mathbf{1}_S \mathbf{1}_S^\top
+\]
 
 Because every \(\lambda_S \ge 0\), all pairwise covariances are
 non-negative. For more than two alternatives, the pairwise correlations
@@ -1531,15 +1505,15 @@ large \(\theta\), dividing the covariance by
 \(\sigma_\theta^2 = \psi_1(\theta)\) exactly recovers \(\rho_{ij}\). The
 standardized noise vector \(\mathbf{Z}^{(\theta)}\) therefore converges
 in distribution to a multivariate standard normal whose correlation
-matrix is inherited from the underlying shared counting processes:
-
-\[\mathbf{Z}^{(\theta)} \xrightarrow{d} \mathcal{N}(\mathbf{0}, \mathbf{R})\]
+matrix is inherited from the underlying shared counting processes: \[
+\mathbf{Z}^{(\theta)} \xrightarrow{d} \mathcal{N}(\mathbf{0}, \mathbf{R})
+\]
 
 where the off-diagonal entries of \(\mathbf{R}\) are the correlations
 \(\rho_{ij}\) induced by the shared-generator rates. Consequently, the
-random utility vector converges to
-
-\[\mathbf{U}^{(\theta)} \xrightarrow{d} \mathcal{N}(\mathbf{v}, \beta^2 \mathbf{R})\]
+random utility vector converges to \[
+\mathbf{U}^{(\theta)} \xrightarrow{d} \mathcal{N}(\mathbf{v}, \beta^2 \mathbf{R})
+\]
 
 Thus every covariance structure realizable by the shared-feature Poisson
 construction has a corresponding correlated Multinomial Probit limit.
@@ -1562,16 +1536,16 @@ To maintain matched discriminability across varying thresholds
 \(\theta\), the systematic utilities \(v_i\) must remain constant while
 the noise is scaled. Because the systematic utility in the
 unstandardized race is \(\log(\Lambda_i)\), the \emph{effective total
-rates} must scale with \(\sigma_\theta = \sqrt{\psi_1(\theta)}\):
-
-\[\Lambda_i^* = \exp(v_i \sigma_\theta)\]
+rates} must scale with \(\sigma_\theta = \sqrt{\psi_1(\theta)}\): \[
+\Lambda_i^* = \exp(v_i \sigma_\theta)
+\]
 
 Consider a two-alternative scenario where options 1 and 2 share a
 feature generator with rate \(\lambda_{12}^*\), and possess unique
 generators with rates \(\lambda_1^*\) and \(\lambda_2^*\). To achieve a
-target correlation \(\rho\), the shared rate must be:
-
-\[\lambda_{12}^* = \rho \sqrt{\Lambda_1^* \Lambda_2^*} = \rho \exp\left(\frac{(v_1 + v_2) \sigma_\theta}{2}\right)\]
+target correlation \(\rho\), the shared rate must be: \[
+\lambda_{12}^* = \rho \sqrt{\Lambda_1^* \Lambda_2^*} = \rho \exp\left(\frac{(v_1 + v_2) \sigma_\theta}{2}\right)
+\]
 
 The required unique rate for alternative 2 is therefore
 \(\lambda_2^* = \Lambda_2^* - \lambda_{12}^*\). For the model to be
@@ -1593,9 +1567,9 @@ possesses almost none.
 
 Mathematically, ensuring \(\lambda_2^* \ge 0\) reveals a strict upper
 bound on the correlation the system can support for a given threshold
-and utility difference. Dividing by \(\Lambda_2^*\), we find:
-
-\[\rho_{\max} = \exp\left(-\frac{(v_1 - v_2) \sigma_\theta}{2}\right)\]
+and utility difference. Dividing by \(\Lambda_2^*\), we find: \[
+\rho_{\max} = \exp\left(-\frac{(v_1 - v_2) \sigma_\theta}{2}\right)
+\]
 
 This equation demonstrates that, within the shared-generator
 realization, correlation and utility cannot be varied independently. At
@@ -1682,9 +1656,7 @@ Consider first two alternatives. Let \(S_0(t)\) denote the shared
 Poisson stream, with rate \(\lambda_0>0\), so that
 \(S_0(t)\sim\operatorname{Poisson}(\lambda_0 t)\). Let
 \(Y_{1,\theta}(t)\) and \(Y_{2,\theta}(t)\) be independent unique
-Poisson processes with rates
-
-\[
+Poisson processes with rates \[
 \lambda_{1,\theta}
 =
 u+\frac{a}{2\sqrt{\theta}},
@@ -1697,9 +1669,7 @@ u-\frac{a}{2\sqrt{\theta}},
 where \(u>0\) and \(\theta\) is sufficiently large that both rates are
 positive. An event from the shared process increments both counters,
 whereas an event unique to one alternative increments that alternative
-and decrements the other:
-
-\[
+and decrements the other: \[
 \begin{aligned}
 X_{1,\theta}(t)
 &=
@@ -1711,9 +1681,7 @@ S_0(t)-Y_{1,\theta}(t)+Y_{2,\theta}(t).
 \]
 
 The counters are permitted to take negative values. A decision occurs
-when either counter first reaches the common threshold \(\theta\),
-
-\[
+when either counter first reaches the common threshold \(\theta\), \[
 T_{i,\theta}
 =
 \inf\{t\geq 0:X_{i,\theta}(t)\geq\theta\},
@@ -1732,9 +1700,7 @@ Section~\ref{sec-correlated-errors}, such ties require an arbitrary
 convention, but their probability vanishes in the high-threshold limit
 and they play no role in what follows.
 
-The drift vector is
-
-\[
+The drift vector is \[
 \mathbb{E}
 \left[
 \frac{d\mathbf X_\theta(t)}{dt}
@@ -1761,9 +1727,7 @@ Section~\ref{sec-variance-normalization}: without a shrinking difference
 between the drifts, the high-threshold choice would again become
 deterministic.
 
-The covariance accumulated per unit time is
-
-\[
+The covariance accumulated per unit time is \[
 \mathbf Q
 =
 \begin{pmatrix}
@@ -1794,16 +1758,12 @@ fluctuations in passage time.
 Ignoring for the moment the \(O(\theta^{-1/2})\) difference between the
 two drifts, both counters move toward the threshold at the common rate
 \(\lambda_0\). Their leading-order deterministic crossing time is
-therefore
-
-\[
+therefore \[
 t_\theta=\frac{\theta}{\lambda_0}.
 \]
 
 The small drift difference cannot, however, be ignored over the full
-\(O(\theta)\) time required to reach the threshold. At \(t_\theta\),
-
-\[
+\(O(\theta)\) time required to reach the threshold. At \(t_\theta\), \[
 \begin{aligned}
 \mathbb{E}[X_{1,\theta}(t_\theta)]
 &=
@@ -1827,9 +1787,7 @@ The small drift difference cannot, however, be ignored over the full
 Thus a drift difference of order \(\theta^{-1/2}\), accumulated over a
 time of order \(\theta\), produces a displacement of order
 \(\sqrt{\theta}\). This is also the scale of the stochastic
-fluctuations: since covariance accumulates at rate \(\mathbf Q\),
-
-\[
+fluctuations: since covariance accumulates at rate \(\mathbf Q\), \[
 \operatorname{Cov}\!\left[\mathbf X_\theta(t_\theta)\right]
 =
 \frac{\theta}{\lambda_0}\mathbf Q.
@@ -1842,9 +1800,7 @@ drift difference would dominate the noise and make choice deterministic,
 whereas a smaller one would vanish relative to the noise.
 
 The multivariate Central Limit Theorem for the underlying Poisson
-processes therefore gives
-
-\[
+processes therefore gives \[
 \frac{
 \mathbf X_\theta(t_\theta)-\theta\mathbf 1
 }{
@@ -1854,9 +1810,7 @@ processes therefore gives
 \mathbf Z,
 \]
 
-where
-
-\[
+where \[
 \mathbf Z
 \sim
 \mathcal N
@@ -1881,17 +1835,13 @@ not monotone: inhibitory events can move them downward, so their
 position at \(t_\theta\) alone does not rule out a much earlier
 crossing.
 
-Let
-
-\[
+Let \[
 M_{i,\theta}(t)
 =
 X_{i,\theta}(t)-\mathbb E[X_{i,\theta}(t)].
 \]
 
-This is a martingale, and at \(t_\theta\),
-
-\[
+This is a martingale, and at \(t_\theta\), \[
 \operatorname{Var}\!\left[M_{i,\theta}(t_\theta)\right]
 =
 Q_{ii}t_\theta
@@ -1905,23 +1855,17 @@ therefore \(O_p(\sqrt{\theta})\). On the other hand, at a time
 threshold by approximately \(\lambda_0M\sqrt{\theta}\), apart from terms
 of order \(\sqrt{\theta}\) that do not grow with \(M\). Consequently, as
 \(M\to\infty\), the probability that stochastic fluctuations produce a
-crossing before time
-
-\[
+crossing before time \[
 t_\theta-M\sqrt{\theta}
 \]
 
 tends to zero, uniformly for large \(\theta\). The corresponding
 argument after \(t_\theta\) shows that the probability of failing to
-cross by time
-
-\[
+cross by time \[
 t_\theta+M\sqrt{\theta}
 \]
 
-also tends to zero. Thus
-
-\[
+also tends to zero. Thus \[
 T_{i,\theta}
 =
 t_\theta+O_p(\sqrt{\theta}).
@@ -1930,34 +1874,26 @@ t_\theta+O_p(\sqrt{\theta}).
 The first-passage times are therefore localized to an
 \(O(\sqrt{\theta})\) window around the deterministic crossing time.
 
-We can now zoom into this window. Write
-
-\[
+We can now zoom into this window. Write \[
 t=t_\theta+y\sqrt{\theta},
 \]
 
 with \(y=O(1)\). Over an interval of length \(y\sqrt{\theta}\), the
-common drift changes either counter by
-
-\[
+common drift changes either counter by \[
 \lambda_0y\sqrt{\theta},
 \]
 
 while the \(O(\theta^{-1/2})\) drift correction contributes only
 \(O(1)\). More importantly, the \emph{new} stochastic variation
 accumulated within such an interval has variance \(O(\sqrt{\theta})\),
-and therefore standard deviation only
-
-\[
+and therefore standard deviation only \[
 O(\theta^{1/4}).
 \]
 
 This is negligible relative to the \(O(\sqrt{\theta})\) fluctuations
 already accumulated by time \(t_\theta\). Thus, on the \(\sqrt{\theta}\)
 scale, the local path is asymptotically a random intercept followed by
-deterministic motion with slope \(\lambda_0\):
-
-\[
+deterministic motion with slope \(\lambda_0\): \[
 \frac{
 \mathbf X_\theta(t_\theta+y\sqrt{\theta})
 -\theta\mathbf 1
@@ -1976,30 +1912,22 @@ deterministic motion with slope \(\lambda_0\):
 o_p(1).
 \]
 
-In the limit, this becomes the random line
-
-\[
+In the limit, this becomes the random line \[
 y\mapsto
 \mathbf Z+\lambda_0y\mathbf 1.
 \]
 
 The crossing time for component \(i\) is obtained by setting this
-limiting line equal to zero:
-
-\[
+limiting line equal to zero: \[
 Z_i+\lambda_0y_i=0,
 \]
 
-so that
-
-\[
+so that \[
 y_i=-\frac{Z_i}{\lambda_0}.
 \]
 
 Since \(y_i=(T_{i,\theta}-t_\theta)/\sqrt{\theta}\), it follows jointly
-across alternatives that
-
-\[
+across alternatives that \[
 \frac{
 \mathbf T_\theta-(\theta/\lambda_0)\mathbf 1
 }{
@@ -2019,26 +1947,20 @@ continuous mapping theorem applied to the first-passage functional.
 Finally, the winning alternative is the one with the smallest
 first-passage time. Because the common centering term
 \(\theta/\lambda_0\) and the positive scale factor
-\(\sqrt{\theta}/\lambda_0\) are the same for both alternatives,
-
-\[
+\(\sqrt{\theta}/\lambda_0\) are the same for both alternatives, \[
 \arg\min_i T_{i,\theta}
 \quad\Longrightarrow\quad
 \arg\max_i Z_i.
 \]
 
-Moreover,
-
-\[
+Moreover, \[
 \operatorname{Var}(Z_1-Z_2)
 =
 \frac{8u}{\lambda_0}
 >0,
 \]
 
-so the limiting maximizer is almost surely unique. Therefore,
-
-\[
+so the limiting maximizer is almost surely unique. Therefore, \[
 C_\theta
 \xrightarrow{d}
 \arg\max_i Z_i.
@@ -2047,17 +1969,13 @@ C_\theta
 Multiplying every component of \(\mathbf Z\) by the same positive scalar
 \(\lambda_0\) does not change the maximizing alternative. Defining
 \(\mathbf V=\lambda_0\mathbf Z\), the limiting choice model may
-therefore be written as
-
-\[
+therefore be written as \[
 C_\theta
 \xrightarrow{d}
 \arg\max_i V_i,
 \]
 
-where
-
-\[
+where \[
 \mathbf V
 \sim
 \mathcal N
@@ -2080,7 +1998,7 @@ threshold is therefore converted almost deterministically into
 arrival-time differences, turning the Gaussian counter fluctuations into
 a Gaussian argmax choice rule.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 4 (Correlated Probit Limit Under Reciprocal Inhibition)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Result 4 (Correlated Probit Limit Under Reciprocal Inhibition)}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 Consider a thresholded two-alternative race in which a shared Poisson
 stream increments both counters and each unique event increments its own
@@ -2093,18 +2011,14 @@ underlying event streams.
 
 \end{tcolorbox}
 
-The limiting correlation is explicit:
-
-\[
+The limiting correlation is explicit: \[
 \rho
 =
 \frac{\lambda_0-2u}{\lambda_0+2u}.
 \]
 
 Hence reciprocal inhibition spans the full nondegenerate binary
-correlation range. Solving for \(u\) gives
-
-\[
+correlation range. Solving for \(u\) gives \[
 u
 =
 \frac{\lambda_0(1-\rho)}
@@ -2117,9 +2031,7 @@ inhibition dominates when \(\rho<0\), and the two contributions cancel
 when \(\rho=0\).
 
 For binary choice, the difference \(V_1-V_2\) is Gaussian with mean
-\(2a\) and variance \(8\lambda_0 u\). Therefore,
-
-\[
+\(2a\) and variance \(8\lambda_0 u\). Therefore, \[
 \Pr(C_\theta=1)
 \longrightarrow
 \Phi
@@ -2129,9 +2041,7 @@ For binary choice, the difference \(V_1-V_2\) is Gaussian with mean
 \]
 
 Equivalently, defining the systematic utility difference as
-\(\Delta v=2a\),
-
-\[
+\(\Delta v=2a\), \[
 \Pr(C_\theta=1)
 \longrightarrow
 \Phi
@@ -2164,9 +2074,7 @@ denote the all-alternative common Poisson stream with rate
 \(\mathbf 1\), providing common progress toward the threshold. In
 addition, let there be pairs of independent Poisson generators
 \(Y_{r,\theta}^{+}(t)\) and \(Y_{r,\theta}^{-}(t)\) with opposite signed
-evidence vectors \(\mathbf b_r\) and \(-\mathbf b_r\), where
-
-\[
+evidence vectors \(\mathbf b_r\) and \(-\mathbf b_r\), where \[
 \mathbf b_r^\top\mathbf 1=0.
 \]
 
@@ -2176,9 +2084,7 @@ contribute only common drift and common noise, which choice
 probabilities cannot detect, and would be projected out of the
 choice-relevant covariance derived below.
 
-The paired rates are
-
-\[
+The paired rates are \[
 \lambda_{r,\theta}^{+}
 =
 u_r+\frac{d_r}{2\sqrt{\theta}},
@@ -2189,9 +2095,7 @@ u_r-\frac{d_r}{2\sqrt{\theta}},
 \]
 
 with \(u_r>0\) and \(\theta\) large enough that all rates are positive.
-The evidence vector is
-
-\[
+The evidence vector is \[
 \mathbf X_\theta(t)
 =
 S_0(t)\mathbf 1
@@ -2205,9 +2109,7 @@ Y_{r,\theta}^{-}(t)
 \right].
 \]
 
-The drift is
-
-\[
+The drift is \[
 \mathbb E
 \left[
 \frac{d\mathbf X_\theta(t)}{dt}
@@ -2218,17 +2120,13 @@ The drift is
 \frac{\mathbf h}{\sqrt{\theta}},
 \]
 
-where
-
-\[
+wher \[
 \mathbf h
 =
 \sum_{r=1}^{R}d_r\mathbf b_r.
 \]
 
-The covariance per unit time is
-
-\[
+The covariance per unit time is \[
 \mathbf Q
 =
 \lambda_0\mathbf 1\mathbf 1^\top
@@ -2243,9 +2141,7 @@ exactly rather than asymptotically, because the paired rates sum to
 Let every component have threshold \(\theta\), and let \(T_{i,\theta}\)
 again denote the first time component \(i\) reaches it. Repeating the
 localization and linearization arguments around
-\(t_\theta=\theta/\lambda_0\) yields
-
-\[
+\(t_\theta=\theta/\lambda_0\) yields \[
 C_\theta
 \xrightarrow{d}
 \arg\max_i
@@ -2254,9 +2150,7 @@ h_i+\epsilon_i
 \right),
 \]
 
-with
-
-\[
+with \[
 \boldsymbol\epsilon
 \sim
 \mathcal N(\mathbf 0,\lambda_0\mathbf Q).
@@ -2268,9 +2162,7 @@ orthogonal to \(\mathbf 1\), the limiting noise decomposes into two
 independent Gaussian components: an exchangeable shift with covariance
 \(\lambda_0^2\mathbf 1\mathbf 1^\top\), identical across alternatives
 and therefore without effect on the argmax, and a contrast component
-carrying the choice-relevant covariance
-
-\[
+carrying the choice-relevant covariance \[
 \boldsymbol\Sigma_{\mathrm{contrast}}
 =
 2\lambda_0
@@ -2282,18 +2174,14 @@ Thus signed Poisson evidence streams map directly onto covariance
 directions in the limiting Multinomial Probit model.
 
 A particularly natural special case retains literal pairwise reciprocal
-inhibition. For each pair \((i,j)\), let
-
-\[
+inhibition. For each pair \((i,j)\), let \[
 \mathbf b_{ij}
 =
 \mathbf e_i-\mathbf e_j.
 \]
 
 An event favoring \(i\) over \(j\) adds one unit to \(i\) and removes
-one unit from \(j\). The limiting contrast covariance is then
-
-\[
+one unit from \(j\). The limiting contrast covariance is then \[
 \boldsymbol\Sigma_{\mathrm{contrast}}
 =
 2\lambda_0
@@ -2326,18 +2214,14 @@ retains the same event-generation interpretation: a single feature can
 support some alternatives while suppressing others.
 
 For any Multinomial Probit model with covariance matrix
-\(\boldsymbol\Sigma\), only utility differences affect choice. Let
-
-\[
+\(\boldsymbol\Sigma\), only utility differences affect choice. Let \[
 \mathbf P
 =
 \mathbf I-\frac{1}{K}\mathbf 1\mathbf 1^\top
 \]
 
 be the projection onto the contrast space. The choice-relevant
-covariance is
-
-\[
+covariance is \[
 \boldsymbol\Sigma_c
 =
 \mathbf P\boldsymbol\Sigma\mathbf P.
@@ -2345,9 +2229,7 @@ covariance is
 
 Suppose first that \(\boldsymbol\Sigma_c\) is positive definite on the
 \((K-1)\)-dimensional contrast space. Its eigendecomposition can be
-written
-
-\[
+written \[
 \boldsymbol\Sigma_c
 =
 \sum_{r=1}^{K-1}
@@ -2355,17 +2237,13 @@ q_r\mathbf w_r\mathbf w_r^\top,
 \]
 
 where \(q_r>0\) and the orthonormal eigenvectors satisfy
-\(\mathbf w_r^\top\mathbf 1=0\). Choosing
-
-\[
+\(\mathbf w_r^\top\mathbf 1=0\). Choosing \[
 \mathbf b_r=\mathbf w_r,
 \qquad
 u_r=\frac{q_r}{2\lambda_0}
 \]
 
-gives
-
-\[
+gives \[
 2\lambda_0
 \sum_r
 u_r\mathbf b_r\mathbf b_r^\top
@@ -2375,9 +2253,7 @@ u_r\mathbf b_r\mathbf b_r^\top
 
 Similarly, systematic utilities are identifiable only up to an additive
 constant. For a desired utility vector \(\mathbf v\), define its
-centered version
-
-\[
+centered version \[
 \widetilde{\mathbf v}
 =
 \mathbf P\mathbf v.
@@ -2385,17 +2261,13 @@ centered version
 
 Because the eigenvectors form an orthonormal basis of the contrast
 space, the drift coefficients can be chosen explicitly as
-\(d_r=\mathbf w_r^\top\mathbf v\), so that
-
-\[
+\(d_r=\mathbf w_r^\top\mathbf v\), so that \[
 \widetilde{\mathbf v}
 =
 \sum_r d_r\mathbf w_r.
 \]
 
-The resulting inhibited race then satisfies
-
-\[
+The resulting inhibited race then satisfies \[
 C_\theta
 \xrightarrow{d}
 \arg\max_i
@@ -2432,7 +2304,7 @@ Therefore, once signed feature events with general loadings are
 admitted, the high-threshold race reproduces the full choice-relevant
 covariance class of correlated Multinomial Probit models.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, title={Result 5 (Signed Streams Span the Choice-Relevant Probit Class)}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Result 5 (Signed Streams Span the Choice-Relevant Probit Class)}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 Let \(\mathbf v\in\mathbb R^K\) be any utility vector and
 \(\boldsymbol\Sigma\) any \(K\times K\) covariance matrix for which the
@@ -2474,9 +2346,7 @@ Essential}\label{why-the-common-drift-is-essential}
 
 The Gaussian first-passage limit depends critically on the shared
 positive drift \(\lambda_0\). If the shared stream is removed in the
-binary model, then
-
-\[
+binary model, then \[
 X_1(t)=Y_1(t)-Y_2(t),
 \qquad
 X_2(t)=-X_1(t),
@@ -2485,9 +2355,7 @@ X_2(t)=-X_1(t),
 and the decision becomes the first exit of a continuous-time random walk
 from the interval \((-\theta,\theta)\). By the gambler's-ruin formula
 for the embedded jump chain, the probability that alternative 1 wins is
-exactly
-
-\[
+exactly \[
 \Pr(C_\theta=1)
 =
 \frac{\lambda_1^\theta}
@@ -2497,9 +2365,7 @@ exactly
 Two features of this formula deserve emphasis. First, it is not merely
 logistic in some limit --- it is exactly a binary logit at every integer
 threshold. Writing log-rates as utilities, \(v_i=\log\lambda_i\) as in
-Section~\ref{sec-generative-model},
-
-\[
+Section~\ref{sec-generative-model}, \[
 \Pr(C_\theta=1)
 =
 \frac{1}{1+\exp\bigl(-\theta(v_1-v_2)\bigr)},
@@ -2523,9 +2389,7 @@ the common drift, the exit is diffusive: the difference process must
 wander a distance \(\theta\), which takes time of order \(\theta^{2}\),
 over which a rate asymmetry of order \(\theta^{-1}\) contributes a
 displacement of order \(\theta\) --- the barrier scale. For the local
-scaling
-
-\[
+scaling \[
 \lambda_{1,\theta}
 =
 u+\frac{a}{2\theta},
@@ -2535,9 +2399,7 @@ u+\frac{a}{2\theta},
 u-\frac{a}{2\theta},
 \]
 
-the exact formula converges to
-
-\[
+the exact formula converges to \[
 \Pr(C_\theta=1)
 \longrightarrow
 \frac{1}{1+\exp(-a/u)}.
@@ -2562,22 +2424,38 @@ both positive and negative dependence and, in the high-threshold
 local-alternatives limit, generates the full choice-relevant covariance
 structure of the correlated Multinomial Probit.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, arc=.35mm, rightrule=.15mm, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, colback=white, toprule=.15mm, colframe=quarto-callout-tip-color-frame, opacityback=0, title={Explore this model interactively}, bottomrule=.15mm, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, bottomrule=.15mm, opacityback=0, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, breakable, title={Explore this model interactively}, arc=.35mm, coltitle=black, opacitybacktitle=0.6, left=2mm, toprule=.15mm, colback=white]
 
 Unlike the other simulations reported in this article, which are static,
-the reciprocal-inhibition race can be explored live. An interactive
-simulator implementing the construction of this section runs directly in
-the browser at
-\url{https://venpopov.com/logit-probit-poisson-rum/simulator.html}, with
-adjustable threshold \(\theta\), shared rate \(\lambda_0\), utilities
-\(v_i\), and pairwise inhibition weights \(u_{ij}\) for \(K = 2\) to
-\(4\) alternatives, along with presets for the regimes discussed above
-(\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a similarity structure).
-As Figure~\ref{fig-simulator} illustrates, it displays sample counter
-trajectories, the convergence of simulated choice shares to the limiting
-Multinomial Probit probabilities, the limiting correlation structure
-alongside counter-fluctuation scatters, and the
-\(\sqrt{\theta}\)-localized first-passage-time distributions.
+the constructions of this section can be explored live in the browser.
+An interactive simulator of the pairwise reciprocal-inhibition race runs
+at \url{https://venpopov.com/logit-probit-poisson-rum/simulator.html},
+with adjustable threshold \(\theta\), shared rate \(\lambda_0\),
+utilities \(v_i\), and pairwise inhibition weights \(u_{ij}\) for
+\(K = 2\) to \(4\) alternatives, along with presets for the regimes
+discussed above (\(\rho > 0\), \(\rho < 0\), \(\rho = 0\), and a
+similarity structure). As Figure~\ref{fig-simulator} illustrates, it
+displays sample counter trajectories, the convergence of simulated
+choice shares to the limiting Multinomial Probit probabilities, the
+limiting correlation structure alongside counter-fluctuation scatters,
+and the \(\sqrt{\theta}\)-localized first-passage-time distributions.
+
+A second simulator, at
+\url{https://venpopov.com/logit-probit-poisson-rum/signed-streams-simulator.html},
+implements the general signed-loading construction of Result 5: given
+target utilities and an arbitrary target covariance
+\(\boldsymbol\Sigma\) (specified through its standard deviations and
+pairwise correlations), it eigendecomposes the choice-relevant part
+\(\mathbf P\boldsymbol\Sigma\mathbf P\), displays the constructed
+evidence streams \((\mathbf b_r, u_r, d_r)\) --- including the
+vanishing-rate treatment of degenerate directions --- and verifies by
+simulation that the race reproduces both the target Multinomial Probit
+choice probabilities and the target contrast covariance. It flags
+targets whose contrast covariance has positive off-diagonal entries,
+which lie beyond the pairwise-inhibition (graph-Laplacian) class, and
+makes the finite-threshold bound \(|d_r| < 2u_r\sqrt{\theta}\) visible
+when a requested utility contrast exceeds the noise available along its
+direction.
 
 \end{tcolorbox}
 
@@ -2619,10 +2497,15 @@ discussed in Section~\ref{sec-variance-normalization}, this bridge is
 distributional rather than dynamical: the variance standardization
 compares different accumulation systems at matched discriminability,
 rather than describing the behavior of a single system under threshold
-manipulation. The goal is not to advocate replacing existing models, but
-to clarify their relationship: logit and probit represent different
-positions within a continuum of log-Gamma noise shapes, with the
-accumulation threshold governing the transition between them.
+manipulation. The framework, moreover, does not stop at the independent
+case: shared evidence streams generate a structured class of positively
+correlated probit models, and signed evidence streams recover the full
+choice-relevant covariance structure of the correlated Multinomial
+Probit in the high-threshold limit. The goal is not to advocate
+replacing existing models, but to clarify their relationship: logit and
+probit represent different positions within a continuum of log-Gamma
+noise shapes, with the accumulation threshold governing the transition
+between them.
 
 The multinomial simulations demonstrate that this unification is not
 merely a theoretical curiosity. Thresholded accumulation induces
@@ -2653,7 +2536,10 @@ variance standardization under which the limiting behavior remains
 non-degenerate, and drawing out its consequences: the independent
 multinomial probit endpoint, a shared-generator extension yielding a
 structured class of correlated probit models, the \(\rho_{\max}\) bound
-within that construction, and the parameter-invariance crossover.
+within that construction, a signed-stream construction that attains
+every choice-relevant probit covariance in the high-threshold limit
+(Result 5) together with the finite-threshold bound it carries, and the
+parameter-invariance crossover.
 
 The conjoint Poisson race models reviewed in the introduction
 (\citeproc{ref-otterIntegratedModelDiscrete2008}{Otter et al., 2008};
@@ -2668,6 +2554,16 @@ theoretical relationship --- that multinomial logit and independent
 multinomial probit are the two endpoints of one family under matched
 discriminability, with the interpolation characterized distributionally
 (log-Gamma noise), proved in the limit, and quantified by simulation.
+The same precision applies on the dependence side. The dependent Poisson
+race of Ruan et al. (\citeproc{ref-ruanDependentPoissonRace2008a}{2008})
+induces correlation exclusively through shared event streams, and any
+construction of that type is confined to non-negative covariances of the
+common-shock form. Result 5 resolves the representation question this
+leaves open: once signed evidence streams are admitted, the
+high-threshold race attains every choice-relevant covariance of the
+correlated Multinomial Probit. The restriction to positive dependence is
+thus a property of purely excitatory event generation, not of race
+mechanisms as such.
 
 The log-Gamma family should also be distinguished from link-level
 bridges between logit and probit. It has long been known that the
@@ -2698,7 +2594,14 @@ continuous accumulation with explicit drift and boundary parameters. The
 Poisson count race is deliberately minimal: it uses accumulation as a
 generative device to induce a family of random utility models, without
 making claims about within-trial dynamics or response time
-distributions.
+distributions. The same reorientation applies to inhibition: reciprocal
+inhibitory coupling is a standard dynamical ingredient of models such as
+the leaky competing accumulator
+(\citeproc{ref-usherTimeCoursePerceptual2001}{Usher \& McClelland,
+2001}), where it shapes within-trial trajectories, whereas
+Section~\ref{sec-inhibitory-race} repurposes it as a generative device
+whose role is to endow the limiting random utility model with a target
+covariance structure.
 
 Between the logit and probit endpoints lies a continuum of log-Gamma
 random utility models. These intermediate regimes are not intended as
@@ -2729,10 +2632,11 @@ independent accumulators once the effective threshold exceeds one,
 because thin-tailed noise makes the odds between any two alternatives
 sensitive to the strength of the surrounding field. Observed IIA
 violations therefore admit two process interpretations --- genuinely
-correlated evidence streams (Section~\ref{sec-correlated-errors}) or
-extensive independent evidence integration --- and distinguishing them
-requires attention to the pattern of the violations, not merely their
-presence.
+correlated evidence streams, whether excitatory or inhibitory
+(Section~\ref{sec-correlated-errors},
+Section~\ref{sec-inhibitory-race}), or extensive independent evidence
+integration --- and distinguishing them requires attention to the
+pattern of the violations, not merely their presence.
 
 \subsection{Limitations and
 extensions}\label{limitations-and-extensions}
@@ -2798,9 +2702,13 @@ representing fundamentally distinct generating mechanisms. At the same
 time, the unification does not imply that a single decision system can
 transition between regimes by adjusting its threshold alone, since the
 variance standardization that enables comparison across \(\theta\)
-values entails different effective rate structures. The framework thus
-clarifies the conceptual relationship between logit and probit and
-provides a principled basis for comparison, illustrating how
+values entails different effective rate structures. The same asymptotic
+machinery also reaches beyond the independent case: shared evidence
+streams realize a structured, positively dependent subclass of
+correlated probit models, and signed evidence streams provide a
+generative foundation for the entire choice-relevant class. The
+framework thus clarifies the conceptual relationship between logit and
+probit and provides a principled basis for comparison, illustrating how
 process-level reasoning can illuminate the structure of static choice
 models.
 
