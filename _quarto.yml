@@ -4,6 +4,9 @@ project:
     - "!AGENTS.md"
     - "!meta/"
     - "**/*.qmd"
+  resources:
+    - simulator.html
+    - signed-streams-simulator.html
 
 manuscript:
   article: index.qmd
@@ -11,6 +14,12 @@ manuscript:
     - text: Simulation functions
       icon: file-code
       href: R/race_functions.R
+    - text: Interactive simulator (reciprocal inhibition)
+      icon: sliders
+      href: simulator.html
+    - text: Interactive simulator (signed streams)
+      icon: sliders
+      href: signed-streams-simulator.html
     - repo
 
 bibliography: references.bib
@@ -25,6 +34,3 @@ format:
 execute:
   freeze: auto
   execute-dir: project
-
-
-

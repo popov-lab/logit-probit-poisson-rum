@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.14)  13 AUG 2026 23:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.14)  14 AUG 2026 00:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1013,53 +1013,53 @@ Class apa7 Warning: Deprecated: see documentation for \authorsaffiliations on in
 \c@NumberOfAffiliations=\count379
 \@float@every@codelisting=\toks51
 \c@codelisting=\count380
-LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line 316.
+LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line 321.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/t1ntxtlf.fd
 File: t1ntxtlf.fd 2021/05/24 v1.1 font definition file for T1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 316.
+(Font)              scaled to size 12.0pt on input line 321.
  (./index.aux)
 \openout1 = `index.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 316.
-LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 316.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 321.
+LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 321.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 316.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 316.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 321.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 321.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 316.
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 316.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 316.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 321.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 321.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 321.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 316.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 316.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 316.
+LaTeX Font Info:    ... okay on input line 321.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 321.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 321.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 316.
+LaTeX Font Info:    ... okay on input line 321.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1114,7 +1114,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 316.
+Package hyperref Info: Link coloring ON on input line 321.
 \@outlinefile=\write6
 \openout6 = `index.out'.
 
@@ -1125,124 +1125,124 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Command `\dddot' is already robust on input line 316.
-LaTeX Info: Command `\ddddot' is already robust on input line 316.
+LaTeX Info: Command `\dddot' is already robust on input line 321.
+LaTeX Info: Command `\ddddot' is already robust on input line 321.
 \c@lstlisting=\count387
 \c@mv@tabular=\count388
 \c@mv@boldtabular=\count389
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
-LaTeX Font Info:    Trying to load font information for OT1+minntx on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
+LaTeX Font Info:    Trying to load font information for OT1+minntx on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1minntx.fd
 File: ot1minntx.fd 2023/09/09 v1.1 font definition file for OT1/minntx
 )
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 6.6pt on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 318.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 318.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2024/04/09 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.6pt on input line 318.
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 323.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 8.8pt on input line 318.
+(Font)              scaled to size 8.8pt on input line 323.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.6pt on input line 318.
+(Font)              scaled to size 6.6pt on input line 323.
 
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}
 
 {/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 318.
+(Font)              scaled to size 12.0pt on input line 323.
 
 
 [2{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}]
 
-LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 3 undefined on input line 330.
+LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 3 undefined on input line 335.
 
 
-LaTeX Warning: Citation `ref-falmagneRepresentationTheoremFinite1978a' on page 3 undefined on input line 359.
+LaTeX Warning: Citation `ref-falmagneRepresentationTheoremFinite1978a' on page 3 undefined on input line 364.
 
 
-LaTeX Warning: Citation `ref-kellenTestingFoundationsSignal2021' on page 3 undefined on input line 360.
+LaTeX Warning: Citation `ref-kellenTestingFoundationsSignal2021' on page 3 undefined on input line 365.
 
 
-LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 3 undefined on input line 367.
+LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 3 undefined on input line 372.
 
 
-LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 3 undefined on input line 368.
+LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 3 undefined on input line 373.
 
 
-LaTeX Warning: Citation `ref-yellottRelationshipLucesChoice1977' on page 3 undefined on input line 369.
+LaTeX Warning: Citation `ref-yellottRelationshipLucesChoice1977' on page 3 undefined on input line 374.
 
 
-LaTeX Warning: Citation `ref-hausmanConditionalProbitModel1978a' on page 3 undefined on input line 373.
+LaTeX Warning: Citation `ref-hausmanConditionalProbitModel1978a' on page 3 undefined on input line 378.
 
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 3 undefined on input line 373.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 3 undefined on input line 378.
 
 
-LaTeX Warning: Citation `ref-thurstoneLawComparativeJudgment1927' on page 3 undefined on input line 374.
+LaTeX Warning: Citation `ref-thurstoneLawComparativeJudgment1927' on page 3 undefined on input line 379.
 
 
-LaTeX Warning: Citation `ref-wixtedForgottenHistorySignal2020' on page 3 undefined on input line 375.
+LaTeX Warning: Citation `ref-wixtedForgottenHistorySignal2020' on page 3 undefined on input line 380.
 
 
 
@@ -1250,127 +1250,127 @@ LaTeX Warning: Citation `ref-wixtedForgottenHistorySignal2020' on page 3 undefin
 <index_files/figure-pdf/fig-rum-overview-1.pdf, id=34, 646.415pt x 556.0775pt>
 File: index_files/figure-pdf/fig-rum-overview-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-rum-overview-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-rum-overview-1.pdf  used on input line 404.
+Package pdftex.def Info: index_files/figure-pdf/fig-rum-overview-1.pdf  used on input line 409.
 (pdftex.def)             Requested size: 646.41342pt x 556.07614pt.
 
 
-LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 4 undefined on input line 411.
+LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 4 undefined on input line 416.
 
 
-LaTeX Warning: Citation `ref-thurstoneLawComparativeJudgment1927' on page 4 undefined on input line 413.
+LaTeX Warning: Citation `ref-thurstoneLawComparativeJudgment1927' on page 4 undefined on input line 418.
 
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 4 undefined on input line 417.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 4 undefined on input line 422.
 
 
 
 [4 <./index_files/figure-pdf/fig-rum-overview-1.pdf>]
 
-LaTeX Warning: Citation `ref-pikeResponseLatencyModels1973' on page 5 undefined on input line 438.
+LaTeX Warning: Citation `ref-pikeResponseLatencyModels1973' on page 5 undefined on input line 443.
 
 
-LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 5 undefined on input line 440.
+LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 5 undefined on input line 445.
 
 
-LaTeX Warning: Citation `ref-townsendStochasticModelingElementary1983' on page 5 undefined on input line 441.
+LaTeX Warning: Citation `ref-townsendStochasticModelingElementary1983' on page 5 undefined on input line 446.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 5 undefined on input line 479.
+LaTeX Warning: Reference `sec-variance-normalization' on page 5 undefined on input line 484.
 
 
 
 [5]
 
-LaTeX Warning: Citation `ref-pikeResponseLatencyModels1973' on page 6 undefined on input line 491.
+LaTeX Warning: Citation `ref-pikeResponseLatencyModels1973' on page 6 undefined on input line 496.
 
 
-LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 6 undefined on input line 492.
+LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 6 undefined on input line 497.
 
 
-LaTeX Warning: Citation `ref-townsendStochasticModelingElementary1983' on page 6 undefined on input line 494.
+LaTeX Warning: Citation `ref-townsendStochasticModelingElementary1983' on page 6 undefined on input line 499.
 
 
-LaTeX Warning: Citation `ref-marleyHorseRaceRandom1992' on page 6 undefined on input line 496.
+LaTeX Warning: Citation `ref-marleyHorseRaceRandom1992' on page 6 undefined on input line 501.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 6 undefined on input line 501.
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 6 undefined on input line 506.
 
 
-LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 6 undefined on input line 506.
+LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 6 undefined on input line 511.
 
 
-LaTeX Warning: Citation `ref-consulLoggammaDistributionIts1971a' on page 6 undefined on input line 516.
+LaTeX Warning: Citation `ref-consulLoggammaDistributionIts1971a' on page 6 undefined on input line 521.
 
 
-LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 6 undefined on input line 516.
+LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 6 undefined on input line 521.
 
 
-LaTeX Warning: Citation `ref-stacyGeneralizationGamma1962' on page 6 undefined on input line 519.
+LaTeX Warning: Citation `ref-stacyGeneralizationGamma1962' on page 6 undefined on input line 524.
 
 
-LaTeX Warning: Citation `ref-lawlessInferenceGeneralizedGamma1980' on page 6 undefined on input line 524.
+LaTeX Warning: Citation `ref-lawlessInferenceGeneralizedGamma1980' on page 6 undefined on input line 529.
 
 
-LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 6 undefined on input line 526.
+LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 6 undefined on input line 531.
 
 
 
 [6]
 
-LaTeX Warning: Reference `sec-probit-limit' on page 7 undefined on input line 544.
+LaTeX Warning: Reference `sec-probit-limit' on page 7 undefined on input line 549.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 7 undefined on input line 548.
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 7 undefined on input line 553.
 
 
-LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 7 undefined on input line 549.
+LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 7 undefined on input line 554.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 7 undefined on input line 551.
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 7 undefined on input line 556.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 7 undefined on input line 562.
+LaTeX Warning: Reference `sec-variance-normalization' on page 7 undefined on input line 567.
 
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 7 undefined on input line 574.
+LaTeX Warning: Reference `sec-correlated-errors' on page 7 undefined on input line 579.
 
 
-LaTeX Warning: Reference `sec-inhibitory-race' on page 7 undefined on input line 582.
+LaTeX Warning: Reference `sec-inhibitory-race' on page 7 undefined on input line 587.
 
 
 
 [7]
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 8 undefined on input line 588.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 8 undefined on input line 593.
 
 
-LaTeX Warning: Reference `sec-multinomial-simulations' on page 8 undefined on input line 589.
+LaTeX Warning: Reference `sec-multinomial-simulations' on page 8 undefined on input line 594.
 
 
 
 [8]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.8pt on input line 638.
+(Font)              scaled to size 8.8pt on input line 643.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.6pt on input line 638.
+(Font)              scaled to size 6.6pt on input line 643.
 
 
 [9]
-LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 687.
+LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 692.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 687.
+(Font)              scaled to size 12.0pt on input line 692.
 
 
-LaTeX Warning: Citation `ref-consulLoggammaDistributionIts1971a' on page 10 undefined on input line 709.
+LaTeX Warning: Citation `ref-consulLoggammaDistributionIts1971a' on page 10 undefined on input line 714.
 
 
-LaTeX Warning: Citation `ref-lawlessInferenceGeneralizedGamma1980' on page 10 undefined on input line 710.
+LaTeX Warning: Citation `ref-lawlessInferenceGeneralizedGamma1980' on page 10 undefined on input line 715.
 
 
-LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 10 undefined on input line 710.
+LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 10 undefined on input line 715.
 
 
 
@@ -1380,89 +1380,89 @@ LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 10 undefined on 
 
 [12]
 
-LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 13 undefined on input line 886.
+LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 13 undefined on input line 891.
 
 
-LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 13 undefined on input line 889.
+LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 13 undefined on input line 894.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 13 undefined on input line 892.
+LaTeX Warning: Reference `sec-variance-normalization' on page 13 undefined on input line 897.
 
 
 
 [13]
 
-LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 14 undefined on input line 927.
+LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 14 undefined on input line 932.
 
 
-LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 14 undefined on input line 931.
+LaTeX Warning: Citation `ref-smithTimedependentPoissonCounter2000a' on page 14 undefined on input line 936.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 14 undefined on input line 947.
+LaTeX Warning: Reference `sec-variance-normalization' on page 14 undefined on input line 952.
 
 
 
 [14]
 
-LaTeX Warning: Reference `sec-probit-limit' on page 15 undefined on input line 976.
+LaTeX Warning: Reference `sec-probit-limit' on page 15 undefined on input line 981.
 
 
-LaTeX Warning: Citation `ref-polyaZentralenGrenzwertsatz1920' on page 15 undefined on input line 979.
+LaTeX Warning: Citation `ref-polyaZentralenGrenzwertsatz1920' on page 15 undefined on input line 984.
 
 
-LaTeX Warning: Reference `sec-multinomial-simulations' on page 15 undefined on input line 984.
+LaTeX Warning: Reference `sec-multinomial-simulations' on page 15 undefined on input line 989.
 
 
-LaTeX Warning: Reference `fig-residuals' on page 15 undefined on input line 989.
+LaTeX Warning: Reference `fig-residuals' on page 15 undefined on input line 994.
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1007: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1012: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1007 two models.}
+l.1012 two models.}
                    
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1007: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1012: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1007 two models.}
+l.1012 two models.}
                    
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1007: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1012: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1007 two models.}
+l.1012 two models.}
                    
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1007: LaTeX Error: Unicode character − (U+2212)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1012: LaTeX Error: Unicode character − (U+2212)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1007 two models.}
+l.1012 two models.}
                    
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1470,7 +1470,7 @@ You may provide a definition with
 <index_files/figure-pdf/fig-residuals-1.pdf, id=118, 450.68375pt x 454.69875pt>
 File: index_files/figure-pdf/fig-residuals-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-residuals-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-residuals-1.pdf  used on input line 1011.
+Package pdftex.def Info: index_files/figure-pdf/fig-residuals-1.pdf  used on input line 1016.
 (pdftex.def)             Requested size: 450.68263pt x 454.69763pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1481,20 +1481,20 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [16 <./index_files/figure-pdf/fig-residuals-1.pdf>]
 
-LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 17 undefined on input line 1034.
+LaTeX Warning: Citation `ref-luceIndividualChoiceBehavior1959' on page 17 undefined on input line 1039.
 
 
-LaTeX Warning: Citation `ref-hausmanConditionalProbitModel1978a' on page 17 undefined on input line 1037.
+LaTeX Warning: Citation `ref-hausmanConditionalProbitModel1978a' on page 17 undefined on input line 1042.
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1089: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1094: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1089 alternatives K.}
+l.1094 alternatives K.}
                        
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1502,20 +1502,20 @@ You may provide a definition with
 <index_files/figure-pdf/fig-tv-distance-1.pdf, id=138, 722.7pt x 361.35pt>
 File: index_files/figure-pdf/fig-tv-distance-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-tv-distance-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-tv-distance-1.pdf  used on input line 1093.
+Package pdftex.def Info: index_files/figure-pdf/fig-tv-distance-1.pdf  used on input line 1098.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
 
 
 [17]
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1112: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1117: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1112 reference; dotted lines: Probit reference.}
+l.1117 reference; dotted lines: Probit reference.}
                                                   
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1523,7 +1523,7 @@ You may provide a definition with
 <index_files/figure-pdf/fig-prob-vectors-1.pdf, id=150, 562.1pt x 349.305pt>
 File: index_files/figure-pdf/fig-prob-vectors-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-prob-vectors-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-prob-vectors-1.pdf  used on input line 1116.
+Package pdftex.def Info: index_files/figure-pdf/fig-prob-vectors-1.pdf  used on input line 1121.
 (pdftex.def)             Requested size: 562.09863pt x 349.30414pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1532,20 +1532,20 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [18 <./index_files/figure-pdf/fig-tv-distance-1.pdf>]
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 19 undefined on input line 1126.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 19 undefined on input line 1131.
 
 
 
 [19 <./index_files/figure-pdf/fig-prob-vectors-1.pdf>]
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1160: LaTeX Error: Unicode character − (U+2212)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1165: LaTeX Error: Unicode character − (U+2212)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1160 references are shown.}
+l.1165 references are shown.}
                              
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1553,19 +1553,19 @@ You may provide a definition with
 <index_files/figure-pdf/fig-set-size-1.pdf, id=183, 562.1pt x 349.305pt>
 File: index_files/figure-pdf/fig-set-size-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-set-size-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-set-size-1.pdf  used on input line 1164.
+Package pdftex.def Info: index_files/figure-pdf/fig-set-size-1.pdf  used on input line 1169.
 (pdftex.def)             Requested size: 562.09863pt x 349.30414pt.
 
 
 [20 <./index_files/figure-pdf/fig-set-size-1.pdf>]
 
-LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 21 undefined on input line 1191.
+LaTeX Warning: Citation `ref-mcfaddenConditionalLogitAnalysis1974' on page 21 undefined on input line 1196.
 
 
-LaTeX Warning: Citation `ref-yellottRelationshipLucesChoice1977' on page 21 undefined on input line 1192.
+LaTeX Warning: Citation `ref-yellottRelationshipLucesChoice1977' on page 21 undefined on input line 1197.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 21 undefined on input line 1229.
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 21 undefined on input line 1234.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1576,24 +1576,24 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <index_files/figure-pdf/fig-iia-1.pdf, id=203, 722.7pt x 361.35pt>
 File: index_files/figure-pdf/fig-iia-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-iia-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-iia-1.pdf  used on input line 1260.
+Package pdftex.def Info: index_files/figure-pdf/fig-iia-1.pdf  used on input line 1265.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
 
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 22 undefined on input line 1271.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 22 undefined on input line 1276.
 
 
 
 [22 <./index_files/figure-pdf/fig-iia-1.pdf>]
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1289: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1294: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1289 set size K and accumulation threshold θ.}
+l.1294 set size K and accumulation threshold θ.}
                                                  
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1601,30 +1601,30 @@ You may provide a definition with
 <index_files/figure-pdf/fig-parameter-recovery-1.pdf, id=217, 712.6625pt x 346.29375pt>
 File: index_files/figure-pdf/fig-parameter-recovery-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-parameter-recovery-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-parameter-recovery-1.pdf  used on input line 1293.
+Package pdftex.def Info: index_files/figure-pdf/fig-parameter-recovery-1.pdf  used on input line 1298.
 (pdftex.def)             Requested size: 712.66077pt x 346.2929pt.
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1314: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1319: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1314 standard normal (black dashed).}
+l.1319 standard normal (black dashed).}
                                        
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1314: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1319: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1314 standard normal (black dashed).}
+l.1319 standard normal (black dashed).}
                                        
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1632,7 +1632,7 @@ You may provide a definition with
 <index_files/figure-pdf/fig-noise-densities-1.pdf, id=218, 562.1pt x 349.305pt>
 File: index_files/figure-pdf/fig-noise-densities-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-noise-densities-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-noise-densities-1.pdf  used on input line 1318.
+Package pdftex.def Info: index_files/figure-pdf/fig-noise-densities-1.pdf  used on input line 1323.
 (pdftex.def)             Requested size: 562.09863pt x 349.30414pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1641,53 +1641,53 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [23 <./index_files/figure-pdf/fig-parameter-recovery-1.pdf>]
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1332: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1337: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1332 noise shape.}
+l.1337 noise shape.}
                     
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1332: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1337: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1332 noise shape.}
+l.1337 noise shape.}
                     
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1332: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1337: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1332 noise shape.}
+l.1337 noise shape.}
                     
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1332: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1337: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1332 noise shape.}
+l.1337 noise shape.}
                     
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1695,20 +1695,20 @@ You may provide a definition with
 <index_files/figure-pdf/fig-skew-kurtosis-1.pdf, id=235, 722.7pt x 289.08pt>
 File: index_files/figure-pdf/fig-skew-kurtosis-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-skew-kurtosis-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-skew-kurtosis-1.pdf  used on input line 1336.
+Package pdftex.def Info: index_files/figure-pdf/fig-skew-kurtosis-1.pdf  used on input line 1341.
 (pdftex.def)             Requested size: 722.69823pt x 289.07928pt.
 
 
 [24 <./index_files/figure-pdf/fig-noise-densities-1.pdf> <./index_files/figure-pdf/fig-skew-kurtosis-1.pdf>]
 
-/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1355: LaTeX Error: Unicode character θ (U+03B8)
+/Users/vepopo/GitHub/logit-probit-poisson-rum/_manuscript/_tex/index.tex:1360: LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1355 uniform, dominant, linear, and clustered.}
+l.1360 uniform, dominant, linear, and clustered.}
                                                  
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1716,89 +1716,89 @@ You may provide a definition with
 <index_files/figure-pdf/fig-robustness-1.pdf, id=257, 578.16pt x 361.35pt>
 File: index_files/figure-pdf/fig-robustness-1.pdf Graphic file (type pdf)
 <use index_files/figure-pdf/fig-robustness-1.pdf>
-Package pdftex.def Info: index_files/figure-pdf/fig-robustness-1.pdf  used on input line 1359.
+Package pdftex.def Info: index_files/figure-pdf/fig-robustness-1.pdf  used on input line 1364.
 (pdftex.def)             Requested size: 578.15858pt x 361.34912pt.
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 25 undefined on input line 1387.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 25 undefined on input line 1392.
 
 
 
 [25 <./index_files/figure-pdf/fig-robustness-1.pdf>]
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 26 undefined on input line 1408.
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 26 undefined on input line 1413.
 
 
 
 [26]
 
-LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 27 undefined on input line 1450.
+LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 27 undefined on input line 1455.
 
 
-LaTeX Warning: Citation `ref-tuerlinckxStochasticModelsPersonality2004' on page 27 undefined on input line 1454.
+LaTeX Warning: Citation `ref-tuerlinckxStochasticModelsPersonality2004' on page 27 undefined on input line 1459.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 27 undefined on input line 1457.
+LaTeX Warning: Reference `sec-variance-normalization' on page 27 undefined on input line 1462.
 
 
 
 [27]
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1487.
+(Font)              scaled to size 12.0pt on input line 1492.
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1487.
+(Font)              scaled to size 8.8pt on input line 1492.
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1487.
+(Font)              scaled to size 6.6pt on input line 1492.
 LaTeX Font Info:    Font shape `OML/ntxmi/b/it' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `OML/ntxmi/b/it' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `OML/ntxmi/b/it' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxmia/b/it' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxmia/b/it' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxmia/b/it' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsym/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsym/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsym/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsyc/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsyc/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxsyc/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxexa/b/n' will be
-(Font)              scaled to size 12.0pt on input line 1490.
+(Font)              scaled to size 12.0pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxexa/b/n' will be
-(Font)              scaled to size 8.8pt on input line 1490.
+(Font)              scaled to size 8.8pt on input line 1495.
 LaTeX Font Info:    Font shape `U/ntxexa/b/n' will be
-(Font)              scaled to size 6.6pt on input line 1490.
+(Font)              scaled to size 6.6pt on input line 1495.
 
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 28 undefined on input line 1520.
+LaTeX Warning: Reference `sec-variance-normalization' on page 28 undefined on input line 1525.
 
 
 
 [28]
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 29 undefined on input line 1553.
+LaTeX Warning: Reference `sec-variance-normalization' on page 29 undefined on input line 1558.
 
 
 
@@ -1806,22 +1806,22 @@ LaTeX Warning: Reference `sec-variance-normalization' on page 29 undefined on in
 
 [30]
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 31 undefined on input line 1652.
+LaTeX Warning: Reference `sec-correlated-errors' on page 31 undefined on input line 1657.
 
 
-LaTeX Warning: Citation `ref-usherTimeCoursePerceptual2001' on page 31 undefined on input line 1663.
+LaTeX Warning: Citation `ref-usherTimeCoursePerceptual2001' on page 31 undefined on input line 1668.
 
 
 
 [31]
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 32 undefined on input line 1726.
+LaTeX Warning: Reference `sec-correlated-errors' on page 32 undefined on input line 1731.
 
 
 
 [32]
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 33 undefined on input line 1755.
+LaTeX Warning: Reference `sec-variance-normalization' on page 33 undefined on input line 1760.
 
 
 
@@ -1845,97 +1845,108 @@ LaTeX Warning: Reference `sec-variance-normalization' on page 33 undefined on in
 
 [42]
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 43 undefined on input line 2448.
+LaTeX Warning: Reference `sec-correlated-errors' on page 43 undefined on input line 2453.
 
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 43 undefined on input line 2458.
+LaTeX Warning: Reference `sec-correlated-errors' on page 43 undefined on input line 2463.
 
 
 
 [43]
 
-LaTeX Warning: Reference `sec-generative-model' on page 44 undefined on input line 2495.
+LaTeX Warning: Reference `sec-generative-model' on page 44 undefined on input line 2500.
 
 
-LaTeX Warning: Citation `ref-linkSequentialTheoryPsychological1975' on page 44 undefined on input line 2509.
+LaTeX Warning: Citation `ref-linkSequentialTheoryPsychological1975' on page 44 undefined on input line 2514.
 
 
-LaTeX Warning: Citation `ref-stoneModelsChoicereactionTime1960' on page 44 undefined on input line 2509.
+LaTeX Warning: Citation `ref-stoneModelsChoicereactionTime1960' on page 44 undefined on input line 2514.
 
 
 
 [44]
 
-LaTeX Warning: Reference `sec-variance-normalization' on page 45 undefined on input line 2569.
+LaTeX Warning: Reference `fig-simulator' on page 45 undefined on input line 2576.
 
+<simulator-screenshot.png, id=376, 3131.7pt x 1994.45125pt>
+File: simulator-screenshot.png Graphic file (type png)
+<use simulator-screenshot.png>
+Package pdftex.def Info: simulator-screenshot.png  used on input line 2603.
+(pdftex.def)             Requested size: 3131.6924pt x 1994.4464pt.
 
-LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 45 undefined on input line 2585.
+LaTeX Warning: Reference `sec-variance-normalization' on page 45 undefined on input line 2618.
 
 
 
 [45]
 
-LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 46 undefined on input line 2598.
+[46 <./simulator-screenshot.png (PNG copy)>]
+
+LaTeX Warning: Citation `ref-robinsonHowPeopleBuild2023' on page 47 undefined on input line 2634.
 
 
-LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 46 undefined on input line 2600.
+LaTeX Warning: Citation `ref-prenticeLogGammaModel1974' on page 47 undefined on input line 2647.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 46 undefined on input line 2610.
+LaTeX Warning: Citation `ref-sternContinuumPairedComparisons1990' on page 47 undefined on input line 2649.
 
 
-LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 46 undefined on input line 2611.
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 47 undefined on input line 2659.
 
 
-LaTeX Warning: Citation `ref-mudholkarRemarkShapeLogistic1978' on page 46 undefined on input line 2628.
-
-
-LaTeX Warning: Citation `ref-liuRobitRegressionSimple2004' on page 46 undefined on input line 2630.
-
-
-LaTeX Warning: Citation `ref-prenticeGeneralizationProbitLogit1976a' on page 46 undefined on input line 2631.
-
-
-
-[46]
-
-LaTeX Warning: Citation `ref-ratcliffTheoryMemoryRetrieval1978' on page 47 undefined on input line 2644.
-
-
-LaTeX Warning: Citation `ref-brownBallisticModelChoice2005' on page 47 undefined on input line 2647.
-
-
-LaTeX Warning: Reference `sec-correlated-errors' on page 47 undefined on input line 2683.
+LaTeX Warning: Citation `ref-ruanDependentPoissonRace2008a' on page 47 undefined on input line 2660.
 
 
 
 [47]
 
-LaTeX Warning: Reference `sec-correlated-errors' on page 48 undefined on input line 2698.
+LaTeX Warning: Citation `ref-mudholkarRemarkShapeLogistic1978' on page 48 undefined on input line 2677.
 
 
-LaTeX Warning: Reference `sec-inhibitory-race' on page 48 undefined on input line 2702.
+LaTeX Warning: Citation `ref-liuRobitRegressionSimple2004' on page 48 undefined on input line 2679.
 
 
-LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 48 undefined on input line 2726.
+LaTeX Warning: Citation `ref-prenticeGeneralizationProbitLogit1976a' on page 48 undefined on input line 2680.
+
+
+LaTeX Warning: Citation `ref-ratcliffTheoryMemoryRetrieval1978' on page 48 undefined on input line 2693.
+
+
+LaTeX Warning: Citation `ref-brownBallisticModelChoice2005' on page 48 undefined on input line 2696.
 
 
 
 [48]
 
+LaTeX Warning: Reference `sec-correlated-errors' on page 49 undefined on input line 2732.
+
+
+LaTeX Warning: Reference `sec-correlated-errors' on page 49 undefined on input line 2747.
+
+
+LaTeX Warning: Reference `sec-inhibitory-race' on page 49 undefined on input line 2751.
+
+
+
 [49]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Warning: Citation `ref-otterIntegratedModelDiscrete2008' on page 50 undefined on input line 2775.
 
 
 
 [50]
+Underfull \vbox (badness 1859) has occurred while \output is active []
+
+
+
+[51]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[51] AED endfloat: Processing end Figures and Tables
+[52] AED endfloat: Processing end Figures and Tables
 
-[52] (./index.aux)
+[53] (./index.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1957,18 +1968,18 @@ Package rerunfilecheck Info: Checksums for `index.out':
 (rerunfilecheck)             After:  CC3667EE985D842179B3211D2D9ADDEE;8534.
  ) 
 Here is how much of TeX's memory you used:
- 36999 strings out of 473190
- 716920 string characters out of 5715800
- 1072960 words of memory out of 5000000
- 59468 multiletter control sequences out of 15000+600000
+ 37011 strings out of 473190
+ 717209 string characters out of 5715800
+ 1074269 words of memory out of 5000000
+ 59478 multiletter control sequences out of 15000+600000
  610775 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,105p,959b,974s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,12n,105p,1082b,974s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/NewTXBMI.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txbmiaX.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txsym.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on index.pdf (52 pages, 526722 bytes).
+Output written on index.pdf (53 pages, 1155677 bytes).
 PDF statistics:
- 572 PDF objects out of 1000 (max. 8388607)
- 459 compressed objects within 5 object streams
- 163 named destinations out of 1000 (max. 500000)
- 63 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 581 PDF objects out of 1000 (max. 8388607)
+ 466 compressed objects within 5 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 68 words of extra memory for PDF output out of 10000 (max. 10000000)
 

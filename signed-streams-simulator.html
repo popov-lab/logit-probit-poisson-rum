@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signed Evidence Streams — Spanning the Choice-Relevant Probit Class</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --div-neg: #e34948;
+    --div-mid: #f0efec;
+    --div-pos: #2a78d6;
+    --accent: #2a78d6;
+    --warn-bg: #fdf3e2;
+    --warn-ink: #7a4c00;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --div-neg: #e66767;
+    --div-mid: #383835;
+    --div-pos: #3987e5;
+    --accent: #3987e5;
+    --warn-bg: #33260d;
+    --warn-ink: #f2c063;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  header.top { padding: 18px 24px 10px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  header.top h1 { font-size: 19px; font-weight: 650; margin: 0; }
+  header.top .sub { color: var(--text-secondary); font-size: 13px; }
+  #themeBtn {
+    margin-left: auto; border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--text-secondary); border-radius: 8px; padding: 5px 12px; cursor: pointer; font: inherit; font-size: 12.5px;
+  }
+  .app { display: grid; grid-template-columns: 300px 1fr; gap: 16px; padding: 0 24px 28px; align-items: start; }
+  @media (max-width: 980px) { .app { grid-template-columns: 1fr; } }
+  aside.controls, .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
+  aside.controls { padding: 14px 16px 16px; position: sticky; top: 12px; }
+  .ctl-group { margin-bottom: 14px; }
+  .ctl-group h3 {
+    font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  .row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+  .row label.name { width: 84px; flex: none; color: var(--text-secondary); font-size: 12.5px; }
+  .row input[type=range] { flex: 1; min-width: 60px; accent-color: var(--accent); }
+  .row .val { width: 46px; flex: none; text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  .seg { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button { flex: 1; border: 0; background: transparent; color: var(--text-secondary); padding: 5px 0; cursor: pointer; font: inherit; font-size: 12.5px; }
+  .seg button.on { background: var(--accent); color: #fff; font-weight: 600; }
+  select, .btn {
+    width: 100%; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface-1); color: var(--text-primary); font: inherit; font-size: 13px;
+  }
+  .btn { cursor: pointer; }
+  .btn.primary { background: var(--accent); border-color: transparent; color: #fff; font-weight: 600; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .linekey { display:inline-block; width: 14px; height: 0; border-top: 3px solid; border-radius: 2px; margin-right: 6px; vertical-align: 3px; }
+  #warnbar { display: none; margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--warn-bg); color: var(--warn-ink); font-size: 12.5px; }
+  .badge {
+    display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
+    background: var(--warn-bg); color: var(--warn-ink); margin-left: 8px; vertical-align: 1px;
+  }
+  .badge.ok { background: rgba(12,163,12,.12); color: #0a7a0a; }
+  :root[data-theme="dark"] .badge.ok { background: rgba(12,163,12,.18); color: #4fd24f; }
+  main .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 1340px) { main .grid2 { grid-template-columns: 1fr; } }
+  .card { padding: 12px 14px 10px; min-width: 0; }
+  .card h2 { font-size: 13.5px; font-weight: 650; margin: 0 0 2px; }
+  .card .hint { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
+  .card canvas { width: 100%; display: block; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); margin: 4px 2px 2px; }
+  .toolrow { display: flex; gap: 8px; align-items: center; margin: 2px 0 6px; flex-wrap: wrap; }
+  .toolrow button, .toolrow select {
+    width: auto; padding: 4px 10px; font-size: 12.5px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-primary); cursor: pointer;
+  }
+  .toolrow .status { color: var(--muted); font-size: 12px; margin-left: auto; font-variant-numeric: tabular-nums; }
+  .busy { opacity: .45; transition: opacity .15s; }
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 30; display: none;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 9px;
+    padding: 7px 10px; font-size: 12px; box-shadow: 0 4px 18px rgba(0,0,0,.14); max-width: 260px;
+  }
+  #tooltip .tt-title { color: var(--muted); margin-bottom: 3px; }
+  #tooltip .tt-row { display: flex; align-items: baseline; gap: 7px; }
+  #tooltip .tt-row b { font-variant-numeric: tabular-nums; }
+  #tooltip .tt-row span.nm { color: var(--text-secondary); }
+  table.tbl { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  table.tbl th, table.tbl td { padding: 5px 10px; text-align: right; font-variant-numeric: tabular-nums; }
+  table.tbl th { color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--grid); }
+  table.tbl td:first-child, table.tbl th:first-child { text-align: left; }
+  table.tbl tr + tr td { border-top: 1px solid var(--grid); }
+  .eq { font-size: 12.5px; color: var(--text-secondary); }
+  .eq b { color: var(--text-primary); font-weight: 600; }
+  .eq .frm { font-family: ui-serif, Georgia, serif; font-style: italic; font-size: 13.5px; color: var(--text-primary); }
+  footer.notes { margin-top: 16px; }
+  footer.notes .card { padding: 14px 16px; }
+  sub, sup { font-size: 10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Signed Evidence Streams</h1>
+  <div class="sub">Spanning the full choice-relevant Multinomial-Probit class with general loadings (Result 5)</div>
+  <button id="themeBtn" title="Toggle light/dark">◐ Theme</button>
+</header>
+
+<div class="app">
+  <aside class="controls">
+    <div class="ctl-group">
+      <h3>Preset</h3>
+      <select id="preset">
+        <option value="k3factor">K = 3 · similar pair + volatile third (beyond Laplacian)</option>
+        <option value="k3sub">K = 3 · mutual substitutes (all ρ &lt; 0)</option>
+        <option value="k3sing">K = 3 · near-singular contrast (bound bites)</option>
+        <option value="indep">K = 3 · independent probit</option>
+        <option value="k2neg">K = 2 · negative correlation</option>
+        <option value="k4pairs">K = 4 · two similar pairs</option>
+      </select>
+    </div>
+    <div class="ctl-group">
+      <h3>Alternatives K</h3>
+      <div class="seg" id="ksel"></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Race parameters</h3>
+      <div class="row"><label class="name">threshold θ</label><input type="range" id="theta" min="0" max="8" step="1"><span class="val" id="thetaV"></span></div>
+      <div class="row"><label class="name">shared rate λ₀</label><input type="range" id="lam0" min="0.2" max="3" step="0.05"><span class="val" id="lam0V"></span></div>
+      <div class="row"><label class="name">trials / point</label><input type="range" id="ntr" min="0" max="3" step="1"><span class="val" id="ntrV"></span></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Target utilities v<sub>i</sub></h3>
+      <div id="utilRows"></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Target noise SDs σ<sub>i</sub></h3>
+      <div id="sdRows"></div>
+    </div>
+    <div class="ctl-group">
+      <h3>Target correlations ρ<sub>ij</sub></h3>
+      <div id="rhoRows"></div>
+    </div>
+    <button class="btn primary" id="runBtn">Re-run simulation</button>
+  </aside>
+
+  <main>
+    <div id="warnbar"></div>
+    <div class="grid2">
+      <div class="card">
+        <h2>Constructed streams <span id="lapBadge" class="badge"></span></h2>
+        <p class="hint">The target Σ is projected to the contrast space and eigendecomposed, Σ<sub>c</sub> = Σ q<sub>r</sub> w<sub>r</sub>w<sub>r</sub>ᵀ. Each direction becomes a pair of Poisson streams with loadings ±w<sub>r</sub>, base rate u<sub>r</sub> = q<sub>r</sub>/2λ₀, and drift split d<sub>r</sub> = w<sub>r</sub>ᵀv. Bars show the loading of each alternative on each stream.</p>
+        <canvas id="cvStreams" height="270"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Sample trial — evidence trajectories</h2>
+        <p class="hint">One complete trial of the compound-Poisson race: the shared stream lifts all counters by +1; each signed stream adds its loading vector. First counter to θ wins. Faded paths are the previous trial.</p>
+        <div class="toolrow">
+          <button id="newTrialBtn">New trial</button>
+          <span class="status" id="raceStatus"></span>
+        </div>
+        <canvas id="cvRace" height="290"></canvas>
+        <div class="legend" id="legRace"></div>
+      </div>
+
+      <div class="card" id="cardConv">
+        <h2>Choice probabilities vs threshold — convergence to the target MNP</h2>
+        <p class="hint">Monte-Carlo choice shares at each θ (points ± 95% CI) against the target Multinomial-Probit probabilities computed from (v, Σ) directly (dashed asymptotes).</p>
+        <canvas id="cvConv" height="300"></canvas>
+        <div class="legend" id="legConv"></div>
+      </div>
+
+      <div class="card" id="cardCov">
+        <h2>Recovered choice-relevant covariance</h2>
+        <p class="hint">Left: target Σ<sub>c</sub> = PΣP. Right: empirical λ₀²·P Ĉov(Z) P from counter fluctuations Z<sub>i</sub> = (X<sub>i</sub>(t<sub>θ</sub>) − θ)/√θ at the current θ. As θ grows the race reproduces the target exactly.</p>
+        <div class="toolrow"><span class="status" id="covStatus"></span></div>
+        <canvas id="cvCov" height="270"></canvas>
+      </div>
+    </div>
+
+    <footer class="notes">
+      <div class="card">
+        <h2>Numbers behind the charts</h2>
+        <div id="tableWrap" style="overflow-x:auto; margin-top:6px;"></div>
+        <p class="eq" style="margin-top:12px">
+          <b>Model (Result 5).</b> For any target utilities <span class="frm">v</span> and covariance <span class="frm">Σ</span>, only the choice-relevant parts
+          <span class="frm">ṽ = Pv</span> and <span class="frm">Σ<sub>c</sub> = PΣP</span> matter, with <span class="frm">P = I − 11ᵀ/K</span>.
+          Writing <span class="frm">Σ<sub>c</sub> = Σ q<sub>r</sub> w<sub>r</sub>w<sub>r</sub>ᵀ</span>, the race uses a shared stream of rate <span class="frm">λ₀</span> (loading 1)
+          and, per eigendirection, paired streams with loadings <span class="frm">±w<sub>r</sub></span> and rates <span class="frm">u<sub>r</sub> ± d<sub>r</sub>/(2√θ)</span>,
+          where <span class="frm">u<sub>r</sub> = q<sub>r</sub>/2λ₀</span> and <span class="frm">d<sub>r</sub> = w<sub>r</sub>ᵀv</span>.
+          As <span class="frm">θ → ∞</span> the winner converges to <span class="frm">argmax<sub>i</sub>(v<sub>i</sub> + ε<sub>i</sub>)</span>, <span class="frm">ε ~ N(0, Σ)</span>,
+          up to choice-irrelevant common components. For a null direction (<span class="frm">q<sub>r</sub> = 0</span>, <span class="frm">d<sub>r</sub> ≠ 0</span>) the rate
+          <span class="frm">u<sub>r,θ</sub> ∝ θ<sup>−1/4</sup></span> vanishes while the drift survives. Rate positivity requires <span class="frm">|d<sub>r</sub>| &lt; 2u<sub>r</sub>√θ</span>:
+          expressible utility contrasts are bounded by available noise at finite θ. Unlike pairwise reciprocal inhibition — whose contrast covariances are
+          weighted graph Laplacians (nonpositive off-diagonals) — general signed loadings reach every choice-relevant probit covariance.
+        </p>
+      </div>
+    </footer>
+  </main>
+</div>
+<div id="tooltip"></div>
+
+<script>
+"use strict";
+/* ================= helpers ================= */
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const seriesColor = i => cssVar('--series-' + (i + 1));
+const ALT = ['A', 'B', 'C', 'D'];
+const THETA_STEPS = [2, 4, 8, 16, 32, 64, 128, 256, 512];
+const NTR_STEPS = [500, 1000, 2000, 4000];
+
+const S = {
+  K: 3, thetaIdx: 6, lam0: 1.2, ntrIdx: 1,
+  v: [0.4, 0.1, -0.5, 0.0],
+  sd: [1, 1, 1.5, 1],
+  rho: {}
+};
+const PRESETS = {
+  k3factor: { K: 3, thetaIdx: 6, lam0: 1.2, v: [0.4, 0.1, -0.5, 0], sd: [1, 1, 1.5, 1], rho: { '0-1': 0.6, '0-2': 0, '1-2': 0 } },
+  k3sub:    { K: 3, thetaIdx: 6, lam0: 1.2, v: [0.5, 0.2, -0.7, 0], sd: [1, 1, 1, 1],   rho: { '0-1': -0.4, '0-2': -0.4, '1-2': -0.4 } },
+  k3sing:   { K: 3, thetaIdx: 4, lam0: 1.2, v: [0.6, -0.2, -0.4, 0], sd: [1, 1, 1, 1],  rho: { '0-1': 0.95, '0-2': 0, '1-2': 0 } },
+  indep:    { K: 3, thetaIdx: 6, lam0: 1.2, v: [0.5, 0.1, -0.6, 0], sd: [1, 1, 1, 1],   rho: { '0-1': 0, '0-2': 0, '1-2': 0 } },
+  k2neg:    { K: 2, thetaIdx: 6, lam0: 1.0, v: [0.5, -0.5, 0, 0],   sd: [1, 1, 1, 1],   rho: { '0-1': -0.6 } },
+  k4pairs:  { K: 4, thetaIdx: 6, lam0: 1.2, v: [0.5, 0.3, -0.2, -0.6], sd: [1, 1, 1, 1], rho: { '0-1': 0.7, '2-3': 0.7, '0-2': 0, '0-3': 0, '1-2': 0, '1-3': 0 } }
+};
+function pairs(K) { const p = []; for (let i = 0; i < K; i++) for (let j = i + 1; j < K; j++) p.push([i, j]); return p; }
+function pkey(i, j) { return i + '-' + j; }
+function getRho(i, j) { const k = pkey(i, j); if (!(k in S.rho)) S.rho[k] = 0; return S.rho[k]; }
+function theta() { return THETA_STEPS[S.thetaIdx]; }
+function ntrials() { return NTR_STEPS[S.ntrIdx]; }
+
+/* ================= linear algebra (K <= 4) ================= */
+function jacobiEig(Ain) { // symmetric eigendecomposition; returns {vals, vecs} vecs[k] = eigenvector
+  const n = Ain.length;
+  const A = Ain.map(r => r.slice());
+  let V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => i === j ? 1 : 0));
+  for (let sweep = 0; sweep < 60; sweep++) {
+    let off = 0;
+    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) off += A[p][q] * A[p][q];
+    if (off < 1e-22) break;
+    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+      if (Math.abs(A[p][q]) < 1e-15) continue;
+      const thv = (A[q][q] - A[p][p]) / (2 * A[p][q]);
+      const t = Math.sign(thv || 1) / (Math.abs(thv) + Math.sqrt(thv * thv + 1));
+      const c = 1 / Math.sqrt(t * t + 1), s = t * c;
+      for (let k = 0; k < n; k++) {
+        const akp = A[k][p], akq = A[k][q];
+        A[k][p] = c * akp - s * akq; A[k][q] = s * akp + c * akq;
+      }
+      for (let k = 0; k < n; k++) {
+        const apk = A[p][k], aqk = A[q][k];
+        A[p][k] = c * apk - s * aqk; A[q][k] = s * apk + c * aqk;
+      }
+      for (let k = 0; k < n; k++) {
+        const vkp = V[k][p], vkq = V[k][q];
+        V[k][p] = c * vkp - s * vkq; V[k][q] = s * vkp + c * vkq;
+      }
+    }
+  }
+  const vals = A.map((r, i) => r[i]);
+  const vecs = Array.from({ length: n }, (_, k) => V.map(row => row[k]));
+  const idx = vals.map((v, i) => i).sort((a, b) => vals[b] - vals[a]);
+  return { vals: idx.map(i => vals[i]), vecs: idx.map(i => vecs[i]) };
+}
+function matMul(A, B) {
+  const n = A.length, m = B[0].length, k0 = B.length;
+  return Array.from({ length: n }, (_, i) => Array.from({ length: m }, (_, j) => {
+    let s = 0; for (let k = 0; k < k0; k++) s += A[i][k] * B[k][j]; return s;
+  }));
+}
+function cholesky(Ain) {
+  const n = Ain.length, L = Array.from({ length: n }, () => new Array(n).fill(0));
+  for (let i = 0; i < n; i++) for (let j = 0; j <= i; j++) {
+    let s = Ain[i][j];
+    for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
+    if (i === j) L[i][j] = Math.sqrt(Math.max(s, 1e-12));
+    else L[i][j] = s / L[j][j];
+  }
+  return L;
+}
+
+/* ================= derived model quantities ================= */
+function derived() {
+  const K = S.K, lam0 = S.lam0;
+  const v = S.v.slice(0, K), sd = S.sd.slice(0, K);
+  // target Sigma from sd + rho
+  let Sig = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) =>
+    i === j ? sd[i] * sd[i] : getRho(Math.min(i, j), Math.max(i, j)) * sd[i] * sd[j]));
+  // PSD projection
+  let eg = jacobiEig(Sig);
+  let adjusted = false;
+  if (Math.min(...eg.vals) < -1e-8) {
+    adjusted = true;
+    const vals = eg.vals.map(x => Math.max(x, 0));
+    Sig = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => {
+      let s = 0; for (let r = 0; r < K; r++) s += vals[r] * eg.vecs[r][i] * eg.vecs[r][j]; return s;
+    }));
+  }
+  const mean = v.reduce((a, b) => a + b, 0) / K;
+  const vc = v.map(x => x - mean);
+  // contrast covariance Sc = P Sig P
+  const P = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => (i === j ? 1 : 0) - 1 / K));
+  const Sc0 = matMul(matMul(P, Sig), P);
+  const Sc = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => (Sc0[i][j] + Sc0[j][i]) / 2));
+  // eigendecompose Sc -> streams
+  const egc = jacobiEig(Sc);
+  const streams = [];
+  for (let r = 0; r < K; r++) {
+    const w = egc.vecs[r], q = Math.max(egc.vals[r], 0);
+    const wSum = Math.abs(w.reduce((a, b) => a + b, 0)) / Math.sqrt(K);
+    if (wSum > 0.999) continue; // common direction
+    const d = w.reduce((a, wi, i) => a + wi * vc[i], 0);
+    if (q > 1e-8) streams.push({ w, q, u: q / (2 * lam0), d, deg: false });
+    else if (Math.abs(d) > 1e-8) streams.push({ w, q: 0, u: null, d, deg: true }); // u depends on theta
+  }
+  // limiting Cov(V) = lam0^2 11' + Sc  -> correlation for reference
+  const CovV = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => lam0 * lam0 + Sc[i][j]));
+  const corrV = CovV.map((row, i) => row.map((x, j) => x / Math.sqrt(CovV[i][i] * CovV[j][j])));
+  // Laplacian-representable? (all Sc off-diagonals <= 0)
+  let beyondLap = false;
+  for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) if (i !== j && Sc[i][j] > 1e-6) beyondLap = true;
+  return { K, lam0, v, vc, Sig, Sc, streams, corrV, adjusted, beyondLap };
+}
+function degU(d, th) { return 0.35 * Math.max(1, Math.abs(d)) * Math.pow(th, -0.25); }
+function streamsFor(th, D) {
+  const lams = [D.lam0], vecs = [new Array(D.K).fill(1)];
+  let infeasible = false;
+  const sq = Math.sqrt(th);
+  for (const st of D.streams) {
+    const uu = st.deg ? degU(st.d, th) : st.u;
+    const lp = uu + st.d / (2 * sq), lm = uu - st.d / (2 * sq);
+    if (lp <= 0 || lm <= 0) { infeasible = true; continue; }
+    lams.push(lp, lm);
+    vecs.push(st.w.slice(), st.w.map(x => -x));
+  }
+  return { lams, vecs, Lam: lams.reduce((a, b) => a + b, 0), infeasible };
+}
+
+/* ================= RNG ================= */
+let _seed = 123456789 >>> 0;
+function rand() { _seed |= 0; _seed = (_seed + 0x6D2B79F5) | 0; let t = Math.imul(_seed ^ (_seed >>> 15), 1 | _seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+function randn() { let u = 0, v = 0; while (u === 0) u = rand(); while (v === 0) v = rand(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+/* ================= simulation core ================= */
+function pickStream(st) {
+  let r = rand() * st.Lam;
+  for (let k = 0; k < st.lams.length; k++) { r -= st.lams[k]; if (r <= 0) return k; }
+  return st.lams.length - 1;
+}
+function trialWinner(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  for (let guard = 0; guard < 2e6; guard++) {
+    const vec = st.vecs[pickStream(st)];
+    let mx = -Infinity, arg = -1;
+    for (let i = 0; i < K; i++) { X[i] += vec[i]; if (X[i] > mx) { mx = X[i]; arg = i; } }
+    if (mx >= th) return arg;
+  }
+  return -1;
+}
+function trialFull(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  const tTheta = th / D.lam0;
+  const tCap = tTheta + 14 * Math.sqrt(th) / D.lam0 + 30 / D.lam0;
+  let t = 0, winner = -1, Z = null;
+  for (let guard = 0; guard < 4e6; guard++) {
+    t += -Math.log(1 - rand()) / st.Lam;
+    if (Z === null && t > tTheta) Z = Array.from(X, x => (x - th) / Math.sqrt(th));
+    const vec = st.vecs[pickStream(st)];
+    let mx = -Infinity, arg = -1;
+    for (let i = 0; i < K; i++) { X[i] += vec[i]; if (X[i] > mx) { mx = X[i]; arg = i; } }
+    if (winner < 0 && mx >= th) winner = arg;
+    if ((winner >= 0 && Z !== null) || t > tCap) break;
+  }
+  if (Z === null) Z = Array.from(X, x => (x - th) / Math.sqrt(th));
+  return { winner, Z };
+}
+function trialPath(th, D, st) {
+  const K = D.K, X = new Float64Array(K);
+  const ev = [{ t: 0, X: Array.from(X) }];
+  let t = 0, winner = -1;
+  for (let guard = 0; guard < 4e5; guard++) {
+    t += -Math.log(1 - rand()) / st.Lam;
+    const vec = st.vecs[pickStream(st)];
+    for (let i = 0; i < K; i++) X[i] += vec[i];
+    ev.push({ t, X: Array.from(X) });
+    let mx = -Infinity, arg = -1;
+    for (let i = 0; i < K; i++) if (X[i] > mx) { mx = X[i]; arg = i; }
+    if (mx >= th) { winner = arg; break; }
+  }
+  return { ev, winner, tEnd: t };
+}
+function targetProbs(D, n) {
+  // MC of argmax(v + eps), eps ~ N(0, Sigma) via Cholesky of the (projected) target
+  const K = D.K;
+  const Sig = D.Sig.map((r, i) => r.map((x, j) => x + (i === j ? 1e-9 : 0)));
+  const L = cholesky(Sig);
+  const counts = new Array(K).fill(0);
+  const g = new Float64Array(K);
+  for (let r = 0; r < n; r++) {
+    for (let i = 0; i < K; i++) g[i] = randn();
+    let mx = -Infinity, arg = 0;
+    for (let i = 0; i < K; i++) {
+      let e = 0; for (let k = 0; k <= i; k++) e += L[i][k] * g[k];
+      const val = D.v[i] + e;
+      if (val > mx) { mx = val; arg = i; }
+    }
+    counts[arg]++;
+  }
+  return counts.map(c => c / n);
+}
+
+/* ================= results store & async runner ================= */
+const R = { D: null, target: null, conv: null, ens: null };
+let runToken = 0;
+function recompute() {
+  const token = ++runToken;
+  const D = derived();
+  R.D = D;
+  R.target = targetProbs(D, 150000);
+  const warn = document.getElementById('warnbar');
+  const msgs = [];
+  if (D.adjusted) msgs.push('The requested correlation matrix was not positive semidefinite; it has been projected to the nearest valid covariance (negative eigenvalues clipped).');
+  const st0 = streamsFor(theta(), D);
+  if (st0.infeasible) msgs.push('At θ = ' + theta() + ' some stream violates rate positivity |d| < 2u√θ (the finite-θ bound coupling utility contrasts to noise) and was dropped — increase θ, increase the corresponding variance, or shrink the utility contrast.');
+  warn.style.display = msgs.length ? 'block' : 'none';
+  warn.textContent = msgs.join(' ');
+  newTrial(false);
+  renderStatic();
+  const sweep = [];
+  R.conv = sweep; R.ens = null;
+  const nPer = ntrials();
+  let ti = 0;
+  const convCard = document.getElementById('cardConv');
+  const covCard = document.getElementById('cardCov');
+  convCard.classList.add('busy'); covCard.classList.add('busy');
+  function stepConv() {
+    if (token !== runToken) return;
+    if (ti >= THETA_STEPS.length) { convCard.classList.remove('busy'); drawConv(); stepEns(); return; }
+    const th = THETA_STEPS[ti];
+    const st = streamsFor(th, D);
+    if (st.infeasible) { sweep.push({ th, shares: null, n: 0, skipped: true }); ti++; setTimeout(stepConv, 0); return; }
+    const counts = new Array(D.K).fill(0);
+    let doneTr = 0;
+    function chunk() {
+      if (token !== runToken) return;
+      const m = Math.min(250, nPer - doneTr);
+      for (let r = 0; r < m; r++) { const w0 = trialWinner(th, D, st); if (w0 >= 0) counts[w0]++; }
+      doneTr += m;
+      if (doneTr < nPer) { setTimeout(chunk, 0); return; }
+      sweep.push({ th, shares: counts.map(c => c / nPer), n: nPer, skipped: false });
+      ti++; drawConv(); setTimeout(stepConv, 0);
+    }
+    chunk();
+  }
+  function stepEns() {
+    if (token !== runToken) return;
+    const th = theta(), st = streamsFor(th, D);
+    const ens = { winners: [], Zs: [], th };
+    R.ens = ens;
+    const N = Math.min(ntrials(), 2000);
+    let doneTr = 0;
+    const covStatus = document.getElementById('covStatus');
+    if (st.infeasible) {
+      covCard.classList.remove('busy');
+      covStatus.textContent = 'skipped — rates infeasible at θ = ' + th;
+      drawCov(); renderTable(); return;
+    }
+    function chunk() {
+      if (token !== runToken) return;
+      const m = Math.min(120, N - doneTr);
+      for (let r = 0; r < m; r++) { const tr = trialFull(th, D, st); ens.winners.push(tr.winner); ens.Zs.push(tr.Z); }
+      doneTr += m;
+      covStatus.textContent = doneTr + ' / ' + N + ' trials';
+      if (doneTr < N) { setTimeout(chunk, 0); return; }
+      covCard.classList.remove('busy');
+      covStatus.textContent = N + ' trials at θ = ' + th;
+      drawCov(); renderTable();
+    }
+    chunk();
+  }
+  stepConv();
+}
+
+/* ================= canvas helpers ================= */
+function setupCanvas(cv) {
+  const dpr = window.devicePixelRatio || 1;
+  if (!cv.dataset.h) cv.dataset.h = cv.getAttribute('height');
+  const h = parseInt(cv.dataset.h, 10);
+  const w = cv.clientWidth;
+  const W = Math.round(w * dpr), H = Math.round(h * dpr);
+  if (cv.width !== W) cv.width = W;
+  if (cv.height !== H) cv.height = H;
+  if (cv.style.height !== h + 'px') cv.style.height = h + 'px';
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  return { ctx, w, h };
+}
+function niceTicks(lo, hi, n) {
+  const span = hi - lo || 1, step0 = span / Math.max(1, n);
+  const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  let step = mag; for (const m of [1, 2, 2.5, 5, 10]) { if (step0 <= m * mag) { step = m * mag; break; } }
+  const t = [];
+  for (let x = Math.ceil(lo / step) * step; x <= hi + 1e-9; x += step) t.push(+x.toFixed(10));
+  return t;
+}
+function fmt(x, d) { return (+x).toFixed(d === undefined ? 2 : d); }
+const tooltip = document.getElementById('tooltip');
+function showTip(x, y, nodes) {
+  tooltip.style.display = 'block';
+  tooltip.replaceChildren(...nodes);
+  const pad = 14, r = tooltip.getBoundingClientRect();
+  let L = x + pad, T = y + pad;
+  if (L + r.width > innerWidth - 8) L = x - r.width - pad;
+  if (T + r.height > innerHeight - 8) T = y - r.height - pad;
+  tooltip.style.left = L + 'px'; tooltip.style.top = T + 'px';
+}
+function hideTip() { tooltip.style.display = 'none'; }
+function tipRows(title, rows) {
+  const out = [];
+  const t = document.createElement('div'); t.className = 'tt-title'; t.textContent = title; out.push(t);
+  for (const r of rows) {
+    const div = document.createElement('div'); div.className = 'tt-row';
+    if (r.color) { const k = document.createElement('span'); k.className = 'linekey'; k.style.borderTopColor = r.color; div.appendChild(k); }
+    const b = document.createElement('b'); b.textContent = r.value; div.appendChild(b);
+    const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = r.name; div.appendChild(nm);
+    out.push(div);
+  }
+  return out;
+}
+function divergeColor(v) {
+  const mix = (a, b, t) => {
+    const pa = [1, 3, 5].map(k => parseInt(a.slice(k, k + 2), 16));
+    const pb = [1, 3, 5].map(k => parseInt(b.slice(k, k + 2), 16));
+    return 'rgb(' + pa.map((x, i) => Math.round(x + (pb[i] - x) * t)).join(',') + ')';
+  };
+  const mid = cssVar('--div-mid'), pos = cssVar('--div-pos'), neg = cssVar('--div-neg');
+  return v >= 0 ? mix(mid, pos, Math.min(1, v)) : mix(mid, neg, Math.min(1, -v));
+}
+function luminance(colStr) {
+  const m = colStr.match(/\d+/g); if (!m) return 1;
+  const [r, g, b] = m.map(Number);
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+
+/* ================= view: constructed streams ================= */
+function drawStreams() {
+  const cv = document.getElementById('cvStreams');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  ctx.font = '11px system-ui, sans-serif';
+  const n = D.streams.length;
+  const badge = document.getElementById('lapBadge');
+  badge.textContent = D.beyondLap ? 'beyond pairwise inhibition' : 'Laplacian-representable';
+  badge.className = 'badge' + (D.beyondLap ? '' : ' ok');
+  if (!n) {
+    ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('no contrast streams — target has no choice-relevant structure', w / 2, h / 2);
+    return;
+  }
+  const th = theta();
+  const padT = 26, padB = 44;
+  const slotW = Math.min(150, (w - 20) / n);
+  const x0 = (w - slotW * n) / 2;
+  const barW = Math.min(18, (slotW - 26) / D.K - 3);
+  const mid = padT + (h - padT - padB) / 2;
+  const scale = (h - padT - padB) / 2 - 6;
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x0, mid); ctx.lineTo(x0 + slotW * n, mid); ctx.stroke();
+  for (let r = 0; r < n; r++) {
+    const st = D.streams[r];
+    const cx = x0 + slotW * r + slotW / 2;
+    const groupW = D.K * (barW + 3) - 3;
+    for (let i = 0; i < D.K; i++) {
+      const bx = cx - groupW / 2 + i * (barW + 3);
+      const val = st.w[i];
+      const bh = Math.abs(val) * scale;
+      ctx.fillStyle = seriesColor(i);
+      if (val >= 0) { roundTopRect(ctx, bx, mid - bh, barW, bh); } else { roundBotRect(ctx, bx, mid, barW, bh); }
+    }
+    ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    const uu = st.deg ? degU(st.d, th) : st.u;
+    const feasible = Math.abs(st.d) < 2 * uu * Math.sqrt(th);
+    ctx.fillText('stream ' + (r + 1) + (st.deg ? ' (θ⁻¹ᐟ⁴)' : ''), cx, 4);
+    ctx.fillStyle = cssVar('--muted');
+    ctx.fillText('u = ' + fmt(uu, 3) + '   d = ' + fmt(st.d, 2), cx, h - padB + 8);
+    ctx.fillStyle = feasible ? cssVar('--muted') : cssVar('--warn-ink');
+    ctx.fillText(feasible ? 'q = ' + fmt(st.q, 2) : 'rate < 0 at θ = ' + th + '!', cx, h - padB + 22);
+  }
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('+', x0 - 12, mid - 16); ctx.fillText('−', x0 - 12, mid + 6);
+}
+function roundTopRect(ctx, x, y, w0, h0) {
+  const r = Math.min(4, w0 / 2, h0);
+  ctx.beginPath();
+  ctx.moveTo(x, y + h0); ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r);
+  ctx.lineTo(x + w0 - r, y); ctx.arcTo(x + w0, y, x + w0, y + r, r);
+  ctx.lineTo(x + w0, y + h0); ctx.closePath(); ctx.fill();
+}
+function roundBotRect(ctx, x, y, w0, h0) {
+  const r = Math.min(4, w0 / 2, h0);
+  ctx.beginPath();
+  ctx.moveTo(x, y); ctx.lineTo(x + w0, y); ctx.lineTo(x + w0, y + h0 - r);
+  ctx.arcTo(x + w0, y + h0, x + w0 - r, y + h0, r); ctx.lineTo(x + r, y + h0);
+  ctx.arcTo(x, y + h0, x, y + h0 - r, r); ctx.closePath(); ctx.fill();
+}
+
+/* ================= view: sample trial ================= */
+const race = { path: null, ghost: null };
+function newTrial(keepGhost) {
+  if (!R.D) return;
+  const st = streamsFor(theta(), R.D);
+  if (st.Lam <= 0) { race.path = null; race.ghost = null; drawRace(); return; }
+  if (keepGhost && race.path) race.ghost = race.path; else if (!keepGhost) race.ghost = null;
+  race.path = trialPath(theta(), R.D, st);
+  drawRace();
+}
+function drawRace() {
+  const cv = document.getElementById('cvRace');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D;
+  const statusEl = document.getElementById('raceStatus');
+  if (!D || !race.path) { if (statusEl) statusEl.textContent = 'no feasible trial at θ = ' + theta(); return; }
+  const th = theta();
+  const padL = 44, padR = 14, padT = 12, padB = 38;
+  const pw = w - padL - padR, ph = h - padT - padB;
+  const tEnd = Math.max(race.path.tEnd, race.ghost ? race.ghost.tEnd : 0) * 1.04;
+  let yMin = 0;
+  for (const p of [race.path, race.ghost]) if (p) for (const e of p.ev) for (const x of e.X) { if (x < yMin) yMin = x; }
+  yMin = Math.min(yMin, -2) - 1;
+  const yMax = th * 1.06 + 1;
+  const X = t => padL + pw * t / tEnd;
+  const Y = v => padT + ph * (1 - (v - yMin) / (yMax - yMin));
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (const t of niceTicks(yMin, yMax, 5)) {
+    ctx.beginPath(); ctx.moveTo(padL, Y(t)); ctx.lineTo(w - padR, Y(t)); ctx.stroke();
+    ctx.fillText(String(t), padL - 6, Y(t));
+  }
+  ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(padL, Y(th)); ctx.lineTo(w - padR, Y(th)); ctx.stroke();
+  ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left';
+  ctx.fillText('θ = ' + th, padL + 4, Y(th) - 8);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = cssVar('--muted');
+  for (const t of niceTicks(0, tEnd, 6)) ctx.fillText(fmt(t, tEnd > 40 ? 0 : 1), X(t), h - padB + 6);
+  ctx.fillText('time t', padL + pw / 2, h - padB + 20);
+  const tTh = th / D.lam0;
+  if (tTh < tEnd) {
+    ctx.strokeStyle = cssVar('--grid'); ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(X(tTh), padT); ctx.lineTo(X(tTh), h - padB); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillText('tθ = θ/λ₀', X(tTh) + 4, padT);
+  }
+  const drawPath = (path, alpha) => {
+    for (let i = 0; i < D.K; i++) {
+      ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = alpha; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+      ctx.beginPath();
+      let started = false, lastY = null;
+      for (const e of path.ev) {
+        const px = X(e.t), py = Y(e.X[i]);
+        if (!started) { ctx.moveTo(px, py); started = true; }
+        else { ctx.lineTo(px, lastY); ctx.lineTo(px, py); }
+        lastY = py;
+      }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+  };
+  if (race.ghost) drawPath(race.ghost, 0.16);
+  drawPath(race.path, 0.95);
+  if (race.path.winner >= 0) {
+    const wA = race.path.winner;
+    const last = race.path.ev[race.path.ev.length - 1];
+    ctx.beginPath(); ctx.arc(X(last.t), Y(last.X[wA]), 5, 0, 7);
+    ctx.fillStyle = seriesColor(wA); ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = cssVar('--surface-1'); ctx.stroke();
+    if (statusEl) statusEl.textContent = 'winner: ' + ALT[wA] + '  ·  T = ' + fmt(last.t, 1) + '  ·  θ = ' + th;
+  }
+}
+
+/* ================= view: convergence ================= */
+const convHover = { x: null, row: null };
+function drawConv() {
+  const cv = document.getElementById('cvConv');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  const padL = 44, padR = 60, padT = 12, padB = 30;
+  const pw = w - padL - padR, ph = h - padT - padB;
+  const lx = t => Math.log2(t);
+  const x0 = lx(THETA_STEPS[0]) - 0.35, x1 = lx(THETA_STEPS[THETA_STEPS.length - 1]) + 0.35;
+  const X = t => padL + pw * (lx(t) - x0) / (x1 - x0);
+  const Y = p => padT + ph * (1 - p);
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.strokeStyle = cssVar('--grid'); ctx.lineWidth = 1;
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (const p of [0, .25, .5, .75, 1]) {
+    ctx.beginPath(); ctx.moveTo(padL, Y(p)); ctx.lineTo(w - padR, Y(p)); ctx.stroke();
+    ctx.fillText(p.toFixed(2), padL - 6, Y(p));
+  }
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (const t of THETA_STEPS) ctx.fillText(String(t), X(t), h - padB + 6);
+  ctx.fillText('threshold θ (log scale)', padL + pw / 2, h - padB + 18);
+  // asymptote lines, then collision-adjusted end labels with leader lines
+  for (let i = 0; i < D.K; i++) {
+    ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = 0.75; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(padL, Y(R.target[i])); ctx.lineTo(w - padR, Y(R.target[i])); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+  }
+  const labs = R.target.map((p, i) => ({ i, y: Y(p) })).sort((a, b) => a.y - b.y);
+  const MINGAP = 13;
+  for (let k = 1; k < labs.length; k++) if (labs[k].y - labs[k - 1].y < MINGAP) labs[k].y = labs[k - 1].y + MINGAP;
+  for (let k = labs.length - 1; k >= 0; k--) if (labs[k].y > h - padB - 4) labs[k].y = h - padB - 4;
+  for (let k = labs.length - 2; k >= 0; k--) if (labs[k + 1].y - labs[k].y < MINGAP) labs[k].y = labs[k + 1].y - MINGAP;
+  for (const L of labs) {
+    const yLine = Y(R.target[L.i]);
+    if (Math.abs(L.y - yLine) > 1.5) { // leader line from asymptote to nudged label
+      ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(w - padR, yLine); ctx.lineTo(w - padR + 4, L.y); ctx.stroke();
+    }
+    ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(ALT[L.i] + ' → ' + fmt(R.target[L.i], 3), w - padR + 6, L.y);
+  }
+  const rows = (R.conv || []).filter(r => !r.skipped);
+  for (let i = 0; i < D.K; i++) {
+    ctx.strokeStyle = seriesColor(i); ctx.lineWidth = 2; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    rows.forEach((r, k) => { const px = X(r.th), py = Y(r.shares[i]); k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); });
+    ctx.stroke();
+    for (const r of rows) {
+      const p = r.shares[i], se = Math.sqrt(Math.max(p * (1 - p), 1e-9) / r.n);
+      ctx.strokeStyle = seriesColor(i); ctx.globalAlpha = 0.55; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(X(r.th), Y(Math.min(1, p + 1.96 * se))); ctx.lineTo(X(r.th), Y(Math.max(0, p - 1.96 * se))); ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.beginPath(); ctx.arc(X(r.th), Y(p), 4, 0, 7);
+      ctx.fillStyle = seriesColor(i); ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = cssVar('--surface-1'); ctx.stroke();
+    }
+  }
+  if (convHover.x !== null && rows.length) {
+    let best = rows[0], bd = Infinity;
+    for (const r of rows) { const d0 = Math.abs(X(r.th) - convHover.x); if (d0 < bd) { bd = d0; best = r; } }
+    ctx.strokeStyle = cssVar('--baseline'); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(X(best.th), padT); ctx.lineTo(X(best.th), h - padB); ctx.stroke();
+    convHover.row = best;
+  } else convHover.row = null;
+}
+function bindConv() {
+  const cv = document.getElementById('cvConv');
+  cv.addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect();
+    convHover.x = e.clientX - r.left;
+    drawConv();
+    if (convHover.row && R.D) {
+      const rows = [];
+      for (let i = 0; i < R.D.K; i++) rows.push({ color: seriesColor(i), value: fmt(convHover.row.shares[i], 3), name: ALT[i] + ' (target ' + fmt(R.target[i], 3) + ')' });
+      showTip(e.clientX, e.clientY, tipRows('θ = ' + convHover.row.th + ' · ' + convHover.row.n + ' trials', rows));
+    } else hideTip();
+  });
+  cv.addEventListener('pointerleave', () => { convHover.x = null; hideTip(); drawConv(); });
+}
+
+/* ================= view: recovered covariance ================= */
+const covGeom = {};
+function empiricalSc() {
+  const D = R.D;
+  if (!R.ens || R.ens.Zs.length < 10) return null;
+  const K = D.K, Zs = R.ens.Zs, n = Zs.length;
+  const mu = new Array(K).fill(0);
+  for (const z of Zs) for (let i = 0; i < K; i++) mu[i] += z[i] / n;
+  const C = Array.from({ length: K }, () => new Array(K).fill(0));
+  for (const z of Zs) for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) C[i][j] += (z[i] - mu[i]) * (z[j] - mu[j]) / (n - 1);
+  const lam2 = D.lam0 * D.lam0;
+  const P = Array.from({ length: K }, (_, i) => Array.from({ length: K }, (_, j) => (i === j ? 1 : 0) - 1 / K));
+  const M = matMul(matMul(P, C.map(r => r.map(x => x * lam2))), P);
+  return M.map((r, i) => r.map((x, j) => (x + M[j][i]) / 2));
+}
+function drawCov() {
+  const cv = document.getElementById('cvCov');
+  const { ctx, w, h } = setupCanvas(cv);
+  const D = R.D; if (!D) return;
+  ctx.font = '11px system-ui, sans-serif';
+  const K = D.K;
+  const emp = empiricalSc();
+  const vMax = Math.max(0.2, ...D.Sc.flat().map(Math.abs), ...(emp ? emp.flat().map(Math.abs) : [0]));
+  const hmSize = Math.min(h - 66, (w - 130) / 2);
+  const cell = hmSize / K;
+  const drawHM = (M, hx, hy, title) => {
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (let i = 0; i < K; i++) {
+      ctx.fillStyle = cssVar('--muted');
+      ctx.fillText(ALT[i], hx + cell * i + cell / 2, hy - 10);
+      ctx.fillText(ALT[i], hx - 12, hy + cell * i + cell / 2);
+    }
+    for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) {
+      const val = M ? M[i][j] : null;
+      const col = M ? divergeColor(val / vMax) : cssVar('--div-mid');
+      ctx.fillStyle = col;
+      ctx.fillRect(hx + cell * j + 1, hy + cell * i + 1, cell - 2, cell - 2);
+      ctx.fillStyle = M ? (luminance(col) > 0.55 ? '#0b0b0b' : '#ffffff') : cssVar('--muted');
+      ctx.fillText(M ? fmt(val, 2) : '…', hx + cell * j + cell / 2, hy + cell * i + cell / 2);
+    }
+    ctx.fillStyle = cssVar('--text-secondary'); ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillText(title, hx - 12, hy + hmSize + 10);
+  };
+  const hy = 24;
+  const gap = 90;
+  const totalW = hmSize * 2 + gap;
+  const hx1 = Math.max(30, (w - totalW) / 2);
+  const hx2 = hx1 + hmSize + gap;
+  drawHM(D.Sc, hx1, hy, 'target Σc = PΣP');
+  drawHM(emp, hx2, hy, 'recovered λ₀²·P Ĉov(Z) P' + (R.ens ? '   (θ = ' + R.ens.th + ')' : ''));
+  // arrow
+  ctx.fillStyle = cssVar('--muted'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('→ race →', hx1 + hmSize + gap / 2, hy + hmSize / 2);
+  covGeom.hx1 = hx1; covGeom.hx2 = hx2; covGeom.hy = hy; covGeom.cell = cell; covGeom.K = K; covGeom.emp = emp;
+}
+function bindCov() {
+  const cv = document.getElementById('cvCov');
+  cv.addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const g = covGeom;
+    if (!g.cell || !R.D) { hideTip(); return; }
+    for (const [hx, M, label] of [[g.hx1, R.D.Sc, 'target'], [g.hx2, g.emp, 'recovered']]) {
+      if (M && x >= hx && y >= g.hy && x < hx + g.cell * g.K && y < g.hy + g.cell * g.K) {
+        const j = Math.floor((x - hx) / g.cell), i = Math.floor((y - g.hy) / g.cell);
+        showTip(e.clientX, e.clientY, tipRows(label + ' Σc[' + ALT[i] + ',' + ALT[j] + ']', [
+          { value: fmt(M[i][j], 4), name: ALT[i] + ' × ' + ALT[j] }
+        ]));
+        return;
+      }
+    }
+    hideTip();
+  });
+  cv.addEventListener('pointerleave', hideTip);
+}
+
+/* ================= legends, table ================= */
+function renderLegends() {
+  const D = R.D; if (!D) return;
+  const mk = (id, kind) => {
+    const el = document.getElementById(id);
+    el.replaceChildren();
+    for (let i = 0; i < D.K; i++) {
+      const s = document.createElement('span');
+      const key = document.createElement('span');
+      key.className = kind === 'line' ? 'linekey' : 'swatch';
+      if (kind === 'line') key.style.borderTopColor = seriesColor(i); else key.style.background = seriesColor(i);
+      s.appendChild(key);
+      s.appendChild(document.createTextNode('Alternative ' + ALT[i] + ' (v = ' + fmt(S.v[i], 2) + ')'));
+      el.appendChild(s);
+    }
+    if (id === 'legConv') {
+      const s = document.createElement('span');
+      s.appendChild(document.createTextNode('dashed = target MNP'));
+      el.appendChild(s);
+    }
+  };
+  mk('legRace', 'line'); mk('legConv', 'line');
+}
+function renderTable() {
+  const D = R.D; if (!D) return;
+  const wrap = document.getElementById('tableWrap');
+  const tbl = document.createElement('table'); tbl.className = 'tbl';
+  const thead = document.createElement('tr');
+  for (const htxt of ['Alternative', 'vᵢ', 'σᵢ', 'P simulated @ θ=' + (R.ens ? R.ens.th : theta()), 'P target MNP']) {
+    const el = document.createElement('th'); el.textContent = htxt; thead.appendChild(el);
+  }
+  tbl.appendChild(thead);
+  const simShare = new Array(D.K).fill(NaN);
+  if (R.ens && R.ens.winners.length) {
+    const c = new Array(D.K).fill(0);
+    let tot = 0;
+    for (const w0 of R.ens.winners) if (w0 >= 0) { c[w0]++; tot++; }
+    for (let i = 0; i < D.K; i++) simShare[i] = tot ? c[i] / tot : NaN;
+  }
+  for (let i = 0; i < D.K; i++) {
+    const tr = document.createElement('tr');
+    const c0 = document.createElement('td');
+    const key = document.createElement('span'); key.className = 'swatch'; key.style.background = seriesColor(i);
+    c0.appendChild(key); c0.appendChild(document.createTextNode('Alternative ' + ALT[i]));
+    tr.appendChild(c0);
+    for (const val of [fmt(S.v[i], 2), fmt(S.sd[i], 2), isNaN(simShare[i]) ? '—' : fmt(simShare[i], 3), fmt(R.target[i], 3)]) {
+      const td = document.createElement('td'); td.textContent = val; tr.appendChild(td);
+    }
+    tbl.appendChild(tr);
+  }
+  const strTitle = document.createElement('p');
+  strTitle.className = 'eq'; strTitle.style.marginTop = '10px';
+  strTitle.innerHTML = '<b>Constructed streams.</b>';
+  const tbl2 = document.createElement('table'); tbl2.className = 'tbl';
+  const th2 = document.createElement('tr');
+  for (const htxt of ['Stream', 'loadings w', 'q (eigenvalue)', 'u = q/2λ₀', 'd = wᵀv', '|d| < 2u√θ ?']) { const el = document.createElement('th'); el.textContent = htxt; th2.appendChild(el); }
+  tbl2.appendChild(th2);
+  D.streams.forEach((st, r) => {
+    const tr = document.createElement('tr');
+    const uu = st.deg ? degU(st.d, theta()) : st.u;
+    const ok = Math.abs(st.d) < 2 * uu * Math.sqrt(theta());
+    const vals = [
+      String(r + 1) + (st.deg ? ' (degenerate)' : ''),
+      '(' + st.w.map(x => fmt(x, 2)).join(', ') + ')',
+      fmt(st.q, 3),
+      fmt(uu, 3) + (st.deg ? ' ∝ θ⁻¹ᐟ⁴' : ''),
+      fmt(st.d, 3),
+      ok ? 'yes' : 'VIOLATED'
+    ];
+    for (const val of vals) { const td = document.createElement('td'); td.textContent = val; tr.appendChild(td); }
+    tbl2.appendChild(tr);
+  });
+  wrap.replaceChildren(tbl, strTitle, tbl2);
+}
+function renderStatic() {
+  renderLegends(); drawStreams(); drawRace(); drawConv(); drawCov(); renderTable();
+}
+
+/* ================= controls ================= */
+function buildControls() {
+  const ks = document.getElementById('ksel');
+  ks.replaceChildren();
+  for (const k of [2, 3, 4]) {
+    const b = document.createElement('button');
+    b.textContent = 'K = ' + k;
+    if (k === S.K) b.classList.add('on');
+    b.addEventListener('click', () => { S.K = k; buildControls(); scheduleRecompute(); });
+    ks.appendChild(b);
+  }
+  const thetaEl = document.getElementById('theta');
+  thetaEl.max = THETA_STEPS.length - 1;
+  thetaEl.value = S.thetaIdx;
+  document.getElementById('thetaV').textContent = theta();
+  document.getElementById('lam0').value = S.lam0;
+  document.getElementById('lam0V').textContent = fmt(S.lam0, 2);
+  document.getElementById('ntr').value = S.ntrIdx;
+  document.getElementById('ntrV').textContent = ntrials();
+  const mkSlider = (parent, labelNode, min, max, step, value, oninput) => {
+    const row = document.createElement('div'); row.className = 'row';
+    const lab = document.createElement('label'); lab.className = 'name';
+    lab.append(...labelNode);
+    const inp = document.createElement('input'); inp.type = 'range'; inp.min = min; inp.max = max; inp.step = step; inp.value = value;
+    const val = document.createElement('span'); val.className = 'val'; val.textContent = fmt(value, 2);
+    inp.addEventListener('input', () => { val.textContent = fmt(+inp.value, 2); oninput(+inp.value); scheduleRecompute(); });
+    row.append(lab, inp, val); parent.appendChild(row);
+  };
+  const ur = document.getElementById('utilRows');
+  ur.replaceChildren();
+  for (let i = 0; i < S.K; i++) {
+    const sw = document.createElement('span'); sw.className = 'swatch'; sw.style.background = seriesColor(i);
+    mkSlider(ur, [sw, document.createTextNode('v(' + ALT[i] + ')')], -1.5, 1.5, 0.05, S.v[i], x => { S.v[i] = x; });
+  }
+  const sr = document.getElementById('sdRows');
+  sr.replaceChildren();
+  for (let i = 0; i < S.K; i++) {
+    const sw = document.createElement('span'); sw.className = 'swatch'; sw.style.background = seriesColor(i);
+    mkSlider(sr, [sw, document.createTextNode('σ(' + ALT[i] + ')')], 0.4, 2, 0.05, S.sd[i], x => { S.sd[i] = x; });
+  }
+  const rr = document.getElementById('rhoRows');
+  rr.replaceChildren();
+  for (const [i, j] of pairs(S.K)) {
+    mkSlider(rr, [document.createTextNode('ρ(' + ALT[i] + ',' + ALT[j] + ')')], -0.95, 0.95, 0.05, getRho(i, j), x => { S.rho[pkey(i, j)] = x; });
+  }
+}
+let recomputeTimer = null;
+function scheduleRecompute() { clearTimeout(recomputeTimer); recomputeTimer = setTimeout(recompute, 350); }
+function applyPreset(name) {
+  const p = PRESETS[name]; if (!p) return;
+  S.K = p.K; S.thetaIdx = p.thetaIdx; S.lam0 = p.lam0;
+  S.v = p.v.slice(); S.sd = p.sd.slice(); S.rho = Object.assign({}, p.rho);
+  buildControls(); recompute();
+}
+
+/* ================= wiring ================= */
+document.getElementById('preset').addEventListener('change', e => applyPreset(e.target.value));
+document.getElementById('theta').addEventListener('input', e => { S.thetaIdx = +e.target.value; document.getElementById('thetaV').textContent = theta(); scheduleRecompute(); });
+document.getElementById('lam0').addEventListener('input', e => { S.lam0 = +e.target.value; document.getElementById('lam0V').textContent = fmt(S.lam0, 2); scheduleRecompute(); });
+document.getElementById('ntr').addEventListener('input', e => { S.ntrIdx = +e.target.value; document.getElementById('ntrV').textContent = ntrials(); scheduleRecompute(); });
+document.getElementById('runBtn').addEventListener('click', () => recompute());
+document.getElementById('newTrialBtn').addEventListener('click', () => newTrial(true));
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  renderStatic();
+});
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+window.addEventListener('resize', () => renderStatic());
+bindConv(); bindCov();
+applyPreset('k3factor');
+</script>
+</body>
+</html>
